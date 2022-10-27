@@ -1,0 +1,2 @@
+DOCUMENTO CON LAS TAREAS PENDIENTES POR HACER:
+1) En página principal salen todos los productos (forma acortada:nombre,precio,imagen)
