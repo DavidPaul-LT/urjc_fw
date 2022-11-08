@@ -1,0 +1,9 @@
+DOCUMENTO CON LAS TAREAS PENDIENTES POR HACER:
+1) En página principal salen todos los productos (forma acortada:nombre,precio,imagen,colores)
+    1.1) Forma extendida: forma acortada + descripción + añadir al carrito + extra(valoración,tallas,etc.)
+    1.2) Todas las páginas, ya seán principal o de producto(forma extendida) conservan el mismo header y footer
+2) Categoria (posibles valores: sudaderas,camisetas,camisas,polos,chaquetas,jersey,vaqueros,chandal,p_cortos,calcetines)
+3) Códigos de producto(extracción desde fecheros info propietarios)
+4) Pensar en paletas de colores
+5) A la modificación de datos de elemento hay que usar formularios
+    5.5) LOS ATRIBUTOS DE ELEMENTO SE IMPLEMENTA COMO SUBELEMENTOS: 
