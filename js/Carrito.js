@@ -2,12 +2,14 @@ class Carrito{
     #elementos
     //---Constructor: crea un nuevo hash map -elementos- que contendrá elementos de tipo Producto
     constructor(){
+        //--- -elementos- llaves: identificador de producto; valores: número de ocurrencias del producto identificado
         this.#elementos = new Map()
     }
     //---insertar(obj Producto): inserta en el hash map -elementos- un nuevo elemento
     //  __Add-to-cart__ on-click parámetro de función
     insertar(elemento){
         //--Pendiente: exigir que el usuario de una talla para insertar else alert()
+        //--- identificador - simula un puntero a elemento 
         let identificador = elemento.getId();
         //---Añade un nuevo elemento a -elementos-
         if (this.#elementos.get(identificador)==undefined){
@@ -36,6 +38,7 @@ class Carrito{
 }
 
 //---TEST---//
+//---Clase Producto no importada
 let p1 = new Producto('calcetines',15,'verde',null);
 let p2 = new Producto('pantalones',30,'negro',null);
 let p3 = new Producto('sudadera',30,'azul',null);

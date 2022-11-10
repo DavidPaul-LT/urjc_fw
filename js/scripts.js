@@ -18,7 +18,7 @@ class Producto{
         this.#id = Producto.#num
         this.#nombre = nombre
         this.#precio = precio
-        this.#imagen = document.createElement(`<img src="${ruta_imagen}" alt="">`)
+        this.#imagen = ruta_imagen//document.createElement(`<img src="${ruta_imagen}" alt="">`)
         Producto.#num += 1
     }
     //--- Devuelve el índice del primer producto
@@ -55,8 +55,26 @@ class AlmacenProductos{
             this.#length -= 1
         }
     }
+    length(){
+        return this.#length
+    }
     //--- Sube al DOM todos los productos que se encuentren en -lista- (útil para cuando se añaden/borran productos)
     mostarProductos(){
-        
+        for (let i of this.#lista) {
+            console.log(i)
+        }
     }
 }
+
+//---TEST---//
+let a = new Producto('pantalón',3,'a');
+let b = new Producto('camisa',3,'b');
+let c = new Producto('abrigo',3,'c');
+
+let alm = new AlmacenProductos();
+
+alm.insertarProducto(a);
+alm.insertarProducto(b);
+alm.insertarProducto(c);
+console.log(alm.mostarProductos());
+console.log(alm.length());
