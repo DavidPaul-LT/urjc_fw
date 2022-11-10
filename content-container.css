@@ -2,7 +2,7 @@
     transition: 250ms;
 }
 
-.card:hover{
-    border: 4px solid rgb(255, 255, 255);
+.card:hover > img{
+    border: 4px solid rgba(255, 255, 255, 0.367);
     transition: 250ms;
 }
