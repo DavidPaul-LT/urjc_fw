@@ -1,6 +1,0 @@
-name: Stretch Sweater Fleece Shirt
-price: USD59.90
-colors: [grey,black,white]
-sizes: [S,M,L,XL]
-cat: Shirt
-page: https://www.onequince.com/men/stretch-knit-shirt?color=charcoal&gender=men&tracker=collection__Casual%20Shirts
