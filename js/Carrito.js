@@ -1,9 +1,11 @@
 class Carrito{
     #elementos
+    #CART
     //---Constructor: crea un nuevo hash map -elementos- que contendrá elementos de tipo Producto
     constructor(){
         //--- -elementos- llaves: identificador de producto; valores: número de ocurrencias del producto identificado
         this.#elementos = new Map()
+        this.#CART = document.getElementById('carrito')
     }
     //---insertar(obj Producto): inserta en el hash map -elementos- un nuevo elemento
     //  __Add-to-cart__ on-click parámetro de función
@@ -19,6 +21,7 @@ class Carrito{
         else{
             this.#elementos.set(identificador,[elemento,this.#elementos.get(identificador)[1]+1])
         }
+        this.#CART.innerText = this.#elementos.size()
     }
     //---eliminar(obj Producto): borra todas las repeticiones de un producto dentro de -elementos-
     //  __Remove-from-cart on click button submit form checklist of Product(s)
@@ -31,21 +34,12 @@ class Carrito{
             document.write(i)
         }
     }
+    //---Longitud carrito
+    length(){
+        return this.#elementos.size()
+    }
     //---Show(): returns all content-array's elements
     show(){
         return this.#elementos
     }
 }
-
-//---TEST---//
-//---Clase Producto no importada
-let p1 = new Producto('calcetines',15,'verde',null);
-let p2 = new Producto('pantalones',30,'negro',null);
-let p3 = new Producto('sudadera',30,'azul',null);
-
-let carro = new Carrito();
-carro.insertar(p1);
-carro.insertar(p2);
-carro.insertar(p3);
-//console.log(carro.show());
-carro.mostarCarrito();
