@@ -1,6 +1,6 @@
 
 .card > img{
-    border: 0px solid rgba(255, 255, 255, 0.500);
+    border: 0px solid rgba(255, 255, 255, 0.5);
     transition: 200ms;
 }
 
