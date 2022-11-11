@@ -4,22 +4,19 @@ body{
 }
 
 .container-fluid{
-    background-color: rgba(87, 55, 7, 0.566);
+    background-color: #90704d;
 }
 .navbar-brand > img{
     height: 65px;
-    width: 115px;
+    width: 85px;
 }
 .nav-link{
     color: white;
 }
     .nav-link:hover{
-        color: black;
+        color: white;
+        text-decoration: underline white;
     }
-
-.navbar-toggler{
-    color: #000;
-}
 
 span{
     color: white;    
