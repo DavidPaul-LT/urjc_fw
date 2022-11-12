@@ -6,96 +6,116 @@
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
 
-//---TEST
-//---Producto
+
+/* class Producto:
+-Se definen nuevos objetos de tipo Producto, tanto productos de prueba (aquellos que están por defecto en -index.html-) como nuevos productos a añadir.
+-Se
+*/
 class Producto{
-    //--- Parece que no se pueden definir private static properties :P
-    static min_index = 1233
-    static num = 1233 //--- 1233, valor por defecto desde el nombre de la primera imagen
     #id
     #nombre
     #precio
     #imagen
-    //--- Crea un nuevo objeto de clase Producto
-    constructor(nombre,precio,ruta_imagen){ // Extras(color)
-        this.#id = this.num
+    #displayed
+    //--- Crea un nuevo ojeto de clase -Producto- con un -id- determinado por la ED -AlmacenProductos-
+    constructor(id,nombre,precio,ruta_imagen,displayed=false){
+        this.#id = id
         this.#nombre = nombre
         this.#precio = precio
-        this.#imagen = ruta_imagen//document.createElement(`<img src="${ruta_imagen}" alt="">`)
-        this.num += 1
+        this.#imagen = ruta_imagen
+        this.#displayed = displayed
     }
-    //--- Devuelve el índice del primer producto
-    getMinIndex(){
-        return this.min_index
+    //--- Devuelve la modificación del DOM (habría que especidicar que se añada a section)
+    displayHTMLcontent(){
+        if (!this.#displayed){
+            //document.create algo
+            //subir al DOM
+            this.#displayed = true
+        }
     }
-    //--- Devuelve la propiedad -id- de cada producto (id no puede ser modificado, solo consultado)
+    //--- Método getter del atributo -id-
     getId(){
         return this.#id
     }
-    mostarNuevoProducto(){
-        //--- Muestra el producto en la página principal: filtar por pendientes por mostrar?
+    //--- Método setter del atributo -id- (el acceso a este método debería estar lo más restringido posible)
+    #setId(val){
+        this.#id = val
     }
-    modificar(){
-        //--- Param func?
+    //--- Método getter del atributo -nombre-
+    getNombre(){
+        return this.#nombre
+    }
+    //--- Método setter del atributo -nombre-
+    setNombre(val){
+        this.#nombre = val
+    }
+    //--- Método getter del atributo -precio-
+    getPrecio(){
+        return this.#precio
+    }
+    //--- Método setter del atributo -precio-
+    setPrecio(val){
+        this.#precio = val
+    }
+    //--- Método getter del atributo -imagen-
+    getImagen(){
+        return this.#imagen
+    }
+    //--- Método setter del atributo -imagen-
+    setImagen(val){
+        this.#imagen = val
     }
 }
-//---Carrito
+
+/*class AlmacenProductos:
+-Sirve como estructura de datos que almacena los distintos objetos -Producto- que se instancien
+-Una de sus funciones es la de supervisar que nunca se repita una id
+*/
+class AlmacenProductos{
+    #elementos
+    //--- Inicializa un mapa que contendrá los productos clasificados por sus atributos -id-
+    constructor(){
+        this.#elementos = new Map()
+    }
+    //--- Inserta un nuevo objeto -Producto- en -elementos-
+    insertar(producto){
+        this.#elementos.set(producto.getId(),producto)
+        producto.displayHTMLcontent() //--- Ctualiza el DOM con la nueva información del producto (crea una nueva targeta)
+    }
+    //--- Eliminar un objeto -Producto- de entre los ya contenidos en -elementos-
+    eliminar(producto){
+        this.#elementos.set(producto.getId(),null)
+    }
+    invisibilizar(producto){
+        aux = document.getElementById(producto.getId())
+        aux.style.display = 'none'
+    }
+}
+
+/* class Carrito
+-Cada uno de sus elementos simula ser un puntero a una posición del objeto -AlmacenProductos-
+*/
 class Carrito{
     #elementos
-    #CART
-    //---Constructor: crea un nuevo hash map -elementos- que contendrá elementos de tipo Producto
     constructor(){
-        //--- -elementos- llaves: identificador de producto; valores: número de ocurrencias del producto identificado
         this.#elementos = new Map()
-        //--- -CART- variable que contiene el contenido html de la etiqueta /carrito/ de index.html (modificar el span para indicar el número de productos guardados)
-        this.#CART = 0
     }
-    //---insertar(obj Producto): inserta en el hash map -elementos- un nuevo elemento
-    //  __Add-to-cart__ on-click parámetro de función
-    insertar(elemento){
-        //--Pendiente: exigir que el usuario de una talla para insertar else alert()
-        //--- identificador - simula un puntero a elemento 
-        let identificador = elemento.getId();
-        //---Añade un nuevo elemento a -elementos-
-        if (this.#elementos.get(identificador)==undefined){
-            this.#elementos.set(identificador,[elemento,1])
+    //--- Guarda como llave el identificador de un obj. -Producto- ya almacenado en -AlmacenProductos-
+    insertar(id_producto){
+        aux = this.#elementos.get(id_producto)
+        if (aux == undefined){
+            this.#elementos.set(id_producto,1)
         }
-        //---Modifica las repeticiones de un elemento
         else{
-            this.#elementos.set(identificador,[elemento,this.#elementos.get(identificador)[1]+1])
-        }
-        this.#CART += 1
-        document.getElementById('carrito').textContent = this.#CART
-    }
-    //---eliminar(obj Producto): borra todas las repeticiones de un producto dentro de -elementos-
-    //  __Remove-from-cart on click button submit form checklist of Product(s)
-    eliminar(elemento){
-        this.#elementos.set(elemento.getId(),undefined)
-        this.#CART -= 1
-        document.getElementById('carrito').textContent = this.#CART
-    }
-    //--- Debería desplegar el carrito en la página en la que se esté: icono-carrito onclick(obj.mostarCarrito())
-    mostarCarrito(){
-        for (const i of this.#elementos) {
-            document.write(i)
+            this.#elementos.set(id_producto,aux+1)
         }
     }
-    //---Longitud carrito
-    length(){
-        return this.#elementos.size
+    //--- Deja de referenciar al obj. -Producto- contenido en -AlmacenProductos-
+    eliminar(id_producto){
+        this.#elementos.set(id_producto,undefined)
     }
-    //---Show(): returns all content-array's elements
-    show(){
-        return this.#elementos
+    //--- Consigue la información de cada -Producto- referenciado y la muestra por pantalla
+    consultar(){
+
     }
 }
-
-
-//TEST
-let new_pr = new Producto('skinny pant',13,null);
-let new_pr2 = new Producto('pants',50,null);
-
-let cart = new Carrito();
-cart.insertar(new_pr);
-cart.insertar(new_pr2);
-cart.show();
