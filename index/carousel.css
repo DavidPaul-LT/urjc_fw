@@ -1,11 +1,6 @@
-#carouselExampleInterval{
-    margin: -8px;
-}
-
 .carousel-item > img{
-    height: 90vh;
+    height: 100vh;
 }
-
     .carousel-control-next-icon{
         color: black;
     }

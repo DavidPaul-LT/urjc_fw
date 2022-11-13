@@ -1,11 +1,18 @@
 body{
     background-color: #e9e9e9;
-    margin: -8px 0px;
 }
 
+/* modificar el @ cuando la pantalla sea mayor a x*/
+.navbar{
+    height: 9vh;
+}
+/* Cambio ??*/
 .container-fluid{
     background-color: #90704d;
+    position: fixed;
+    z-index: +5;
 }
+
 .navbar-brand > img{
     height: 65px;
     width: 85px;
