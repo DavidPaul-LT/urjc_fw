@@ -3,6 +3,8 @@
 * Copyright 2013-2022 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-homepage/blob/master/LICENSE)
 */
+
+
 // This file is intentionally blank
 // Use this file to add JavaScript to your project
 
@@ -97,25 +99,31 @@ class AlmacenProductos{
 */
 class Carrito{
     #elementos
+    #cart_obj
     constructor(){
         this.#elementos = new Map()
+        this.#cart_obj = document.getElementById('carrito')
     }
     //--- Guarda como llave el identificador de un obj. -Producto- ya almacenado en -AlmacenProductos-
     insertar(id_producto){
-        aux = this.#elementos.get(id_producto)
+        let aux = this.#elementos.get(id_producto)
         if (aux == undefined){
             this.#elementos.set(id_producto,1)
         }
         else{
             this.#elementos.set(id_producto,aux+1)
         }
+        this.#cart_obj.textContent = `${parseInt(this.#cart_obj.textContent)+1}`
     }
     //--- Deja de referenciar al obj. -Producto- contenido en -AlmacenProductos-
     eliminar(id_producto){
         this.#elementos.set(id_producto,undefined)
+        this.#cart_obj.textContent = `${parseInt(this.#cart_obj.textContent)-1}`
     }
     //--- Consigue la información de cada -Producto- referenciado y la muestra por pantalla
     consultar(){
 
     }
 }
+//---TEST
+let cart = new Carrito();
