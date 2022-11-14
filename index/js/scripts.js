@@ -125,5 +125,11 @@ class Carrito{
 
     }
 }
+//---EXTRA
+function borrarSection(){
+    let aux = document.getElementById('section');
+    aux.innerHTML = '';
+    console.log('hola');
+}
 //---TEST
 let cart = new Carrito();
