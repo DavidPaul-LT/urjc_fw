@@ -17,14 +17,14 @@ body{
     height: 65px;
     width: 85px;
 }
+
 .nav-link{
     color: white;
+    background-color: transparent;
+    border: none;
 }
     .nav-link:hover{
         color: white;
         text-decoration: underline white;
     }
 
-span{
-    color: white;    
-}
