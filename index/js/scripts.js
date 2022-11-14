@@ -144,16 +144,10 @@ class Carrito{
     }
 }
 //---EXTRA
-<<<<<<< HEAD
 function borrarSection(){
     let aux = document.getElementById('section');
     aux.innerHTML = '';
     console.log('hola');
-=======
-function destroySection(){
-    let aux = document.getElementsByTagName("section")[0];
-    aux.innerHTML = ''
->>>>>>> 86eaf034a42ceeeb9ad893ebab154f3f4de149c0
 }
 //---TEST
 let cart = new Carrito();
