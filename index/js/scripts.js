@@ -19,20 +19,21 @@ class Producto{
     #precio
     #imagen
     #displayed
+    #inner_html
     //--- Crea un nuevo ojeto de clase -Producto- con un -id- determinado por la ED -AlmacenProductos-
-    constructor(id,nombre,precio,ruta_imagen,displayed=false){
+    constructor(id,nombre,precio,ruta_imagen,inner_html=null){
         this.#id = id
         this.#nombre = nombre
         this.#precio = precio
         this.#imagen = ruta_imagen
-        this.#displayed = displayed
+        this.#inner_html = inner_html
     }
     //--- Devuelve la modificación del DOM (habría que especidicar que se añada a section)
     displayHTMLcontent(){
-        if (!this.#displayed){
+        if (this.#inner_html === null){
             //document.create algo
             //subir al DOM
-            this.#displayed = true
+            //actualizar -innner_html-
         }
     }
     //--- Método getter del atributo -id-
@@ -50,6 +51,7 @@ class Producto{
     //--- Método setter del atributo -nombre-
     setNombre(val){
         this.#nombre = val
+        //modificar -inner_html-
     }
     //--- Método getter del atributo -precio-
     getPrecio(){
@@ -58,6 +60,7 @@ class Producto{
     //--- Método setter del atributo -precio-
     setPrecio(val){
         this.#precio = val
+        //modificar -inner_html-
     }
     //--- Método getter del atributo -imagen-
     getImagen(){
@@ -66,6 +69,19 @@ class Producto{
     //--- Método setter del atributo -imagen-
     setImagen(val){
         this.#imagen = val
+        //modificar -inner_html-
+    }
+}
+/*class ReadProduct:
+-Consigue del DOM la información relativa a un producto
+*/
+class ReadProducto{
+    #inner_html
+    constructor(id){
+        this.#inner_html = document.getElementById(id).getElementsByClassName('name')[0]
+    }
+    getNombre(){
+        return this.#inner_html
     }
 }
 
@@ -81,8 +97,10 @@ class AlmacenProductos{
     }
     //--- Inserta un nuevo objeto -Producto- en -elementos-
     insertar(producto){
-        this.#elementos.set(producto.getId(),producto)
-        producto.displayHTMLcontent() //--- Ctualiza el DOM con la nueva información del producto (crea una nueva targeta)
+        if (this.#elementos.get(producto.getId()) != undefined){
+            this.#elementos.set(producto.getId(),producto)
+            producto.displayHTMLcontent() //--- Actualiza el DOM con la nueva información del producto (crea una nueva targeta)
+        }
     }
     //--- Eliminar un objeto -Producto- de entre los ya contenidos en -elementos-
     eliminar(producto){
@@ -126,10 +144,16 @@ class Carrito{
     }
 }
 //---EXTRA
+<<<<<<< HEAD
 function borrarSection(){
     let aux = document.getElementById('section');
     aux.innerHTML = '';
     console.log('hola');
+=======
+function destroySection(){
+    let aux = document.getElementsByTagName("section")[0];
+    aux.innerHTML = ''
+>>>>>>> 86eaf034a42ceeeb9ad893ebab154f3f4de149c0
 }
 //---TEST
 let cart = new Carrito();
