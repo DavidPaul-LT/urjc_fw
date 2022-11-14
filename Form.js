@@ -1,5 +1,5 @@
 
-
+// Crea un div con todas las características del producto - FALTA (anidarlo a los objetos al crearlos o modificarlos)
 function btnForm(){
     let divCol = document.createElement("div");
         let divCard = document.createElement("div");
@@ -10,7 +10,6 @@ function btnForm(){
                     let divCardFooter = document.createElement("div");
                         let divTextCenter2 = document.createElement("div");
                             let a = document.createElement("a");
-
     divCol.className = "col mb-5";
     divCol.id = "Borrar";
     divCard.className = "card h-100";
@@ -22,12 +21,10 @@ function btnForm(){
     divCardFooter.className = "card-footer p-4 pt-0 border-top-0 bg-transparent";
     divTextCenter2.className = "text-center";
     a.className = "btn btn-outline-dark mt-auto";
-
     let h5Text = document.createTextNode("Flowknit Ultra-Soft Performance Polo");
     h5.appendChild(h5Text);
     let aText = document.createTextNode("Add to cart");
     a.appendChild(aText);
-
     divCol.appendChild(divCard);
     divCard.appendChild(img);
     divCard.appendChild(divCardBody);
@@ -36,17 +33,18 @@ function btnForm(){
     divTextCenter.appendChild(divCardFooter);
     divCardFooter.appendChild(divTextCenter2);
     divTextCenter2.appendChild(a);
-
-    // añade el elemento creado y su contenido al DOM
     document.getElementById("ContenedorProductostwo").appendChild(divCol);
+
+    btnShowForm();
+
 }
 
+// Mustra el formulario para añadir, modificar o crear un elemento
 
 function btnShowForm(){
     let form = document.getElementById("form");
     let btnShowForm = document.getElementById("btnShowForm");
     let btnForm = document.getElementById("btnForm");
-
 
     if(form.style.display == "none"){
         form.style.display = "block";
@@ -57,5 +55,6 @@ function btnShowForm(){
         form.style.display = "none";
         btnShowForm.textContent = "Añadir Producto"
         btnForm.style.display = "none";
+
     }
 }
