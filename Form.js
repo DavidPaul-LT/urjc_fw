@@ -23,7 +23,7 @@ function btnForm(){
     a.className = "btn btn-outline-dark mt-auto";
     let h5Text = document.createTextNode("Flowknit Ultra-Soft Performance Polo");
     h5.appendChild(h5Text);
-    let aText = document.createTextNode("Add to cart");
+    let aText = document.createTextNode("X");
     a.appendChild(aText);
     divCol.appendChild(divCard);
     divCard.appendChild(img);
@@ -33,7 +33,7 @@ function btnForm(){
     divTextCenter.appendChild(divCardFooter);
     divCardFooter.appendChild(divTextCenter2);
     divTextCenter2.appendChild(a);
-    document.getElementById("ContenedorProductostwo").appendChild(divCol);
+    document.getElementById("formId").before(divCol);
 
     btnShowForm();
 
@@ -57,4 +57,8 @@ function btnShowForm(){
         btnForm.style.display = "none";
 
     }
+}
+
+function ProductRemover(element){
+    document.element.remove()
 }
