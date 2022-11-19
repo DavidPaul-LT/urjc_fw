@@ -1,51 +1,77 @@
+let productList = [];
 
-// Crea un div con todas las características del producto - FALTA (anidarlo a los objetos al crearlos o modificarlos)
-function btnForm(){
-    let divCol = document.createElement("div");
-        let divCard = document.createElement("div");
-            let img = document.createElement("img");
-            let divCardBody = document.createElement("div");
-                let divTextCenter = document.createElement("div");
-                    let h5 = document.createElement("h5");
-                    let divCardFooter = document.createElement("div");
-                        let divTextCenter2 = document.createElement("div");
-                            let a = document.createElement("a");
-    divCol.className = "col mb-5";
-    divCol.id = "Borrar";
-    divCard.className = "card h-100";
+function saveProduct(){
+    let oname = document.querySelector("#nombreForm").value,
+        oimg = document.querySelector("#imgForm").value,
+        oprice = document.querySelector("#priceForm").value;
+
+    addNewProduct(oname, oimg, oprice);
+}
+
+//Crear elemento
+function addNewProduct(oname, oimg, oprice){
+    let newProduct = {
+        name: oname,
+        img: oimg,
+        price: '$' + oprice
+    }
+    productList.push(newProduct);
+    showNewProduct(oname, oimg, oprice);
+}
+
+function showNewProduct(oname, oimg, oprice){
+    let product = document.createElement("product"),
+        card = document.createElement("card"),
+        img = document.createElement("img"),
+        card2 = document.createElement("card2"),
+        attributes = document.createElement("atributes"),
+        h5 = document.createElement("h5"),
+        p = document.createElement("p"),
+        footerCard = document.createElement("footerCard"),
+        buttonDelete = document.createElement("buttonDelete");
+
+    product.className = "col mb-5";
+    product.style = "border: none; ; background-color: transparent;";
+    card.className = "card h-100";
     img.className = "card-img-top";
-    img.src = document.getElementById("imgForm").value;
-    divCardBody.className = "card-body p-4";
-    divTextCenter.className = "text-center";
+    img.src = oimg;
+    card2.className = "card-body p-4";
+    attributes.className = "text-center";
     h5.className = "fw-bolder";
-    divCardFooter.className = "card-footer p-4 pt-0 border-top-0 bg-transparent";
-    divTextCenter2.className = "text-center";
-    a.className = "btn btn-outline-dark mt-auto";
-    let h5Text = document.createTextNode("Flowknit Ultra-Soft Performance Polo");
-    h5.appendChild(h5Text);
-    let aText = document.createTextNode("X");
-    a.appendChild(aText);
-    divCol.appendChild(divCard);
-    divCard.appendChild(img);
-    divCard.appendChild(divCardBody);
-    divCardBody.appendChild(divTextCenter);
-    divTextCenter.appendChild(h5);
-    divTextCenter.appendChild(divCardFooter);
-    divCardFooter.appendChild(divTextCenter2);
-    divTextCenter2.appendChild(a);
-    document.getElementById("formId").before(divCol);
+    h5.textContent = oname;
+    p.textContent = "$" + oprice;
+    footerCard.className = "card-footer p-4 pt-0 border-top-0 bg-transparent text-center";
+    buttonDelete.className = "text-center btn btn-outline-dark";
+    buttonDelete.setAttribute("onclick", "productRemover(this)");
+    buttonDelete.textContent = "Delete";
 
-    btnShowForm();
+    product.appendChild(card);
+    card.appendChild(img);
+    card.appendChild(card2);
+    card2.appendChild(attributes);
+    attributes.appendChild(h5);
+    attributes.appendChild(p);
+    card.appendChild(footerCard);
+    footerCard.appendChild(buttonDelete);
 
+    document.getElementById("ContenedorProductostwo").appendChild(product);
+}
+
+
+function productRemover(element){
+    // Nos ubicamos en la etiqueta producto y la eliminamos el HTML.
+    element = element.parentNode;
+    element = element.parentNode;
+    element = element.parentNode;
+    element.remove();
 }
 
 // Mustra el formulario para añadir, modificar o crear un elemento
-
 function btnShowForm(){
-    let form = document.getElementById("form");
-    let btnShowForm = document.getElementById("btnShowForm");
-    let btnForm = document.getElementById("btnForm");
-
+    let form = document.getElementById("form"),
+    btnShowForm = document.getElementById("btnShowForm"),
+    btnForm = document.getElementById("btnForm");
+    
     if(form.style.display == "none"){
         form.style.display = "block";
         btnShowForm.textContent = "Salir";
@@ -53,12 +79,19 @@ function btnShowForm(){
     } else {
         btnShowForm.style.display = 'block';
         form.style.display = "none";
-        btnShowForm.textContent = "Añadir Producto"
+        btnShowForm.textContent = "Añadir Producto";
         btnForm.style.display = "none";
-
+        
     }
 }
 
-function ProductRemover(element){
-    document.element.remove()
+/*
+// Crea un div con todas las características de un producto ya existente - FALTA (anidarlo a los objetos al crearlos o modificarlos)
+function btnForm(){
+    let product = document.querySelector("producto"),
+        newProduct = product.cloneNode(true);
+    document.getElementById("formId").before(newProduct);
+    //cambia el texto del boton y esconde el formulario
+    btnShowForm();
 }
+*/
