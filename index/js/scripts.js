@@ -164,6 +164,16 @@ class Pagina{
 */
 class PaginaPrincipal extends Pagina{
     #mostrar_almacen_productos(almacen){
+        //---Crear master
+        let master = document.createElement('div')
+        master.className = 'row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center'
+        master.id = 'master'
+        //---Crear -upper-container-
+        let upper = document.createElement('div')
+        upper.className = 'container px-4 px-lg-5 mt-5'
+        upper.id = 'upper-container'
+        upper.appendChild(master)
+        document.getElementsByTagName('section')[0].appendChild(upper) //---Master añadido como hijo de -upper-container-
         for (let [key,value] of almacen) {
             //---Crea tarjetas de Producto para cada uno de los que está contenido en -AlmacenProducto-
             //---NOMBRE
@@ -194,9 +204,13 @@ class PaginaPrincipal extends Pagina{
             final.className = 'col mb-5'
             final.id = value.getId()
             final.appendChild(card)
+            //---Añadir a master
+            document.getElementById('master').appendChild(final)
+            /*
             //---Añadir al -section-
             let sec = document.getElementsByTagName('section')[0]
             sec.appendChild(final)
+            */
         }
     }
     constructor(almacen_prods){
