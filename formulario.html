@@ -19,7 +19,7 @@
             <form id="form" style="display: none; border: 1px solid black;">
               <div class="mb-5">
                 <label class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombreForm">
+                <input type="text" class="form-control  has-validation" id="nombreForm">
               </div>
                 <div class="mb-5">
                   <label class="form-label">Imagen</label>
@@ -33,9 +33,8 @@
             <button id="btnForm" class="btn btn-outline-dark col mb-5" style="display: none;" onclick="saveProduct()">Submit</button>
           </section>
           
-          
           <!-- PRODUCTO DE PRUEBA 1-->
-          <product class="col mb-5" style="border: none; ; background-color: transparent;">
+          <product class="col mb-5" style="border: none; ; background-color: transparent;" onclick="savePage()">
             <card class="card h-100">
               <!-- Product image-->
               <img class="card-img-top" src="../product/product_Images/1234.JPG" alt="..." />

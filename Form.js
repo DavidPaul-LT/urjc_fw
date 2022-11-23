@@ -59,11 +59,18 @@ function showNewProduct(oname, oimg, oprice){
 
 
 function productRemover(element){
+    let nodos;
+    for(let i = 0; i < productList.length; i++){
+        if(productList[i].name == element.name){
+
+        }
+        nodos = productList[i]
+    } 
     // Nos ubicamos en la etiqueta producto y la eliminamos el HTML.
     element = element.parentNode;
     element = element.parentNode;
     element = element.parentNode;
-    element.remove();
+    element.remove();    
 }
 
 // Mustra el formulario para añadir, modificar o crear un elemento
@@ -95,3 +102,9 @@ function btnForm(){
     btnShowForm();
 }
 */
+
+
+function savePage(){
+    arrayPage.push(element);
+    localStorage.producto = element.outerHTML;
+}
