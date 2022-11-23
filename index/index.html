@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Practica</title>
+    <!-- CSS Boostrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- CSS Custom -->
+    <link rel="stylesheet" href="../index/navBar.css">
+    <link rel="stylesheet" href="../index/carousel.css">
+    <link rel="stylesheet" href="../Product/card.css">
+</head>
+<body>
+  <!-- Navegation bar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+
+      <a class="navbar-brand" href="index.html"><img src="../index/Index_images/logoImg.jpeg" class="img-fluid" alt="logoImg"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span> 
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Disabled</a>
+          </li>
+        </ul>
+      </div> 
+      <!-- Carrito Button -->
+      <form class="d-flex">
+        <button class="btn btn-outline-dark" type="submit">
+          <i class="bi-cart-fill me-1"></i>
+            Carrito
+            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+        </button>
+      </form>
+    </div>
+  </nav>
+
+  <div id="paginaprincipal">
+  <!-- Carusell -->
+  <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="10000">
+        <img src="https://www2.hm.com/content/dam/TOOLBOX/PRE_SEASON/2022_s05/june_2022/3116A-TCM5089-1x1.jpg"  class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item" data-bs-interval="2000">
+        <img src="https://images.ctfassets.net/afruo3gr1g6h/4Kz7kOlAqpaMhhPxM36I4y/6ae4376e32138cc14fc2460a230382fc/Group_1505.jpg?w=1600&h=661&q=95&fm=webp" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="https://images.ctfassets.net/afruo3gr1g6h/143mnki0MRCWu2TzbuM7QN/67e5b26af009e2c44603d86e2dcbe0da/Overlay-2.jpg?w=1600&q=95" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  
+  <!-- Product List-->
+  <section  class="py-5">
+    <div  class="container px-4 px-lg-5 mt-5">
+      <div id="contenedor" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <!-- PRODUCTO DE PRUEBA 1-->
+        <div class="col mb-5">
+          <div class="card h-100">
+            <!-- Product image-->
+            <img class="card-img-top" src="../product/product_Images/1234.JPG" alt="..." />
+            <!-- Product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder">Stretch Sweater Fleece Shirt</h5>
+                <!-- Product reviews-->
+                <form>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="a1estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="a2estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="a3estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="a4estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="a5estrella"></span>
+                </form>
+                <!-- Product price-->
+                $60.00
+              </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCTO DE PRUEBA 2-->
+        <div class="col mb-5">
+          <div class="card h-100">
+            <!-- Sale badge-->
+            <div class="badge bg-black text-white position-absolute" style="top: 0.5rem; right: 0.5rem">12.5% OFF</div>
+            <!-- Product image-->
+            <img class="card-img-top" src="../product/product_Images/1235.JPG" alt="..." />
+            <!-- Product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder">Flowknit Ultra-Soft Performance Polo</h5>
+                <!-- Product reviews-->
+                <form>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="b1estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="b2estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="b3estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="b4estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="b5estrella"></span>
+                </form>
+                <!-- Product price-->
+                <span class="text-muted text-decoration-line-through">$40.00</span>
+                $35.00
+              </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCTO DE PRUEBA 3-->
+        <div class="col mb-5">
+          <div class="card h-100">
+            <!-- Sale badge-->
+            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+            <!-- Product image-->
+            <img class="card-img-top" src="../product/product_Images/1236.jpg" alt="..." />
+            <!-- Product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder">Flowknit Ultra-Soft Performance Pant</h5>
+                <!-- Product reviews-->
+                <form>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="c1estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="c2estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="c3estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="c4estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="c5estrella"></span>
+                </form>
+                <!-- Product price-->
+                <span class="text-muted text-decoration-line-through">$45.00</span>
+                $40.00
+              </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCTO DE PRUEBA 4-->
+        <div class="col mb-5">
+          <div class="card h-100">
+            <!-- Product image-->
+            <img class="card-img-top" src="../product/product_Images/1237.jpg" alt="..." />
+            <!-- Product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder">Flowknit Ultra-Soft Performance Short</h5>
+                <!-- Product reviews-->
+                <form>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="d1estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="d2estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="d3estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="d4estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="d5estrella"></span>
+                </form>
+                <!-- Product price-->
+                $35.00
+              </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCTO DE PRUEBA 5-->
+        <div class="col mb-5">
+          <div class="card h-100">
+            <!-- Sale badge-->
+            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+            <!-- Product image-->
+            <img class="card-img-top" src="../product/product_Images/1238.jpg" alt="..." />
+            <!-- Product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder">Mongolian Cashmere Crewneck Sweater</h5>
+                <!-- Product reviews-->
+                <form>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="e1estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="e2estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="e3estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="e4estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="e5estrella"></span>
+                </form>
+                <!-- Product price-->
+                <span class="text-muted text-decoration-line-through">$90.00</span>
+                $50.00
+              </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div id="boton5" class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCTO DE PRUEBA 6-->
+        <div class="col mb-5">
+          <div class="card h-100">
+            <!-- Product image-->
+            <img class="card-img-top" src="../product/product_Images/1239.jpg" alt="..." />
+            <!-- Product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder">100% Merino Wool Shirt Jacket</h5>
+                <!-- Product reviews-->
+                <form>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="f1estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="f2estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="f3estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="f4estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="f5estrella"></span>
+                </form>
+                <!-- Product price-->
+                $120.00
+              </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCTO DE PRUEBA 7-->
+        <div class="col mb-5">
+          <div class="card h-100">
+            <!-- Sale badge-->
+            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+            <!-- Product image-->
+            <img class="card-img-top" src="../product/product_Images/1240.jpg" alt="..." />
+            <!-- Product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder">Ultra-Stretch Ponte Kick Flare Pant</h5>
+                <!-- Product reviews-->
+                <form>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="g1estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="g2estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="g3estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="g4estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="g5estrella"></span>
+                </form>
+                <!-- Product price-->
+                <span class="text-muted text-decoration-line-through">$50.00</span>
+                $40.00
+              </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div id="boton7" class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCTO DE PRUEBA 8-->
+        <div class="col mb-5">
+          <div class="card h-100">
+            <!-- Product image-->
+            <img class="card-img-top" src="../product/product_Images/1241.jpg" alt="..." />
+            <!-- Product details-->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder">UltraSoft Performance Legging Inseam</h5>
+                <!-- Product reviews-->
+                <form>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="h1estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="h2estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="h3estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="h4estrella"></span>
+                  <span class="fa fa-star" onclick="calificar(this)" style="cursor: pointer; color: black;" id="h5estrella"></span>
+                </form>
+                <!-- Product price-->
+                $40.00
+              </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div id="boton8" class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+  <script src="https://kit.fontawesome.com/268bb10e54.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <script src="../Product/clasificacion.js"></script>
+  <script src="../app.js"></script>
+</body>
+</html>
