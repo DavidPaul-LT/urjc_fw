@@ -180,11 +180,15 @@ class PaginaPrincipal extends Pagina{
             let nombre = document.createElement('h5')
             nombre.className = 'fw-bolder name'
             nombre.textContent = value.getNombre()
+            //---PRECIO
+            let aux_precio = document.createElement('p')
+            aux_precio.textContent = '$' + value.getPrecio() + '.00'
             //---NOMBRE + PRECIO
             let precio = document.createElement('div')
             precio.className = 'text-center'
             precio.appendChild(nombre)
-            precio.textContent = value.getPrecio()
+            precio.appendChild(aux_precio)
+            //precio.textContent += '$' + value.getPrecio() + '.00'
             //---PRODUCT DETAILS
             let detalles = document.createElement('div')
             detalles.className = 'card-body p-4'
@@ -202,6 +206,7 @@ class PaginaPrincipal extends Pagina{
             //---PRODUCTO DE PRUEBA
             let final = document.createElement('div')
             final.className = 'col mb-5'
+            final.onclick  = 'alert(5)' //---No funciona
             final.id = value.getId()
             final.appendChild(card)
             //---Añadir a master
