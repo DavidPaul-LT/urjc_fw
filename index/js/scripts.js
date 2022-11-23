@@ -145,7 +145,7 @@ class Pagina{
     }
     //---Devuelve el -AlmacenProductos- usado por la superclase -Pagina-
     get_almacen(){
-        return this.#almacen
+        return this.#almacen.getAlmacen()
     }
     //---Devuelve un objeto -PaginaPrincipal-
     ir_pag_almacen(new_almacen=this.#almacen){
@@ -159,19 +159,69 @@ class Pagina{
         return new PaginaCarrito(new_almacen)
     }
 }
-/*  !!!PROCURAR QUE SEA INMUTABLE!!! (Así se obliga a cargar siempre y permite la actualización de los productos)
-    Pagina principal, aquella en la que se muestra los productos de AlmacenProductos
+/*
+    -----Carrousel()
+        Crea los elementos necesarios para la generación del carrousel que contendrá -section-
 */
-class PaginaPrincipal extends Pagina{
-    //---Añaed a section el carrousel
-    #mostrar_carrousel(){
+class Carrousel{
+    //---Set de imágenes por defecto del carrousel
+    static image_set = [
+        'index_images/carrousel_images/carrousel1.jpg',
+        'index_images/carrousel_images/carrousel2.jpg',
+        'index_images/carrousel_images/carrousel3.jpg',
+        'index_images/carrousel_images/carrousel4.jpg'
+    ]
+    static mostar_carrousel(){
+        //---main carrousel
+        let carr = document.createElement('div')
+        carr.id = 'carouselExampleInterval'
+        carr.className = 'carousel slide'
+        carr.setAttribute('data-bs-ride','carousel')
         //---Carrousel-inner
         let inner = document.createElement('div')
         inner.className = 'carousel-inner'
-        //---Falta por implementar
+        for (let i = 0; i < 4; i++) {
+            //---Carrousel-item
+            let item = document.createElement('div')
+            item.className = 'carousel-item'
+            //---Establece como imagen por defecto la primera del set
+            if (i==0) {
+                item.className += ' active'
+            }
+            item.setAttribute('data-bs-interval','4000')
+            //---Imagenes de carrousel
+            let img = document.createElement('img')
+            img.src = Carrousel.image_set[i]
+            img.className = 'd-block w-100'
+            img.alt = '...'
+            item.appendChild(img)
+            inner.appendChild(item)
+        }
+        carr.appendChild(inner)
+        //---Botones previous y next
+        for (let i of ['prev','next']) {
+            let butt = document.createElement('button')
+            butt.className = 'carousel-control-' + i
+            butt.type = 'button'
+            butt.setAttribute('data-bs-target','#carouselExampleInterval')
+            butt.setAttribute('data-bs-slide',i)
+            let control = document.createElement('span')
+            control.className = `carousel-control-${i}-icon`
+            control.setAttribute('aria-hidde','true')
+            butt.appendChild(control)
+            carr.appendChild(butt)
+        }
+        //---Añadir el carrusel a -section-
+        document.getElementsByTagName('section')[0].appendChild(carr)
     }
-    //---Añade a section los productos que se encuentren en -AlmacenProductos-
-    #mostrar_almacen_productos(almacen){
+}
+/*
+    -----MuestraProductos()
+        Crea los elementos necesarios para la generación de las tarjetas de producto que contendrá -section-
+*/
+class MuestraProductos{
+    //---Añade a -section- los productos contenidos en un objeto AlmacenProductos
+    static mostar_almacen_productos(almacen){
         //---Crear master
         let master = document.createElement('div')
         master.className = 'row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center'
@@ -221,13 +271,21 @@ class PaginaPrincipal extends Pagina{
             document.getElementById('master').appendChild(final)
         }
     }
-    constructor(almacen_prods){
+}
+/*  !!!PROCURAR QUE SEA INMUTABLE!!! (Así se obliga a cargar siempre y permite la actualización de los productos)
+    Pagina principal, aquella en la que se muestra los productos de AlmacenProductos
+*/
+class PaginaPrincipal extends Pagina{
+    constructor(almacen_prods,is_carrousel_deployed=false){
         super(almacen_prods) //---Borra por defecto todos los hijos de -section-
         //1) Header
         //2) Carrousel
-        
+        if (!is_carrousel_deployed){
+            Carrousel.mostar_carrousel()
+            console.log('Carrousel mostrado')
+        }
         //3) AlmacenProductos
-        this.#mostrar_almacen_productos(almacen_prods.getAlmacen())
+        MuestraProductos.mostar_almacen_productos(this.get_almacen())
         console.log('Cargada pagina principal')
     }
 }
