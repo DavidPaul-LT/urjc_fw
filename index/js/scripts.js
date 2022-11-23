@@ -163,6 +163,14 @@ class Pagina{
     Pagina principal, aquella en la que se muestra los productos de AlmacenProductos
 */
 class PaginaPrincipal extends Pagina{
+    //---Añaed a section el carrousel
+    #mostrar_carrousel(){
+        //---Carrousel-inner
+        let inner = document.createElement('div')
+        inner.className = 'carousel-inner'
+        //---Falta por implementar
+    }
+    //---Añade a section los productos que se encuentren en -AlmacenProductos-
     #mostrar_almacen_productos(almacen){
         //---Crear master
         let master = document.createElement('div')
@@ -211,17 +219,13 @@ class PaginaPrincipal extends Pagina{
             final.appendChild(card)
             //---Añadir a master
             document.getElementById('master').appendChild(final)
-            /*
-            //---Añadir al -section-
-            let sec = document.getElementsByTagName('section')[0]
-            sec.appendChild(final)
-            */
         }
     }
     constructor(almacen_prods){
         super(almacen_prods) //---Borra por defecto todos los hijos de -section-
         //1) Header
         //2) Carrousel
+        
         //3) AlmacenProductos
         this.#mostrar_almacen_productos(almacen_prods.getAlmacen())
         console.log('Cargada pagina principal')
