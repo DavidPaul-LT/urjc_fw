@@ -66,15 +66,16 @@ class AlmacenProductos{
         ['1240','Ultra-Stretch Ponte Kick Flare Pant',(40,50),'../product/1240.jpg'],
         ['1241','Ultra-Soft Performance Legging - 25" Inseam',40,'../product/1241.jpg']
     ]
-    //--- Inserta en -elementos- todos los productos de prueba
-    static productos_de_prueba(){
-        for (let producto of AlmacenProductos.modelos) {
-            this.#elementos.insertar(new Producto(producto[0],producto[1],producto[2],producto[3]))
+    //--- Inicializa un mapa que contendrá los productos clasificados por sus atributos -id-
+    constructor(prods_prueba=true){
+        this.#elementos = new Map()
+        if (prods_prueba){
+            this.#productos_de_prueba()
         }
     }
-    //--- Inicializa un mapa que contendrá los productos clasificados por sus atributos -id-
-    constructor(){
-        this.#elementos = new Map()
+    //--- Método getter de -elementos-
+    getAlmacen(){
+        return this.#elementos
     }
     //--- Inserta un nuevo objeto -Producto- en -elementos-
     insertar(producto){
@@ -82,6 +83,12 @@ class AlmacenProductos{
             throw "KeyAlreadyUsedException" //---Raise KeyAlreadyUsedException (clave ya usada, busca otra o elimina el producto)
         }else{
             this.#elementos.set(producto.getId(),producto)
+        }
+    }
+    //--- Inserta en -elementos- todos los productos de prueba
+    #productos_de_prueba(){
+        for (let producto of AlmacenProductos.modelos) {
+            this.insertar(new Producto(producto[0],producto[1],producto[2],producto[3]))
         }
     }
     //--- Eliminar un objeto -Producto- de entre los ya contenidos en -elementos-
@@ -142,23 +149,54 @@ class Pagina{
     }
     //---Devuelve un objeto -PaginaPrincipal-
     ir_pag_almacen(new_almacen=this.#almacen){
-        return PaginaPrincipal(new_almacen)
+        return new PaginaPrincipal(new_almacen)
     }
     //---Devuelve un objeto -PaginaProducto-
     ir_pag_producto(new_almacen=this.#almacen){
-        return PaginaProducto(new_almacen)
+        return new PaginaProducto(new_almacen)
     }
     ir_pag_carrito(new_almacen=this.#almacen){
-        return PaginaCarrito(new_almacen)
+        return new PaginaCarrito(new_almacen)
     }
 }
 /*  !!!PROCURAR QUE SEA INMUTABLE!!! (Así se obliga a cargar siempre y permite la actualización de los productos)
     Pagina principal, aquella en la que se muestra los productos de AlmacenProductos
 */
 class PaginaPrincipal extends Pagina{
-    #mostrar_almacen_productos(){
-        for (let producto of almacen) {
+    #mostrar_almacen_productos(almacen){
+        for (let [key,value] of almacen) {
             //---Crea tarjetas de Producto para cada uno de los que está contenido en -AlmacenProducto-
+            //---NOMBRE
+            let nombre = document.createElement('h5')
+            nombre.className = 'fw-bolder name'
+            nombre.textContent = value.getNombre()
+            //---NOMBRE + PRECIO
+            let precio = document.createElement('div')
+            precio.className = 'text-center'
+            precio.appendChild(nombre)
+            precio.textContent = value.getPrecio()
+            //---PRODUCT DETAILS
+            let detalles = document.createElement('div')
+            detalles.className = 'card-body p-4'
+            detalles.appendChild(precio)
+            //---PRODUCT IMAGE
+            let imagen = document.createElement('img')
+            imagen.className = 'card-img-top'
+            imagen.src = value.getImagen()
+            imagen.alt = '...'
+            //---PRODUCT IMAGE + PRODUCT DETAILS
+            let card = document.createElement('div')
+            card.className = 'card h-100'
+            card.appendChild(imagen)
+            card.appendChild(detalles)
+            //---PRODUCTO DE PRUEBA
+            let final = document.createElement('div')
+            final.className = 'col mb-5'
+            final.id = value.getId()
+            final.appendChild(card)
+            //---Añadir al -section-
+            let sec = document.getElementsByTagName('section')[0]
+            sec.appendChild(final)
         }
     }
     constructor(almacen_prods){
@@ -166,7 +204,7 @@ class PaginaPrincipal extends Pagina{
         //1) Header
         //2) Carrousel
         //3) AlmacenProductos
-        this.#mostrar_almacen_productos()
+        this.#mostrar_almacen_productos(almacen_prods.getAlmacen())
         console.log('Cargada pagina principal')
     }
 }
@@ -191,7 +229,7 @@ class PaginaCarrito extends Pagina{
     constructor(almacen_prods){
         super(almacen_prods) //---Borra por defecto todos los hijos de -section-
         //1) Header carrito
-        //2) for AlmacenProductos[i] of Carrito{Diplay Producto}
+        //2) for AlmacenProductos[i] of Carrito{Display Producto}
         console.log('Cargada pagina del carrito')
     }
 }
@@ -230,3 +268,5 @@ function pagina(){
 //---
 //pagina();
 let cart = new Carrito();
+let storage = new AlmacenProductos();
+let page = new PaginaPrincipal(storage);
