@@ -206,7 +206,7 @@ class PaginaPrincipal extends Pagina{
             //---PRODUCTO DE PRUEBA
             let final = document.createElement('div')
             final.className = 'col mb-5'
-            final.onclick  = 'alert(5)' //---No funciona
+            final.setAttribute('onclick','new PaginaProducto(null)')
             final.id = value.getId()
             final.appendChild(card)
             //---Añadir a master
@@ -265,24 +265,6 @@ function calificar(item){
             document.getElementById((primero+i)+nombre).style.color = "orange";
         }
     }
-}
-//---TEST PÁGINA CARRITO
-function pagina2(){
-    alert(6);
-}
-
-function pagina(){
-    let sec = document.getElementsByTagName('section')[0];
-    //---Borra todos los hijos de section
-    while (sec.lastElementChild){
-        sec.removeChild(sec.lastElementChild)
-    }
-    let p = document.createElement('p');
-    p.textContent = 'PAGINA 1';
-    sec.appendChild(p);
-    sec.innerHTML += '<button onclick="pagina2()">Ir a pagina 2</button>';
-
-    
 }
 //---
 //pagina();
