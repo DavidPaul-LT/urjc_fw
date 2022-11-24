@@ -152,8 +152,8 @@ class Pagina{
         return new PaginaPrincipal(new_almacen)
     }
     //---Devuelve un objeto -PaginaProducto-
-    ir_pag_producto(new_almacen=this.#almacen){
-        return new PaginaProducto(new_almacen)
+    ir_pag_producto(new_almacen=this.#almacen,id){
+        return new PaginaProducto(new_almacen,id)
     }
     ir_pag_carrito(new_almacen=this.#almacen){
         return new PaginaCarrito(new_almacen)
@@ -264,7 +264,7 @@ class MuestraProductos{
             //---PRODUCTO DE PRUEBA
             let final = document.createElement('div')
             final.className = 'col mb-5'
-            final.setAttribute('onclick','new PaginaProducto(null)')
+            final.setAttribute('onclick','new PaginaProducto(this.almacen,null)')
             final.id = value.getId()
             final.appendChild(card)
             //---Añadir a master
@@ -300,6 +300,7 @@ class PaginaProducto extends Pagina{
     }
     constructor(almacen_prods,id){
         super(almacen_prods) //---Borra por defecto todos los hijos de -section-
+        console.log('Pagina producto cargada')
         this.#mostrar_pag_producto(id)
     }
 }
