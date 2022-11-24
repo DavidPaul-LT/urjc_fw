@@ -100,8 +100,11 @@ class AlmacenProductos{
         aux = document.getElementById(producto.getId())
         aux.style.display = 'none'
     }
+    //--- Consigue un atributo en función de su -id-
+    getProducto(id){
+        return this.#elementos.get(id)
+    }
 }
-
 /* class Carrito
 -Cada uno de sus elementos simula ser un puntero a una posición del objeto -AlmacenProductos-
 */
@@ -111,6 +114,10 @@ class Carrito{
     constructor(){
         this.#elementos = new Map()
         this.#cart_obj = document.getElementById('carrito')
+    }
+    //--- Devuelve la longitud del carrito
+    length(){
+        return this.#elementos.size
     }
     //--- Guarda como llave el identificador de un obj. -Producto- ya almacenado en -AlmacenProductos-
     insertar(id_producto){
@@ -127,6 +134,10 @@ class Carrito{
     eliminar(id_producto){
         this.#elementos.set(id_producto,undefined)
         this.#cart_obj.textContent = `${parseInt(this.#cart_obj.textContent)-1}`
+    }
+    //--- Devuelve el mapa de elemntos de -elemento-
+    getCarrito(){
+        return this.#elementos
     }
 }
 /*
@@ -148,15 +159,15 @@ class Pagina{
         return this.#almacen.getAlmacen()
     }
     //---Devuelve un objeto -PaginaPrincipal-
-    ir_pag_almacen(new_almacen=this.#almacen){
-        return new PaginaPrincipal(new_almacen)
+    static ir_pag_principal(varp,new_almacen){
+        varp = new PaginaPrincipal(new_almacen)
     }
     //---Devuelve un objeto -PaginaProducto-
-    ir_pag_producto(new_almacen=this.#almacen){
-        return new PaginaProducto(new_almacen)
+    static ir_pag_producto(varp,id,new_almacen){
+        varp = new PaginaProducto(new_almacen,id)
     }
-    ir_pag_carrito(new_almacen=this.#almacen){
-        return new PaginaCarrito(new_almacen)
+    static ir_pag_carrito(varp,new_almacen){
+        varp =  new PaginaCarrito(new_almacen)
     }
 }
 /*
@@ -221,7 +232,7 @@ class Carrousel{
 */
 class MuestraProductos{
     //---Añade a -section- los productos contenidos en un objeto AlmacenProductos
-    static mostrar_almacen_productos(almacen){
+    static mostrar_almacen_productos(modificador,almacen){
         //---Crear master
         let master = document.createElement('div')
         master.className = 'row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center'
@@ -246,7 +257,6 @@ class MuestraProductos{
             precio.className = 'text-center'
             precio.appendChild(nombre)
             precio.appendChild(aux_precio)
-            //precio.textContent += '$' + value.getPrecio() + '.00'
             //---PRODUCT DETAILS
             let detalles = document.createElement('div')
             detalles.className = 'card-body p-4'
@@ -264,11 +274,13 @@ class MuestraProductos{
             //---PRODUCTO DE PRUEBA
             let final = document.createElement('div')
             final.className = 'col mb-5'
-            final.setAttribute('onclick','new PaginaProducto(null)')
+            //final.setAttribute('onclick',`Pagina.ir_pag_producto(${modificador},value.getId())`) 
+            //final.addEventListener('click',`Pagina.ir_pag_producto(modificador,value.getId())`)
+            final.innerHTML = '<div class="col mb-5" id=`${value.getId()}` onclick=`Pagina.ir_pag_producto(modificador,value.getId())`></div>'
             final.id = value.getId()
             final.appendChild(card)
             //---Añadir a master
-            document.getElementById('master').appendChild(final)
+            master.appendChild(final)
         }
     }
 }
@@ -285,7 +297,7 @@ class PaginaPrincipal extends Pagina{
             console.log('Carrousel mostrado')
         }
         //3) AlmacenProductos
-        MuestraProductos.mostrar_almacen_productos(this.get_almacen())
+        MuestraProductos.mostrar_almacen_productos(this,this.get_almacen())
         console.log('Cargada pagina principal')
     }
 }
@@ -295,22 +307,121 @@ class PaginaPrincipal extends Pagina{
 class PaginaProducto extends Pagina{
     #id
     #mostrar_pag_producto(id){
-        //1) Consulta -AlmacenProductos-
-        //2) Crea la página
+        document.write('Hola mundo')
     }
     constructor(almacen_prods,id){
         super(almacen_prods) //---Borra por defecto todos los hijos de -section-
         this.#mostrar_pag_producto(id)
+        console.log('Cargada página producto')
+    }
+}
+/*
+    MostrarCarrito() clase auxiliar que añade al DOM un nuevo carrito
+*/
+class MuestraCarrito{
+    static mostrar_carrito(almacen,carrito){
+        //---Crea el elemento upper
+        let upper = document.createElement('div')
+        upper.className = 'p-5'
+        //---info cantidad productos
+        let cant = document.createElement('div')
+        cant.className = 'd-flex justify-content-between align-items-center mb-5'
+        let h = document.createElement('h6')
+        h.className = 'mb-0 text-muted'
+        h.textContent = `${carrito.length()} productos en tu carrito`
+        cant.appendChild(h)
+        upper.appendChild(cant)
+        //--- barra de separación obligatoria
+        let bar = document.createElement('hr')
+        bar.className = 'my-4'
+        upper.appendChild(bar)
+        for (let [key,value] of carrito){
+            let producto = document.createElement('div')
+            producto.className = 'row mb-4 d-flex justify-content-between align-items-center'
+            //mini imagen de producto
+            let div = document.createElement('div')
+            div.className = 'col-md-2 col-lg-2 col-xl-2'
+            let img = document.createElement('img')
+            img.src = almacen.getProducto(key).getImagen()
+            img.className = 'img-fluid rounded-3'
+            img.alt = '...'
+            div.appendChild(img)
+            producto.appendChild(div)
+            //nombre producto
+            let nombre = document.createElement('div')
+            nombre.className = 'col-md-3 col-lg-3 col-xl-3'
+            let nombre_h = document.createElement('h6')
+            nombre_h.textContent = almacen.getProducto(key).getNombre()
+            nombre.appendChild(nombre_h)
+            producto.appendChild(nombre)
+            //selector cantidad
+            let sel = document.createElement('div')
+            sel.className = 'col-md-3 col-lg-3 col-xl-2 d-flex'
+            let step_down = document.createElement('button')
+            step_down.className = 'btn btn-link px-2'
+            step_down.setAttribute('onclick',"this.parentNode.querySelector('input[type=number]').stepDown()")
+            let i = document.createElement('i')
+            i.className = 'fas fa-minus'
+            step_down.appendChild(i)
+            sel.appendChild(step_down)
+            let inp = document.createElement('input')
+            inp.id = "form1"
+            inp.min = '1'
+            inp.name = 'quantity'
+            inp.value = `${value}`
+            inp.type = 'number'
+            inp.className = 'form-control form-control-sm'
+            sel.appendChild(inp)
+            let sel2 = document.createElement('div')
+            sel.className = 'col-md-3 col-lg-3 col-xl-2 d-flex'
+            let step_up = document.createElement('button')
+            step_up.className = 'btn btn-link px-2'
+            step_up.setAttribute('onclick',"this.parentNode.querySelector('input[type=number]').stepUp()")
+            let i2 = document.createElement('i')
+            i2.className = 'fas fa-plus'
+            step_down.appendChild(i)
+            sel2.appendChild(step_up)
+            producto.appendChild(sel)
+            producto.appendChild(inp)
+            producto.appendChild(sel2)
+            //---precio producto
+            let precio = document.createElement('div')
+            precio.className = 'col-md-1 col-lg-1 col-xl-1 text-end'
+            let h6 = document.createElement('h6')
+            h6.className = 'mb-0'
+            h6.textContent = `$${almacen.getProducto(key).getPrecio()}.00`
+            precio.appendChild(h6)
+            producto.appendChild(precio)
+            //---borrar producto del carrito
+            let borrar = document.createElement('div')
+            borrar.className = 'col-md-1 col-lg-1 col-xl-1 text-end'
+            let aux = document.createElement('a')
+            aux.setAttribute('onclick',algo) //pendiente por ajustar
+            aux.className = 'text-muted'
+            aux.textContent = 'X'
+            let i3 = document.createElement('i')
+            i3.className = 'fas fa-times'
+            aux.appendChild(i3)
+            borrar.appendChild(aux)
+            producto.appendChild(borrar)
+            upper.appendChild(producto)
+            //---barra separación
+            let barw = document.createElement('hr')
+            barw.className = 'my-4'
+            upper.appendChild(barw)
+        }
+        //---FALTA TERMINAR PAGINA CARRITO
     }
 }
 /*
     Pagina Carrito, aquella en la que se muestra todos los pruductos ingresados en -Carrito-
 */
 class PaginaCarrito extends Pagina{
-    constructor(almacen_prods){
+    constructor(almacen_prods,carrito){
         super(almacen_prods) //---Borra por defecto todos los hijos de -section-
         //1) Header carrito
         //2) for AlmacenProductos[i] of Carrito{Display Producto}
+        MuestraCarrito.mostrar_carrito(almacen_prods.get_almacen(),carrito.getCarrito())
         console.log('Cargada pagina del carrito')
     }
 }
