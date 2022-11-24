@@ -57,14 +57,14 @@ class AlmacenProductos{
     #elementos
     //---Añade al mapa de elementos unos productos de prueba
     static modelos = [
-        ['1234','Stretch Sweater Fleece Shirt',60,'../product/product_Images/1234.jpg'],
-        ['1235','Flowknit Ultra-Soft Performance Polo',(35,40),'../product/product_Images/1235.jpg'],
-        ['1236','Flowknit Ultra-Soft Performance Pant',(40,45),'../product/product_Images/1236.jpg'],
-        ['1237','Flowknit Ultra-Soft Performance Short',35,'../product/product_Images/1237.jpg'],
-        ['1238','Mongolian Cashmere Crewneck Sweater',(50,90),'../product/product_Images/1238.jpg'],
-        ['1239','100% Merino Wool Shirt Jacket',120,'../product/product_Images/1239.jpg'],
-        ['1240','Ultra-Stretch Ponte Kick Flare Pant',(40,50),'../product/product_Images/1240.jpg'],
-        ['1241','Ultra-Soft Performance Legging - 25" Inseam',40,'../product/product_Images/1241.jpg']
+        ['1234','Stretch Sweater Fleece Shirt',60,'../product/1234.jpg'],
+        ['1235','Flowknit Ultra-Soft Performance Polo',(35,40),'../product/1235.jpg'],
+        ['1236','Flowknit Ultra-Soft Performance Pant',(40,45),'../product/1236.jpg'],
+        ['1237','Flowknit Ultra-Soft Performance Short',35,'../product/1237.jpg'],
+        ['1238','Mongolian Cashmere Crewneck Sweater',(50,90),'../product/1238.jpg'],
+        ['1239','100% Merino Wool Shirt Jacket',120,'../product/1239.jpg'],
+        ['1240','Ultra-Stretch Ponte Kick Flare Pant',(40,50),'../product/1240.jpg'],
+        ['1241','Ultra-Soft Performance Legging - 25" Inseam',40,'../product/1241.jpg']
     ]
     //--- Inicializa un mapa que contendrá los productos clasificados por sus atributos -id-
     constructor(prods_prueba=true){
@@ -145,7 +145,7 @@ class Pagina{
     }
     //---Devuelve el -AlmacenProductos- usado por la superclase -Pagina-
     get_almacen(){
-        return this.#almacen
+        return this.#almacen.getAlmacen()
     }
     //---Devuelve un objeto -PaginaPrincipal-
     ir_pag_almacen(new_almacen=this.#almacen){
@@ -159,11 +159,69 @@ class Pagina{
         return new PaginaCarrito(new_almacen)
     }
 }
-/*  !!!PROCURAR QUE SEA INMUTABLE!!! (Así se obliga a cargar siempre y permite la actualización de los productos)
-    Pagina principal, aquella en la que se muestra los productos de AlmacenProductos
+/*
+    -----Carrousel()
+        Crea los elementos necesarios para la generación del carrousel que contendrá -section-
 */
-class PaginaPrincipal extends Pagina{
-    #mostrar_almacen_productos(almacen){
+class Carrousel{
+    //---Set de imágenes por defecto del carrousel
+    static image_set = [
+        'index_images/carrousel_images/carrousel1.jpg',
+        'index_images/carrousel_images/carrousel2.jpg',
+        'index_images/carrousel_images/carrousel3.jpg',
+        'index_images/carrousel_images/carrousel4.jpg'
+    ]
+    static mostrar_carrousel(){
+        //---main carrousel
+        let carr = document.createElement('div')
+        carr.id = 'carouselExampleInterval'
+        carr.className = 'carousel slide'
+        carr.setAttribute('data-bs-ride','carousel')
+        //---Carrousel-inner
+        let inner = document.createElement('div')
+        inner.className = 'carousel-inner'
+        for (let i = 0; i < 4; i++) {
+            //---Carrousel-item
+            let item = document.createElement('div')
+            item.className = 'carousel-item'
+            //---Establece como imagen por defecto la primera del set
+            if (i==0) {
+                item.className += ' active'
+            }
+            item.setAttribute('data-bs-interval','4000')
+            //---Imagenes de carrousel
+            let img = document.createElement('img')
+            img.src = Carrousel.image_set[i]
+            img.className = 'd-block w-100'
+            img.alt = '...'
+            item.appendChild(img)
+            inner.appendChild(item)
+        }
+        carr.appendChild(inner)
+        //---Botones previous y next
+        for (let i of ['prev','next']) {
+            let butt = document.createElement('button')
+            butt.className = 'carousel-control-' + i
+            butt.type = 'button'
+            butt.setAttribute('data-bs-target','#carouselExampleInterval')
+            butt.setAttribute('data-bs-slide',i)
+            let control = document.createElement('span')
+            control.className = `carousel-control-${i}-icon`
+            control.setAttribute('aria-hidde','true')
+            butt.appendChild(control)
+            carr.appendChild(butt)
+        }
+        //---Añadir el carrusel a -section-
+        document.getElementsByTagName('section')[0].appendChild(carr)
+    }
+}
+/*
+    -----MuestraProductos()
+        Crea los elementos necesarios para la generación de las tarjetas de producto que contendrá -section-
+*/
+class MuestraProductos{
+    //---Añade a -section- los productos contenidos en un objeto AlmacenProductos
+    static mostrar_almacen_productos(almacen){
         //---Crear master
         let master = document.createElement('div')
         master.className = 'row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center'
@@ -211,19 +269,23 @@ class PaginaPrincipal extends Pagina{
             final.appendChild(card)
             //---Añadir a master
             document.getElementById('master').appendChild(final)
-            /*
-            //---Añadir al -section-
-            let sec = document.getElementsByTagName('section')[0]
-            sec.appendChild(final)
-            */
         }
     }
-    constructor(almacen_prods){
+}
+/*  !!!PROCURAR QUE SEA INMUTABLE!!! (Así se obliga a cargar siempre y permite la actualización de los productos)
+    Pagina principal, aquella en la que se muestra los productos de AlmacenProductos
+*/
+class PaginaPrincipal extends Pagina{
+    constructor(almacen_prods,is_carrousel_deployed=false){
         super(almacen_prods) //---Borra por defecto todos los hijos de -section-
         //1) Header
         //2) Carrousel
+        if (!is_carrousel_deployed){
+            Carrousel.mostrar_carrousel()
+            console.log('Carrousel mostrado')
+        }
         //3) AlmacenProductos
-        this.#mostrar_almacen_productos(almacen_prods.getAlmacen())
+        MuestraProductos.mostrar_almacen_productos(this.get_almacen())
         console.log('Cargada pagina principal')
     }
 }
@@ -232,13 +294,13 @@ class PaginaPrincipal extends Pagina{
 */
 class PaginaProducto extends Pagina{
     #id
-    #mostar_pag_producto(id){
+    #mostrar_pag_producto(id){
         //1) Consulta -AlmacenProductos-
         //2) Crea la página
     }
     constructor(almacen_prods,id){
         super(almacen_prods) //---Borra por defecto todos los hijos de -section-
-        this.#mostar_pag_producto(id)
+        this.#mostrar_pag_producto(id)
     }
 }
 /*
