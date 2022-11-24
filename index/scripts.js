@@ -1,0 +1,273 @@
+/* class Producto:
+    Clase (pseudo)inmutable que sirve como contenedor de los atributos de un determinado producto de la página
+*/
+class Producto{
+    #id
+    #nombre
+    #precio
+    #imagen
+    //--- Crea un nuevo ojeto de clase -Producto- con un -id- determinado por la ED -AlmacenProductos-
+    constructor(id,nombre,precio,ruta_imagen){
+        this.#id = id
+        this.#nombre = nombre
+        this.#precio = precio
+        this.#imagen = ruta_imagen
+    }
+    //--- Método getter del atributo -id-
+    getId(){
+        return this.#id
+    }
+    //--- Método setter del atributo -id- (el acceso a este método debería estar lo más restringido posible)
+    #setId(val){
+        this.#id = val
+    }
+    //--- Método getter del atributo -nombre-
+    getNombre(){
+        return this.#nombre
+    }
+    //--- Método setter del atributo -nombre-
+    setNombre(val){
+        this.#nombre = val
+        //modificar -inner_html-
+    }
+    //--- Método getter del atributo -precio-
+    getPrecio(){
+        return this.#precio
+    }
+    //--- Método setter del atributo -precio-
+    setPrecio(val){
+        this.#precio = val
+        //modificar -inner_html-
+    }
+    //--- Método getter del atributo -imagen-
+    getImagen(){
+        return this.#imagen
+    }
+    //--- Método setter del atributo -imagen-
+    setImagen(val){
+        this.#imagen = val
+    }
+}
+/* class AlmacenProductos:
+    -Sirve como estructura de datos que almacena los distintos objetos -Producto- que se instancien
+    -Garantiza la unicidad de los IDs
+    -Parametros -producto- son facilitados por el formulario de creación/modificación
+*/
+class AlmacenProductos{
+    #elementos
+    //---Añade al mapa de elementos unos productos de prueba
+    static modelos = [
+        ['1234','Stretch Sweater Fleece Shirt',60,'../product/product_Images/1234.jpg'],
+        ['1235','Flowknit Ultra-Soft Performance Polo',(35,40),'../product/product_Images/1235.jpg'],
+        ['1236','Flowknit Ultra-Soft Performance Pant',(40,45),'../product/product_Images/1236.jpg'],
+        ['1237','Flowknit Ultra-Soft Performance Short',35,'../product/product_Images/1237.jpg'],
+        ['1238','Mongolian Cashmere Crewneck Sweater',(50,90),'../product/product_Images/1238.jpg'],
+        ['1239','100% Merino Wool Shirt Jacket',120,'../product/product_Images/1239.jpg'],
+        ['1240','Ultra-Stretch Ponte Kick Flare Pant',(40,50),'../product/product_Images/1240.jpg'],
+        ['1241','Ultra-Soft Performance Legging - 25" Inseam',40,'../product/product_Images/1241.jpg']
+    ]
+    //--- Inicializa un mapa que contendrá los productos clasificados por sus atributos -id-
+    constructor(prods_prueba=true){
+        this.#elementos = new Map()
+        if (prods_prueba){
+            this.#productos_de_prueba()
+        }
+    }
+    //--- Método getter de -elementos-
+    getAlmacen(){
+        return this.#elementos
+    }
+    //--- Inserta un nuevo objeto -Producto- en -elementos-
+    insertar(producto){
+        if (this.#elementos.get(producto.getId()) != undefined){
+            throw "KeyAlreadyUsedException" //---Raise KeyAlreadyUsedException (clave ya usada, busca otra o elimina el producto)
+        }else{
+            this.#elementos.set(producto.getId(),producto)
+        }
+    }
+    //--- Inserta en -elementos- todos los productos de prueba
+    #productos_de_prueba(){
+        for (let producto of AlmacenProductos.modelos) {
+            this.insertar(new Producto(producto[0],producto[1],producto[2],producto[3]))
+        }
+    }
+    //--- Eliminar un objeto -Producto- de entre los ya contenidos en -elementos-
+    eliminar(producto){
+        this.#elementos.set(producto.getId(),null)
+    }
+    //--- Oculta al usuario un elemento de -AlmacenProductos-
+    invisibilizar(producto){
+        aux = document.getElementById(producto.getId())
+        aux.style.display = 'none'
+    }
+}
+
+/* class Carrito
+-Cada uno de sus elementos simula ser un puntero a una posición del objeto -AlmacenProductos-
+*/
+class Carrito{
+    #elementos
+    #cart_obj
+    constructor(){
+        this.#elementos = new Map()
+        this.#cart_obj = document.getElementById('carrito')
+    }
+    //--- Guarda como llave el identificador de un obj. -Producto- ya almacenado en -AlmacenProductos-
+    insertar(id_producto){
+        let aux = this.#elementos.get(id_producto)
+        if (aux == undefined){
+            this.#elementos.set(id_producto,1)
+        }
+        else{
+            this.#elementos.set(id_producto,aux+1)
+        }
+        this.#cart_obj.textContent = `${parseInt(this.#cart_obj.textContent)+1}`
+    }
+    //--- Deja de referenciar al obj. -Producto- contenido en -AlmacenProductos-
+    eliminar(id_producto){
+        this.#elementos.set(id_producto,undefined)
+        this.#cart_obj.textContent = `${parseInt(this.#cart_obj.textContent)-1}`
+    }
+}
+/*
+    Pagina
+*/
+class Pagina{
+    #almacen
+    //---constructor se encarga de eliminar todos los elementos contenidos en -section-
+    constructor(almacen_prods){
+        this.#almacen = almacen_prods
+        let sec = document.getElementsByTagName('section')[0];
+        while (sec.lastElementChild){
+            sec.removeChild(sec.lastElementChild)
+        }
+        console.log('Cargada con exito la pagina')
+    }
+    //---Devuelve el -AlmacenProductos- usado por la superclase -Pagina-
+    get_almacen(){
+        return this.#almacen
+    }
+    //---Devuelve un objeto -PaginaPrincipal-
+    ir_pag_almacen(new_almacen=this.#almacen){
+        return new PaginaPrincipal(new_almacen)
+    }
+    //---Devuelve un objeto -PaginaProducto-
+    ir_pag_producto(new_almacen=this.#almacen){
+        return new PaginaProducto(new_almacen)
+    }
+    ir_pag_carrito(new_almacen=this.#almacen){
+        return new PaginaCarrito(new_almacen)
+    }
+}
+/*  !!!PROCURAR QUE SEA INMUTABLE!!! (Así se obliga a cargar siempre y permite la actualización de los productos)
+    Pagina principal, aquella en la que se muestra los productos de AlmacenProductos
+*/
+class PaginaPrincipal extends Pagina{
+    #mostrar_almacen_productos(almacen){
+        //---Crear master
+        let master = document.createElement('div')
+        master.className = 'row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center'
+        master.id = 'master'
+        //---Crear -upper-container-
+        let upper = document.createElement('div')
+        upper.className = 'container px-4 px-lg-5 mt-5'
+        upper.id = 'upper-container'
+        upper.appendChild(master)
+        document.getElementsByTagName('section')[0].appendChild(upper) //---Master añadido como hijo de -upper-container-
+        for (let [key,value] of almacen) {
+            //---Crea tarjetas de Producto para cada uno de los que está contenido en -AlmacenProducto-
+            //---NOMBRE
+            let nombre = document.createElement('h5')
+            nombre.className = 'fw-bolder name'
+            nombre.textContent = value.getNombre()
+            //---PRECIO
+            let aux_precio = document.createElement('p')
+            aux_precio.textContent = '$' + value.getPrecio() + '.00'
+            //---NOMBRE + PRECIO
+            let precio = document.createElement('div')
+            precio.className = 'text-center'
+            precio.appendChild(nombre)
+            precio.appendChild(aux_precio)
+            //precio.textContent += '$' + value.getPrecio() + '.00'
+            //---PRODUCT DETAILS
+            let detalles = document.createElement('div')
+            detalles.className = 'card-body p-4'
+            detalles.appendChild(precio)
+            //---PRODUCT IMAGE
+            let imagen = document.createElement('img')
+            imagen.className = 'card-img-top'
+            imagen.src = value.getImagen()
+            imagen.alt = '...'
+            //---PRODUCT IMAGE + PRODUCT DETAILS
+            let card = document.createElement('div')
+            card.className = 'card h-100'
+            card.appendChild(imagen)
+            card.appendChild(detalles)
+            //---PRODUCTO DE PRUEBA
+            let final = document.createElement('div')
+            final.className = 'col mb-5'
+            final.setAttribute('onclick','new PaginaProducto(null)')
+            final.id = value.getId()
+            final.appendChild(card)
+            //---Añadir a master
+            document.getElementById('master').appendChild(final)
+            /*
+            //---Añadir al -section-
+            let sec = document.getElementsByTagName('section')[0]
+            sec.appendChild(final)
+            */
+        }
+    }
+    constructor(almacen_prods){
+        super(almacen_prods) //---Borra por defecto todos los hijos de -section-
+        //1) Header
+        //2) Carrousel
+        //3) AlmacenProductos
+        this.#mostrar_almacen_productos(almacen_prods.getAlmacen())
+        console.log('Cargada pagina principal')
+    }
+}
+/*
+    Pagina Producto, aquella en la que se muestran todos los atributos de un determinado producto
+*/
+class PaginaProducto extends Pagina{
+    #id
+    #mostar_pag_producto(id){
+        //1) Consulta -AlmacenProductos-
+        //2) Crea la página
+    }
+    constructor(almacen_prods,id){
+        super(almacen_prods) //---Borra por defecto todos los hijos de -section-
+        this.#mostar_pag_producto(id)
+    }
+}
+/*
+    Pagina Carrito, aquella en la que se muestra todos los pruductos ingresados en -Carrito-
+*/
+class PaginaCarrito extends Pagina{
+    constructor(almacen_prods){
+        super(almacen_prods) //---Borra por defecto todos los hijos de -section-
+        //1) Header carrito
+        //2) for AlmacenProductos[i] of Carrito{Display Producto}
+        console.log('Cargada pagina del carrito')
+    }
+}
+//---Extra clasificación
+function calificar(item){
+    let primero = item.id[0]; //captura el primer caracter;
+    let contador = item.id[1];
+    let nombre = item.id.substring(2); //captura todo menos el primer caracter
+
+    for(let i = 1; i < 6; i++){
+        if(i > contador){
+            document.getElementById((primero+i)+nombre).style.color = "black";
+        } else {
+            document.getElementById((primero+i)+nombre).style.color = "orange";
+        }
+    }
+}
+//---
+//pagina();
+let cart = new Carrito();
+let storage = new AlmacenProductos();
+let page = new PaginaPrincipal(storage);
