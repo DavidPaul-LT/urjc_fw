@@ -85,6 +85,15 @@ function btnShowForm(){
     }
 }
 
+function switchPage(){
+    let section = document.getElementById("sectionMain");
+    if(section.style.display == 'block'){
+        section.style.display = 'none';
+    } else {
+        section.style.display = 'block';
+    }
+}
+
 /*
 // Crea un div con todas las características de un producto ya existente - FALTA (anidarlo a los objetos al crearlos o modificarlos)
 function btnForm(){
