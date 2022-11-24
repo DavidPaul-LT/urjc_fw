@@ -93,12 +93,15 @@ class AlmacenProductos{
     }
     //--- Eliminar un objeto -Producto- de entre los ya contenidos en -elementos-
     eliminar(producto){
-        this.#elementos.set(producto.getId(),null)
+        this.#elementos.set(producto.getId(),null);
     }
     //--- Oculta al usuario un elemento de -AlmacenProductos-
     invisibilizar(producto){
         aux = document.getElementById(producto.getId())
-        aux.style.display = 'none'
+        aux.style.display = 'none';
+    }
+    getProducto(id){
+        return this.#elementos.get(id);
     }
 }
 
@@ -313,23 +316,10 @@ class PaginaCarrito extends Pagina{
         //2) for AlmacenProductos[i] of Carrito{Display Producto}
         console.log('Cargada pagina del carrito')
     }
-}
-//---Extra clasificación
-function calificar(item){
-    let primero = item.id[0]; //captura el primer caracter;
-    let contador = item.id[1];
-    let nombre = item.id.substring(2); //captura todo menos el primer caracter
-
-    for(let i = 1; i < 6; i++){
-        if(i > contador){
-            document.getElementById((primero+i)+nombre).style.color = "black";
-        } else {
-            document.getElementById((primero+i)+nombre).style.color = "orange";
-        }
-    }
-}
+}   
 //---
 //pagina();
 let cart = new Carrito();
 let storage = new AlmacenProductos();
 let page = new PaginaPrincipal(storage);
+
