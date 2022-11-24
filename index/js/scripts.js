@@ -171,7 +171,7 @@ class Carrousel{
         'index_images/carrousel_images/carrousel3.jpg',
         'index_images/carrousel_images/carrousel4.jpg'
     ]
-    static mostar_carrousel(){
+    static mostrar_carrousel(){
         //---main carrousel
         let carr = document.createElement('div')
         carr.id = 'carouselExampleInterval'
@@ -221,7 +221,7 @@ class Carrousel{
 */
 class MuestraProductos{
     //---Añade a -section- los productos contenidos en un objeto AlmacenProductos
-    static mostar_almacen_productos(almacen){
+    static mostrar_almacen_productos(almacen){
         //---Crear master
         let master = document.createElement('div')
         master.className = 'row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center'
@@ -281,11 +281,11 @@ class PaginaPrincipal extends Pagina{
         //1) Header
         //2) Carrousel
         if (!is_carrousel_deployed){
-            Carrousel.mostar_carrousel()
+            Carrousel.mostrar_carrousel()
             console.log('Carrousel mostrado')
         }
         //3) AlmacenProductos
-        MuestraProductos.mostar_almacen_productos(this.get_almacen())
+        MuestraProductos.mostrar_almacen_productos(this.get_almacen())
         console.log('Cargada pagina principal')
     }
 }
@@ -294,13 +294,13 @@ class PaginaPrincipal extends Pagina{
 */
 class PaginaProducto extends Pagina{
     #id
-    #mostar_pag_producto(id){
+    #mostrar_pag_producto(id){
         //1) Consulta -AlmacenProductos-
         //2) Crea la página
     }
     constructor(almacen_prods,id){
         super(almacen_prods) //---Borra por defecto todos los hijos de -section-
-        this.#mostar_pag_producto(id)
+        this.#mostrar_pag_producto(id)
     }
 }
 /*
