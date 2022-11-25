@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1920 1080">
+ <defs>
+  <filter id="e" x="-.030185" y="-.044591" width="1.0604" height="1.0892" color-interpolation-filters="sRGB">
+   <feGaussianBlur stdDeviation="21.157691"/>
+  </filter>
+  <filter id="f" x="-.43264" y="-.63914" width="1.8653" height="2.2783" color-interpolation-filters="sRGB">
+   <feGaussianBlur stdDeviation="303.26023"/>
+  </filter>
+  <clipPath id="d">
+   <rect x="-8.9706e-14" y="-27.638" width="1920" height="1080" color="#000000" color-rendering="auto" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+  </clipPath>
+ </defs>
+ <g transform="translate(0 27.638)">
+  <rect x="-8.9706e-14" y="-27.638" width="1920" height="1080" color="#000000" color-rendering="auto" image-rendering="auto" shape-rendering="auto" solid-color="#000000" style="isolation:auto;mix-blend-mode:normal"/>
+  <flowRoot fill="#000000" font-family="sans-serif" font-size="12.5px" letter-spacing="0px" stroke-width="1px" word-spacing="0px" style="line-height:125%"><flowRegion><rect x="888.93" y="679.98" width="230.31" height="84.853"/></flowRegion><flowPara/></flowRoot>
+  <g clip-path="url(#d)">
+   <g transform="matrix(.65249 0 0 .65249 417.62 546.48)">
+    <g transform="matrix(1.1124 .20145 -.20145 1.1124 -147.08 -931.02)" fill="#fff" font-family="'Open Sans'" font-weight="800" letter-spacing="0px" stroke-width="1px" word-spacing="0px">
+     <g transform="matrix(.88194 -.23632 .23632 .88194 -118.55 -32.025)">
+      <text x="186.13266" y="950.84229" font-size="473.4px" style="line-height:125%"><tspan x="186.13266" y="950.84229">BLACK</tspan></text>
+      <text x="189.85004" y="1380.2568" font-size="425.21px" style="line-height:125%"><tspan x="189.85004" y="1380.2568">FRIDAY</tspan></text>
+     </g>
+     <g transform="matrix(.88194 -.23632 .23632 .88194 -118.55 -32.025)" filter="url(#e)">
+      <text x="186.13266" y="950.84229" font-size="473.4px" style="line-height:125%"><tspan x="186.13266" y="950.84229">BLACK</tspan></text>
+      <text x="189.85004" y="1380.2568" font-size="425.21px" style="line-height:125%"><tspan x="189.85004" y="1380.2568">FRIDAY</tspan></text>
+     </g>
+     <g transform="matrix(.88194 -.23632 .23632 .88194 -118.55 -32.025)" filter="url(#f)">
+      <text x="186.13266" y="950.84229" font-size="473.4px" style="line-height:125%"><tspan x="186.13266" y="950.84229">BLACK</tspan></text>
+      <text x="189.85004" y="1380.2568" font-size="425.21px" style="line-height:125%"><tspan x="189.85004" y="1380.2568">FRIDAY</tspan></text>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>
