@@ -318,8 +318,10 @@ class PaginaCarrito extends Pagina{
     }
 }   
 //---
+
+exports.AlmacenProductos = AlmacenProductos(storage);
+
 //pagina();
 let cart = new Carrito();
 let storage = new AlmacenProductos();
 let page = new PaginaPrincipal(storage);
-
