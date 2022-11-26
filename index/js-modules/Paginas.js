@@ -151,6 +151,9 @@ export class PaginaProducto{
 export class PaginaCarrito{
     //---Método que crea y añade al DOM los elementos necesarios para crear una página específica para el carrito
     static mostrar_carrito(almacen,carrito){
+        Pagina.errase()
+
         //NOT IMPLEMENTED
+        console.log('Creada página')
     }
 }
