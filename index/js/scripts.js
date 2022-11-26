@@ -67,14 +67,14 @@ class AlmacenProductos{
     #elementos
     //---Añade al mapa de elementos unos productos de prueba
     static modelos = [
-        ['1234','Stretch Sweater Fleece Shirt',60,'../product/1234.jpg','This shirt has a classic, versatile knit look, that is the perfect Fall layering shirt. Made with super soft and stretchy fabric, it provides a natural fit on your body.'],
+        ['1234','Stretch Sweater Fleece Shirt',[60],'../product/1234.jpg','This shirt has a classic, versatile knit look, that is the perfect Fall layering shirt. Made with super soft and stretchy fabric, it provides a natural fit on your body.'],
         ['1235','Flowknit Ultra-Soft Performance Polo',[35,40],'../product/1235.jpg','Level up your perfect polo. This supersoft option is ideal for golf, travel, or date-night. Our insanely-soft Flowknit fabric is not only sustainable, but jam-packed with performance features like moisture-wicking and anti-odor for ultimate versatility. Our Flowknit is made from Global Recycle Standard poly yarn, which diverts and recycles plastics destined for landfill or the ocean, so you can feel and look good in what you wear.'],
         ['1236','Flowknit Ultra-Soft Performance Pant',[40,45],'../product/1236.jpg','Our favorite performance joggers are a slim but relaxed fit with the perfect amount of stretch for ultimate comfort. Thick drawstrings, cuffed ankles, and two pocket design give them a premium feel. Our Flowknit is made from Global Recycle Standard poly yarn, which diverts and recycles plastics destined for landfill or the ocean, so you can feel and look good in what you wear.'],
-        ['1237','Flowknit Ultra-Soft Performance Short',35,'../product/1237.jpg',`They may be short in length but the list of features we've packed into these performance shorts is long! Moisture-wicking, anti-microbial, with a cell-phone pocket at front, and a secure zip back pocket. Perfect for training, travel, or lounging. Our Flowknit is made from Global Recycle Standard poly yarn, which diverts and recycles plastics destined for landfill or the ocean, so you can feel and look good in what you wear.`],
+        ['1237','Flowknit Ultra-Soft Performance Short',[35],'../product/1237.jpg',`They may be short in length but the list of features we've packed into these performance shorts is long! Moisture-wicking, anti-microbial, with a cell-phone pocket at front, and a secure zip back pocket. Perfect for training, travel, or lounging. Our Flowknit is made from Global Recycle Standard poly yarn, which diverts and recycles plastics destined for landfill or the ocean, so you can feel and look good in what you wear.`],
         ['1238','Mongolian Cashmere Crewneck Sweater',[50,90],'../product/1238.jpg',`This is the one that made us famous. And rightly so. The classic cashmere sweater is timeless. Lightweight, soft and cozy, it's perfect for just about any time of year and occasion. Our quality cashmere is incredibly long-lasting and three times as warm as wool, sourced sustainably and ethically. Read more on what makes it special in our Cashmere 101.`],
-        ['1239','100% Merino Wool Shirt Jacket',120,'../product/1239.jpg',`Our 100% Merino Wool Shirt Jacket is your perfect go-to style as the temperature starts to drop. Expertly tailored with boiled merino wool, this shirt jacket - shacket - has the relaxed silhouette of a shirt, but provides the warmth of a jacket. With an intentionally oversized look, it's perfect for layering and made to throw on over any outfit with ease.`],
+        ['1239','100% Merino Wool Shirt Jacket',[120],'../product/1239.jpg',`Our 100% Merino Wool Shirt Jacket is your perfect go-to style as the temperature starts to drop. Expertly tailored with boiled merino wool, this shirt jacket - shacket - has the relaxed silhouette of a shirt, but provides the warmth of a jacket. With an intentionally oversized look, it's perfect for layering and made to throw on over any outfit with ease.`],
         ['1240','Ultra-Stretch Ponte Kick Flare Pant',[40,50],'../product/1240.jpg',`If work pants and yoga pants had a kid - this would be it. Part of our best-selling ponte pant collection, this stretchy, double knit style is cropped at the ankle and designed with a modern kick flare that looks great with flats or sneakers. Plus, they’re equally appropriate for the office or the couch.`],
-        ['1241','Ultra-Soft Performance Legging - 25" Inseam',40,'../product/1241.jpg',`For leg days and lounge days these are the luxe leggings you need in your life. Our Ultra-soft Performance Leggings have everything you need to be your go-to workout bottoms, without compromising on looks. Quick-drying, moisture-wicking, anti-microbial fabric with the 4-way stretch you love so you can squat worry-free. Plus, the hidden waistband pocket fits a card or a key for unencumbered outdoor activities.`]
+        ['1241','Ultra-Soft Performance Legging - 25" Inseam',[40],'../product/1241.jpg',`For leg days and lounge days these are the luxe leggings you need in your life. Our Ultra-soft Performance Leggings have everything you need to be your go-to workout bottoms, without compromising on looks. Quick-drying, moisture-wicking, anti-microbial fabric with the 4-way stretch you love so you can squat worry-free. Plus, the hidden waistband pocket fits a card or a key for unencumbered outdoor activities.`]
     ]
     //--- Inicializa un mapa que contendrá los productos clasificados por sus atributos -id-
     constructor(prods_prueba=true){
@@ -141,6 +141,7 @@ class Carrito{
             this.#elementos.set(id_producto,aux+1)
         }
         this.#length += 1
+        console.log(this.#elementos)
         this.#cart_obj.textContent = `${this.#length}`
     }
     //--- Deja de referenciar al obj. -Producto- contenido en -AlmacenProductos-
@@ -270,7 +271,7 @@ class PaginaPrincipal{
             //---PRECIO
             let aux_precio = document.createElement('p')
             let aux2_precio = value.getPrecio()
-            if(aux2_precio.length == undefined){
+            if(aux2_precio.length == 1){
                 aux_precio.textContent = '$' + aux2_precio + '.00'
             }else{
                 aux_precio.textContent = '$' + aux2_precio[0] + '.00 (DTO)'
@@ -317,12 +318,14 @@ class PaginaPrincipal{
 class PaginaProducto{
     //---Método que crea y añade al DOM los elementos que se precisen para la creación de una página individual de producto
     static mostrar_pagina_producto(almacen,id,carrito){
+        document.getElementById('product_add_to_cart').removeChild(document.getElementById('button_cart'))
         Pagina.show_section('section_producto')
         document.getElementById('product_id').textContent = 'ID: ' + id
         document.getElementById('product_name').textContent = almacen.getProducto(id).getNombre()
         document.getElementById('product_image').src = almacen.getProducto(id).getImagen()
         let aux_precio = almacen.getProducto(id).getPrecio()
         if(aux_precio.length > 1){
+            document.getElementById('product_price1').style.display = 'block'
             document.getElementById('product_price1').textContent = `$${aux_precio[1]}.00`
             document.getElementById('product_price0').textContent = `$${aux_precio[0]}.00`
         }else{
@@ -330,7 +333,18 @@ class PaginaProducto{
             document.getElementById('product_price0').textContent = `$${aux_precio[0]}.00`
         }
         document.getElementById('product_descripcion').textContent = almacen.getProducto(id).getDescripcion()
-        document.getElementById('product_add_to_cart').addEventListener('click',function(){carrito.insertar(id)})
+        //boton add_to_cart
+        let div_add = document.getElementById('product_add_to_cart')
+        let button_cart = document.createElement('button')
+        button_cart.className = 'btn btn-outline-dark flex-shrink-0'
+        button_cart.type = 'button'
+        button_cart.addEventListener('click',function(){carrito.insertar(id)})
+        button_cart.id = 'button_cart'
+        let i_aux = document.createElement('i')
+        i_aux.className = 'bi-cart-fill me-1'
+        i_aux.textContent = 'Añadir al carrito'
+        button_cart.appendChild(i_aux)
+        div_add.appendChild(button_cart)
         console.log(`Accediendo a página producto con id: ${almacen.getProducto(id).getNombre()}`)
     }
 }
@@ -412,11 +426,12 @@ class PaginaCarrito{
                 aux_precio.className = 'col-md-3 col-lg-2 col-xl-2 offset-lg-1'
                 let precio = document.createElement('h6')
                 precio.className = 'mb-0'
-                suma_total += veces*info.getPrecio()
                 if(info.getPrecio().length > 1){
                     precio.textContent = `$${info.getPrecio()[0]}.00`
+                    suma_total += veces*info.getPrecio()[0]
                 }else{
                     precio.textContent = `$${info.getPrecio()}.00`
+                    suma_total += veces*info.getPrecio()
                 }
                 aux_precio.appendChild(precio)
                 producto.appendChild(aux_precio)
@@ -450,7 +465,6 @@ function calificar(item){
     let primero = item.id[0]; //captura el primer caracter;
     let contador = item.id[1];
     let nombre = item.id.substring(2); //captura todo menos el primer caracter
-
     for(let i = 1; i < 6; i++){
         if(i > contador){
             document.getElementById((primero+i)+nombre).style.color = "black";
