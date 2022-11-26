@@ -100,6 +100,9 @@ class AlmacenProductos{
         aux = document.getElementById(producto.getId())
         aux.style.display = 'none'
     }
+    getProducto(id){
+        return this.#elementos.get(id)
+    }
 }
 
 /* class Carrito
@@ -264,7 +267,7 @@ class MuestraProductos{
             //---PRODUCTO DE PRUEBA
             let final = document.createElement('div')
             final.className = 'col mb-5'
-            final.setAttribute('onclick','new PaginaProducto(this.almacen,null)')
+            final.setAttribute('onclick','new PaginaProducto(this.almacen, this.id)')
             final.id = value.getId()
             final.appendChild(card)
             //---Añadir a master
@@ -294,14 +297,45 @@ class PaginaPrincipal extends Pagina{
 */
 class PaginaProducto extends Pagina{
     #id
-    #mostrar_pag_producto(id){
-        //1) Consulta -AlmacenProductos-
-        //2) Crea la página
+    #mostrar_pag_producto(almacen, id){
+        //Guarda en elemento la información del almacen
+        let elemento = almacen.getAlmacen().get(id)
+        //producto
+        let producto = document.createElement('div')
+        let section = document.getElementsByTagName('section')[0]
+        section.appendChild(producto)
+        producto.id = 'producto'
+        //nombre
+        let nombre = document.createElement('div')
+        producto.appendChild(nombre)
+        nombre.textContent = 'Nombre: ' + elemento.getNombre()
+        //precio
+        let precio = document.createElement('div')
+        producto.appendChild(precio)
+        precio.textContent = 'Precio: $' + elemento.getPrecio() + '.00'
+        //Ruta imagen
+        let rutaImagen = document.createElement('div')
+        producto.appendChild(rutaImagen)
+        rutaImagen.textContent = 'Ruta imagen: ' + elemento.getImagen()
+        //Imagen
+        let imagen = document.createElement('img')
+        imagen.className = 'h-1'
+        producto.appendChild(imagen)
+        imagen.src = elemento.getImagen()
+
+        /*
+        let imagen = document.createElement('img')
+            imagen.className = 'card-img-top'
+            imagen.src = value.getImagen()
+            imagen.alt = '...'
+        */
+        //comprobar que detecta el elemento (prueba)
+        console.log(id)
     }
     constructor(almacen_prods,id){
         super(almacen_prods) //---Borra por defecto todos los hijos de -section-
-        console.log('Pagina producto cargada')
-        this.#mostrar_pag_producto(id)
+        let storage2 = new AlmacenProductos();
+        this.#mostrar_pag_producto(storage2, id)
     }
 }
 /*
