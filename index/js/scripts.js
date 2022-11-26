@@ -184,62 +184,6 @@ class Pagina{
     }
 }
 /*
-    -----Carrousel()
-        Crea los elementos necesarios para la generación del carrousel que contendrá -section-
-*/
-class Carrousel{
-    //---Set de imágenes por defecto del carrousel
-    static image_set = [
-        'index_images/carrousel_images/carrousel1.jpg',
-        'index_images/carrousel_images/carrousel2.jpg',
-        'index_images/carrousel_images/carrousel3.jpg',
-        'index_images/carrousel_images/carrousel4.jpg'
-    ]
-    static mostrar_carrousel(){
-        //---main carrousel
-        let carr = document.createElement('div')
-        carr.id = 'carouselExampleInterval'
-        carr.className = 'carousel slide'
-        carr.setAttribute('data-bs-ride','carousel')
-        //---Carrousel-inner
-        let inner = document.createElement('div')
-        inner.className = 'carousel-inner'
-        for (let i = 0; i < 4; i++) {
-            //---Carrousel-item
-            let item = document.createElement('div')
-            item.className = 'carousel-item'
-            //---Establece como imagen por defecto la primera del set
-            if (i==0) {
-                item.className += ' active'
-            }
-            item.setAttribute('data-bs-interval','4000')
-            //---Imagenes de carrousel
-            let img = document.createElement('img')
-            img.src = Carrousel.image_set[i]
-            img.className = 'd-block w-100'
-            img.alt = '...'
-            item.appendChild(img)
-            inner.appendChild(item)
-        }
-        carr.appendChild(inner)
-        //---Botones previous y next
-        for (let i of ['prev','next']) {
-            let butt = document.createElement('button')
-            butt.className = 'carousel-control-' + i
-            butt.type = 'button'
-            butt.setAttribute('data-bs-target','#carouselExampleInterval')
-            butt.setAttribute('data-bs-slide',i)
-            let control = document.createElement('span')
-            control.className = `carousel-control-${i}-icon`
-            control.setAttribute('aria-hidde','true')
-            butt.appendChild(control)
-            carr.appendChild(butt)
-        }
-        //---Añadir el carrusel a -section-
-        document.getElementsByTagName('section')[0].appendChild(carr)
-    }
-}
-/*
     Pagina principal, aquella en la que se muestra los productos de AlmacenProductos
 */
 class PaginaPrincipal{
@@ -480,6 +424,5 @@ let storage = new AlmacenProductos(); //---variable -AlmacenProductos-
 document.getElementById('carrito_master').addEventListener('click',function(){PaginaCarrito.mostrar_carrito(storage,cart)})
 document.getElementById('home').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage)})
 document.getElementById('solace_icon').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage)})
-PaginaPrincipal.mostrar_carrousel();
 PaginaPrincipal.mostrar_almacen_productos(storage,cart);
 storage.getProducto("1234").setNombre('POLO');
