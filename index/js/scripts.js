@@ -105,11 +105,6 @@ class AlmacenProductos{
     eliminar(producto){
         this.#elementos.set(producto.getId(),null)
     }
-    //--- Oculta al usuario un elemento de -AlmacenProductos-
-    invisibilizar(producto){
-        aux = document.getElementById(producto.getId())
-        aux.style.display = 'none'
-    }
     //--- Consigue un atributo en función de su -id-
     getProducto(id){
         return this.#elementos.get(id)
@@ -146,8 +141,11 @@ class Carrito{
     }
     //--- Deja de referenciar al obj. -Producto- contenido en -AlmacenProductos-
     eliminar(id_producto){
-        this.#elementos.set(id_producto,undefined)
-        this.#length -= 1
+        if(this.#length > 0){
+            this.#length -= this.#elementos.get(id_producto)
+        }
+        this.#elementos.delete(id_producto)
+        console.log(this.#elementos)
         this.#cart_obj.textContent = `${this.#length}`
     }
     //--- Devuelve el mapa de elemntos de -elemento-
@@ -166,8 +164,8 @@ class Pagina{
     //---Método que elimina todo el contenido (nodos hijos) del elemnto -section-
     static errase(section){
         let sec = document.getElementById(section)
-        while (sec.lastElementChild){
-            sec.removeChild(sec.lastElementChild)
+        while (sec.firstChild){
+            sec.removeChild(sec.lastChild)
         }
         console.log('Section borrado correctamente')
     }
@@ -279,7 +277,7 @@ class PaginaProducto{
         let button_cart = document.createElement('button')
         button_cart.className = 'btn btn-outline-dark flex-shrink-0'
         button_cart.type = 'button'
-        button_cart.addEventListener('click',function(){carrito.insertar(id)})
+        button_cart.addEventListener('click',function(){carrito.insertar(id);console.log('Producto insertado en el carrito')})
         button_cart.id = 'button_cart'
         let i_aux = document.createElement('i')
         i_aux.className = 'bi-cart-fill me-1'
@@ -287,6 +285,20 @@ class PaginaProducto{
         button_cart.appendChild(i_aux)
         div_add.appendChild(button_cart)
         console.log(`Accediendo a página producto con id: ${almacen.getProducto(id).getNombre()}`)
+        //productos recomendados
+        let llaves = Array.from(almacen.getAlmacen().keys())
+        for (let i = 1; i <= 4; i++){
+            let opt = Math.floor(Math.random()*llaves.length)
+            let aux_prod = almacen.getProducto(llaves[opt])
+            document.getElementById(`recomendado_${i}`).addEventListener('click',function(){PaginaProducto.mostrar_pagina_producto(almacen,aux_prod.getId(),carrito)})
+            document.getElementById(`rec_${i}_img`).src = aux_prod.getImagen()
+            document.getElementById(`rec_${i}_nombre`).textContent = aux_prod.getNombre()
+            if(aux_prod.getPrecio()[1] != undefined){
+                document.getElementById(`rec_${i}_precio1`).textContent = `$${aux_prod.getPrecio()[1]}.00`
+            }
+            document.getElementById(`rec_${i}_precio0`).textContent = `$${aux_prod.getPrecio()[0]}.00`
+            llaves.splice(opt,1)
+        }
     }
 }
 /*
@@ -299,6 +311,9 @@ class PaginaCarrito{
         if(carrito.length()>0){
             let master = document.getElementById('cart_productos_mostrados')
             Pagina.errase('cart_productos_mostrados')
+            for (let pro of document.getElementsByClassName('producto_carrito')) {
+                master.removeChild(pro)
+            }
             //crea carrito_modificable
             let modificable = document.createElement('div')
             modificable.className = 'd-flex justify-content-between align-items-center mb-5'
@@ -313,6 +328,7 @@ class PaginaCarrito{
             let suma_total = 0
             for (let [producto_key,veces] of carrito.getCarrito()){
                 //---Variable informadora
+                if(veces != null){
                 let info = almacen.getProducto(producto_key)
                 //---tag producto
                 let producto = document.createElement('div')
@@ -350,6 +366,7 @@ class PaginaCarrito{
                 inp.className = 'form-control form-control-sm'
                 inp.min = '1'
                 inp.name = 'quantity'
+                inp.id = 'input_carrito' //prueba recoger info del carrito
                 inp.value = `${veces}`
                 inp.type = 'number'
                 master_sel.appendChild(inp)
@@ -379,9 +396,10 @@ class PaginaCarrito{
                 //borrar elemento
                 let borrar = document.createElement('div')
                 borrar.className = 'col-md-1 col-lg-1 col-xl-1 text-end'
-                let a  = document.createElement('a')
+                let a  = document.createElement('button')
                 a.className = 'text-muted'
-                a.addEventListener('click',function(){carrito.eliminar(info.getId())}) //falta recargar la pagina de carrito
+                a.textContent = 'X'
+                a.addEventListener('click',function(){carrito.eliminar(info.getId());PaginaCarrito.mostrar_carrito(almacen,carrito)}) //falta recargar la pagina de carrito
                 let aux_i = document.createElement('i')
                 aux_i.className = 'fas fa-times'
                 a.appendChild(aux_i)
@@ -392,12 +410,12 @@ class PaginaCarrito{
                 let hr2 = document.createElement('hr')
                 hr2.className = 'my-4'
                 master.appendChild(hr2)
+                }
             }
             document.getElementById('resumen_items').textContent = `items ${carrito.length()}`
             document.getElementById('resumen_subtotal').textContent = `$${suma_total}.00`
-            document.getElementById('resumen_precio_final').textContent = `$${suma_total}`
+            document.getElementById('resumen_precio_final').textContent = `$${suma_total}.00`
         }
-        PaginaCarrito.loaded_once = true
         console.log('Desplegada página de carrito')
     }
 }
