@@ -83,6 +83,35 @@
                 </button>
             </div>
         </section>
+        <section class="row justify-content-center justify-content-md-start mb-5" id="formId">
+            <button id="btnShowForm" class="btn btn-outline-dark col py-5">Añadir Producto</button>
+  
+            <form id="form" target="_blank" class="py-5 col-md-4 offset-md-4" style="border: 1px solid black; border-radius: 20px; display: none;">
+                <div class="col-md-6 offset-md-3 mt-5">
+                    <label class="form-label">ID</label>
+                    <input type="text" class="form-control" id="idForm">
+                  </div>
+                <div class="col-md-6 offset-md-3 mt-5">
+                <label class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombreForm">
+              </div>
+              <div class="col-md-6 offset-md-3 mt-5">
+                <label class="form-label">Imagen</label>
+                <input type="text" class="form-control" id="imgForm">
+              </div>
+              <div class="col-md-6 offset-md-3 mt-5">
+                <label class="form-label">Precio</label>
+                <input type="text" class="form-control" id="priceForm">
+              </div>
+              <div class="col-md-6 offset-md-3 mt-5">
+                <label class="form-label">Descripción</label>
+                <input type="text" class="form-control" id="descripcionForm">
+              </div>
+              <div class="col-md-6 offset-md-5 mt-5">
+                <button id="btnForm" class="btn btn-outline-dark" onclick="saveProduct()" type="submit">Submit</button>
+              </div>
+            </form>
+        </section>
         <!-- Section para la página de producto (imagen 600x700)-->
         <section id="section_producto" class="py-5" style="display: none;">
           <div class="container px-4 px-lg-5 my-5">

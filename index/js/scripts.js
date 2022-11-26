@@ -67,14 +67,14 @@ class AlmacenProductos{
     #elementos
     //---Añade al mapa de elementos unos productos de prueba
     static modelos = [
-        ['1234','Stretch Sweater Fleece Shirt',[60],'../product/1234.jpg','This shirt has a classic, versatile knit look, that is the perfect Fall layering shirt. Made with super soft and stretchy fabric, it provides a natural fit on your body.'],
-        ['1235','Flowknit Ultra-Soft Performance Polo',[35,40],'../product/1235.jpg','Level up your perfect polo. This supersoft option is ideal for golf, travel, or date-night. Our insanely-soft Flowknit fabric is not only sustainable, but jam-packed with performance features like moisture-wicking and anti-odor for ultimate versatility. Our Flowknit is made from Global Recycle Standard poly yarn, which diverts and recycles plastics destined for landfill or the ocean, so you can feel and look good in what you wear.'],
-        ['1236','Flowknit Ultra-Soft Performance Pant',[40,45],'../product/1236.jpg','Our favorite performance joggers are a slim but relaxed fit with the perfect amount of stretch for ultimate comfort. Thick drawstrings, cuffed ankles, and two pocket design give them a premium feel. Our Flowknit is made from Global Recycle Standard poly yarn, which diverts and recycles plastics destined for landfill or the ocean, so you can feel and look good in what you wear.'],
-        ['1237','Flowknit Ultra-Soft Performance Short',[35],'../product/1237.jpg',`They may be short in length but the list of features we've packed into these performance shorts is long! Moisture-wicking, anti-microbial, with a cell-phone pocket at front, and a secure zip back pocket. Perfect for training, travel, or lounging. Our Flowknit is made from Global Recycle Standard poly yarn, which diverts and recycles plastics destined for landfill or the ocean, so you can feel and look good in what you wear.`],
-        ['1238','Mongolian Cashmere Crewneck Sweater',[50,90],'../product/1238.jpg',`This is the one that made us famous. And rightly so. The classic cashmere sweater is timeless. Lightweight, soft and cozy, it's perfect for just about any time of year and occasion. Our quality cashmere is incredibly long-lasting and three times as warm as wool, sourced sustainably and ethically. Read more on what makes it special in our Cashmere 101.`],
-        ['1239','100% Merino Wool Shirt Jacket',[120],'../product/1239.jpg',`Our 100% Merino Wool Shirt Jacket is your perfect go-to style as the temperature starts to drop. Expertly tailored with boiled merino wool, this shirt jacket - shacket - has the relaxed silhouette of a shirt, but provides the warmth of a jacket. With an intentionally oversized look, it's perfect for layering and made to throw on over any outfit with ease.`],
-        ['1240','Ultra-Stretch Ponte Kick Flare Pant',[40,50],'../product/1240.jpg',`If work pants and yoga pants had a kid - this would be it. Part of our best-selling ponte pant collection, this stretchy, double knit style is cropped at the ankle and designed with a modern kick flare that looks great with flats or sneakers. Plus, they’re equally appropriate for the office or the couch.`],
-        ['1241','Ultra-Soft Performance Legging - 25" Inseam',[40],'../product/1241.jpg',`For leg days and lounge days these are the luxe leggings you need in your life. Our Ultra-soft Performance Leggings have everything you need to be your go-to workout bottoms, without compromising on looks. Quick-drying, moisture-wicking, anti-microbial fabric with the 4-way stretch you love so you can squat worry-free. Plus, the hidden waistband pocket fits a card or a key for unencumbered outdoor activities.`]
+        ['1234','Camisa de lana elástica',[60],'../product/1234.jpg','Esta camisa tiene un aspecto de punto clásico y versátil, perfecta para el otoño. Fabricada con un tejido súper suave y elástico, proporciona un ajuste natural al cuerpo.'],
+        ['1235','Polo de alto rendimiento',[35,40],'../product/1235.jpg','Este polo supersuave es ideal para el golf, los viajes o las citas nocturnas. Nuestro tejido Flowknit, increíblemente suave, no solo es sostenible, sino que facilita la absorción de la humedad y evita el mal olor, ofreciendo la máxima versatilidad. Nuestro Flowknit está fabricado con hilo de poliéster Global Recycle Standard, que desvía y recicla los plásticos destinados a los vertederos o al océano, para que puedas sentirte y verte bien con lo que llevas puesto.'],
+        ['1236','Pantalón de alto rendimiento',[40,45],'../product/1236.jpg','Nuestros joggers de alto rendimiento favoritos tienen un ajuste fino pero relajado siendo lo suficientemente elásticos para conseguir la máxima comodidad. Los gruesos cordones, los tobillos con puños y el diseño de dos bolsillos ofrecen una sensación de calidad.'],
+        ['1237','Pantalón corto de alto rendimiento',[35],'../product/1237.jpg','Puede que sean cortos, pero consiguen evitar la humedad, son antimicrobianos, tienen un bolsillo para el móvil en la parte delantera y un bolsillo trasero con cremallera. Perfecto para entrenar, viajar o descansar.'],
+        ['1238','Jersey de cachemira mongola con cuello redondo',[50,90],'../product/1238.jpg','El clásico jersey de cachemira es intemporal. Ligero, suave y acogedor, perfecto para cualquier época del año y ocasión. Nuestra cachemira de calidad es increíblemente duradera y tres veces más cálida que la lana, y se obtiene de forma sostenible y ética.'],
+        ['1239','Chaqueta camisera 100% lana merina',[120],'../product/1239.jpg','Nuestra chaqueta camisera de lana merina 100% es perfecta cuando las temperaturas empiezan a bajar. Confeccionada por expertos con lana merina hervida, esta chaqueta camisera tiene la silueta de una camisa, pero proporciona la calidez de una chaqueta. Con un aspecto intencionadamente sobredimensionado, es perfecta para vestirse a capas y se puede poner sobre cualquier prenda con facilidad.'],
+        ['1240','Pantalón acampanado Ultra-Stretch',[40,50],'../product/1240.jpg','Si los pantalones de trabajo y los de yoga tuvieran un hijo, sería éste. Este pantalón es de punto doble y muy elástico, está diseñado con un moderno corte de patada que queda muy bien con zapatos planos o con zapatillas de deporte.'],
+        ['1241','Leggings de alto rendimiento ultra suave',[40],'../product/1241.jpg','Nuestros leggings de alto rendimiento tienen todo lo que necesitan para convertirse en tus pantalones de entrenamiento favoritos, sin comprometer la apariencia. Cuentan con un tejido de secado rápido, que absorbe la humedad y que es antimicrobiano, con la elasticidad en 4 direcciones que tanto te gusta para que puedas hacer sentadillas sin preocupaciones.']
     ]
     //--- Inicializa un mapa que contendrá los productos clasificados por sus atributos -id-
     constructor(prods_prueba=true){
@@ -187,11 +187,6 @@ class Pagina{
     Pagina principal, aquella en la que se muestra los productos de AlmacenProductos
 */
 class PaginaPrincipal{
-    //---Método que crea y añade al DOM los elementos necesarios para mostrar el carrousel
-    static mostrar_carrousel(){
-        Carrousel.mostrar_carrousel()
-        console.log('Carrousel cargado en la página')
-    }
     //---Método que crea y añade al DOM los elementos necesarios para mostrar los elementos contenidos en un -AlmacenProductos-
     static almacen_creado = false
     static mostrar_almacen_productos(almacen,carrito){
@@ -271,11 +266,13 @@ class PaginaProducto{
         if(aux_precio.length > 1){
             document.getElementById('product_price1').style.display = 'block'
             document.getElementById('product_price1').textContent = `$${aux_precio[1]}.00`
+            document.getElementById('product_price1').style.color = 'brown'
             document.getElementById('product_price0').textContent = `$${aux_precio[0]}.00`
         }else{
             document.getElementById('product_price1').style.display = 'none'
             document.getElementById('product_price0').textContent = `$${aux_precio[0]}.00`
         }
+        document.getElementById('product_price0').style.color = 'red'
         document.getElementById('product_descripcion').textContent = almacen.getProducto(id).getDescripcion()
         //boton add_to_cart
         let div_add = document.getElementById('product_add_to_cart')
@@ -417,6 +414,24 @@ function calificar(item){
         }
     }
 }
+function btnShowForm(almacen){
+    let form = document.getElementById("form"),
+    btnShowForm = document.getElementById("btnShowForm"),
+    sectionProducts = document.getElementById("section_principal"),
+    bannerBF = document.getElementsByTagName('header')[0]
+    if(form.style.display == "none"){
+        form.style.display = "block";
+        sectionProducts.style.display = "none";
+        bannerBF.style.display = "none";
+    } else {
+        bannerBF.style.display = "block";
+        console.log(almacen.getProducto("1234").getNombre());
+        btnShowForm.style.display = 'block';
+        form.style.display = "none";
+        btnShowForm.textContent = "+";
+        sectionProducts.style.display = "block";
+    }
+}
 //---
 //pagina();
 let cart = new Carrito(); //---variable -Carrito-
@@ -424,5 +439,6 @@ let storage = new AlmacenProductos(); //---variable -AlmacenProductos-
 document.getElementById('carrito_master').addEventListener('click',function(){PaginaCarrito.mostrar_carrito(storage,cart)})
 document.getElementById('home').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage)})
 document.getElementById('solace_icon').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage)})
+document.getElementById('btnShowForm').addEventListener('click',function(){btnShowForm(storage)})
 PaginaPrincipal.mostrar_almacen_productos(storage,cart);
-storage.getProducto("1234").setNombre('POLO');
+//storage.getProducto("1234").setNombre('POLO');
