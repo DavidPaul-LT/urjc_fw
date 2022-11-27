@@ -61,6 +61,10 @@
             
         </section>
 
+        <div class="col-md-6 offset-md-3 justify-content-center" id="btnCrear">
+            <div id="btnShowForm" class="btn btnContact-np mb-5 bg-info" onclick="mostrarForm()">Añadir Producto</div>
+        </div>
+
         <!-- Formulario -->
 
         <div class="container contact-form" id="contactForm" style="display: none;">
@@ -70,20 +74,20 @@
             <form method="post" id="form">
                <div class="row">
                     <div class="col-md-6" >
-                        <fieldset disabled class="form-group py-1">
-                            <input id="codigo" class="form-control" placeholder="Disabled input" value=""/>
+                        <fieldset class="form-group py-1" id="field">
+                            <input id="codigo" class="form-control" placeholder="Código" value=""/>
                         </fieldset>
                         <div class="form-group py-1">
-                            <input id="nombre" type="text" class="form-control" placeholder="" value=""/>
+                            <input id="nombre" type="text" class="form-control" placeholder="Nombre" value=""/>
                         </div>
                         <div class="form-group py-1">
-                            <input id="img" type="text" class="form-control" placeholder="" value=""/>
+                            <input id="img" type="text" class="form-control" placeholder="Ruta imagen" value=""/>
                         </div>
                         <div class="form-group py-1">
-                            <input id="precio" type="text" class="form-control" placeholder="" value=""/>
+                            <input id="precio" type="text" class="form-control" placeholder="Precio" value=""/>
                         </div>
                         <div class="form-group py-1 text-center">
-                            <div id="btnSubmit" class="btnContact" onclick="modificarProducto()">Submit</div>
+                            <div id="btnSubmit" class="btnContact bg-info" onclick="decisionProducto()">Submit</div>
                         </div>
                     </div>
                     <div class="col-md-6">

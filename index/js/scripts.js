@@ -297,10 +297,15 @@ class PaginaPrincipal extends Pagina{
         //2) Carrousel
         if (!is_carrousel_deployed){
             Carrousel.mostrar_carrousel()
-            console.log('Carrousel mostrado')
+            console.log('Carrousel mostrado');
         }
         //3) AlmacenProductos
         MuestraProductos.mostrar_almacen_productos(this.get_almacen())
+        document.getElementById('contactForm').style.display = 'none'; // añadido PAUL
+        document.getElementById("form").reset(); // añadido PAUL
+        document.getElementById('btnCrear').style.display = 'block'; //añadido Paul
+        document.getElementById("btnShowForm").textContent = 'Añadir Producto'; //añadido Paul
+        document.getElementById('field').disabled = false; //añadido Paul
         console.log('Cargada pagina principal')
     }
 }
@@ -344,7 +349,7 @@ class PaginaProducto extends Pagina{
         modificar.className = "btn btn-outline-dark mt-auto"
         
         modificar.id = "btnMod";  //añadido Paul
-        modificar.setAttribute('onclick', 'mostrarValoresProducto()', false); //añadido Paul
+        modificar.addEventListener('click', function(){mostrarValoresProducto(id)}); //añadido Paul
 
         producto.appendChild(modificar)
         modificar.textContent = 'Modificar';
@@ -364,6 +369,11 @@ class PaginaProducto extends Pagina{
         //Funcion para borrar
         //comprobar que detecta el elemento (prueba)
         console.log(id)
+        document.getElementById("form").reset();// modificado PAUL
+        document.getElementById('contactForm').style.display = 'none'; //MODIFICADO PAUL
+        document.getElementById('field').disabled = true; //modificado PAUL
+        document.getElementById('btnCrear').style.display = 'none'; //MODIFICADO PAUL
+        
     }
     constructor(almacen_prods,id){
         super(almacen_prods) //---Borra por defecto todos los hijos de -section-
@@ -399,19 +409,16 @@ function calificar(item){
 
 //---
 //pagina();
-let cart = new Carrito();
-let storage = new AlmacenProductos();
-let page = new PaginaPrincipal(storage);
 
 
-//BASURA
+//BOTONES FUNCIONES
 
-
-function mostrarValoresProducto(){
+function mostrarValoresProducto(id){
     let contactForm = document.getElementById("contactForm"),
     btnMod = document.getElementById("btnMod");
 
     if(contactForm.style.display == 'none'){
+
         contactForm.style.display = 'block';
         btnMod.textContent = 'Cerrar Formulario';
     }else{
@@ -419,15 +426,27 @@ function mostrarValoresProducto(){
         document.getElementById("form").reset();
         btnMod.textContent = 'Modificar';
     }
+    
+    if(document.getElementById('field').disabled == true){
+        return valores(id);
+    }
+}
 
-    if(contactForm.style.display == 'block'){
-        let nombre = storage.getProducto("1235");
+function valores(id){
+        let nombre = storage.getProducto(id);
         console.log(nombre);
-        document.getElementById('codigo').value = "1235";
+        document.getElementById('codigo').value = id;
         document.getElementById('nombre').value = nombre.getNombre;
         document.getElementById('img').value = nombre.getImagen;
         document.getElementById('precio').value = nombre.getPrecio;
         document.getElementById('descripcion').value = nombre.getDescripcion;
+}
+
+function decisionProducto(){
+    if(document.getElementById('field').disabled == false){
+        crearNuevoElemento();
+    } else {
+        modificarProducto();
     }
 }
 
@@ -441,3 +460,38 @@ function modificarProducto(){
     nombre.setDescripcion = document.getElementById('descripcion').value;
     console.log(nombre);
 }
+
+function mostrarForm(){
+    let contactForm = document.getElementById("contactForm"),
+    btnShowForm = document.getElementById("btnShowForm");
+
+    if(contactForm.style.display == 'none'){
+
+        contactForm.style.display = 'block';
+        btnShowForm.textContent = 'Cerrar Formulario';
+    }else{
+        contactForm.style.display = 'none';
+        document.getElementById("form").reset();
+        btnShowForm.textContent = 'Modificar';
+    }
+}
+
+function crearNuevoElemento(){
+    let productoNuevo = new Producto();
+    debugger;
+    productoNuevo.setId = document.getElementById('codigo').value;
+    productoNuevo.setNombre = document.getElementById('nombre').value;
+    productoNuevo.setImagen = document.getElementById('img').value;
+    productoNuevo.setPrecio = document.getElementById('precio').value;
+    productoNuevo.setDescripcion = document.getElementById('descripcion').value;
+    storage.insertar(productoNuevo);
+    console.log(storage);
+
+    new PaginaPrincipal(storage);
+}
+
+// HASTA AQUÍ BRO
+
+let cart = new Carrito();
+let storage = new AlmacenProductos();
+let page = new PaginaPrincipal(storage);
