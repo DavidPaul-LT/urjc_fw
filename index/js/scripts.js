@@ -439,6 +439,66 @@ function calificar(item){
         }
     }
 }
+
+
+
+
+class FormularioNuevoProducto{
+
+    constructor()
+    //Guarda en elemento la información del almacen
+        almacen.getAlmacen().get(id)
+        //producto
+        let producto = document.createElement('div')
+        let section = document.getElementsByTagName('section')[0]
+        section.appendChild(producto)
+        producto.id = 'producto'
+        //nombre
+        let nombre = document.createElement('div')
+        producto.appendChild(nombre)
+        nombre.textContent = 'Nombre: ' + elemento.getNombre()
+        //precio
+        let precio = document.createElement('div')
+        producto.appendChild(precio)
+        precio.textContent = 'Precio: $' + elemento.getPrecio() + '.00'
+        //Ruta imagen
+        let rutaImagen = document.createElement('div')
+        producto.appendChild(rutaImagen)
+        rutaImagen.textContent = 'Ruta imagen: ' + elemento.getImagen()
+        //Imagen
+        let imagen = document.createElement('img')
+        imagen.className = 'h-1'
+        producto.appendChild(imagen)
+        imagen.src = elemento.getImagen()
+
+        /*
+        let imagen = document.createElement('img')
+            imagen.className = 'card-img-top'
+            imagen.src = value.getImagen()
+            imagen.alt = '...'
+        */
+        //comprobar que detecta el elemento (prueba)
+        console.log(id)
+    }
+    constructor(almacen_prods,id){
+        super(almacen_prods) //---Borra por defecto todos los hijos de -section-
+        let storage2 = new AlmacenProductos();
+        this.#mostrar_pag_producto(storage2, id)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 //---
 //pagina();
 let cart = new Carrito();
