@@ -127,15 +127,17 @@ class Carrito{
         return this.#length
     }
     //--- Guarda como llave el identificador de un obj. -Producto- ya almacenado en -AlmacenProductos-
-    insertar(id_producto){
+    insertar(id_producto,cantidad=1){
         let aux = this.#elementos.get(id_producto)
         if (aux == undefined){
             this.#elementos.set(id_producto,1)
         }
         else{
-            this.#elementos.set(id_producto,aux+1)
+            this.#elementos.set(id_producto,aux+cantidad)
         }
-        this.#length += 1
+        if(this.#length >= 0){
+            this.#length += cantidad
+        }
         console.log(this.#elementos)
         this.#cart_obj.textContent = `${this.#length}`
     }
@@ -360,24 +362,33 @@ class PaginaCarrito{
                 //-step down
                 let step_down = document.createElement('button')
                 step_down.className = 'btn btn-link px-2'
-                step_down.addEventListener('click',function(){this.parentNode.querySelector('input[type=number]').stepDown()})
+                step_down.textContent = '-'
+                //aux_veces
+                let aux_veces = veces
+                step_down.addEventListener('click',function(){
+                    if(veces > 1){
+                        carrito.insertar(producto_key,-1)
+                        console.log(carrito.getCarrito())
+                        PaginaCarrito.mostrar_carrito(almacen,carrito)
+                    }
+                })
                 let i1 = document.createElement('i')
                 i1.className = 'fas fa-minus'
                 step_down.appendChild(i1)
                 master_sel.appendChild(step_down)
                 //-form 1
-                let inp = document.createElement('input')
-                inp.className = 'form-control form-control-sm'
-                inp.min = '1'
-                inp.name = 'quantity'
-                inp.id = 'input_carrito' //prueba recoger info del carrito
-                inp.value = `${veces}`
-                inp.type = 'number'
+                let inp = document.createElement('div')
+                inp.textContent = ` ${aux_veces} `
                 master_sel.appendChild(inp)
                 //-step up
                 let step_up = document.createElement('button')
                 step_up.className = 'btn btn-link px-2'
-                step_up.addEventListener('click',function(){this.parentNode.querySelector('input[type=number]').stepUp()})
+                step_up.textContent = '+'
+                step_up.addEventListener('click',function(){
+                    carrito.insertar(producto_key)
+                    console.log(carrito.getCarrito())
+                    PaginaCarrito.mostrar_carrito(almacen,carrito)
+                })
                 let i2 = document.createElement('i')
                 i2.className = 'fas fa-plus'
                 step_up.appendChild(i1)
@@ -451,7 +462,14 @@ function btnShowForm(almacen){
 //pagina();
 let cart = new Carrito(); //---variable -Carrito-
 let storage = new AlmacenProductos(); //---variable -AlmacenProductos-
-document.getElementById('carrito_master').addEventListener('click',function(){PaginaCarrito.mostrar_carrito(storage,cart)})
+document.getElementById('carrito_master').addEventListener('click',function(){
+    if(cart.length() > 0){
+        PaginaCarrito.mostrar_carrito(storage,cart)
+    }else{
+        alert('Ups, parece que no has añadido nada aún a tu carrito\n¿Por qué no pruebas insertar algun producto?')
+    }
+    
+})
 document.getElementById('home').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage)})
 document.getElementById('solace_icon').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage)})
 document.getElementById('btnShowForm').addEventListener('click',function(){btnShowForm(storage)})
