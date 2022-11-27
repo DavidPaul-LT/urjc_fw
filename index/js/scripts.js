@@ -203,6 +203,7 @@ class PaginaPrincipal{
         document.getElementById('section_principal_almacen').appendChild(upper) //---Master añadido como hijo de -upper-container-
         for (let [key,value] of almacen.getAlmacen()) {
             //---Crea tarjetas de Producto para cada uno de los que está contenido en -AlmacenProducto-
+            let final = document.createElement('div')
             //---NOMBRE
             let nombre = document.createElement('h5')
             nombre.className = 'fw-bolder name'
@@ -218,6 +219,13 @@ class PaginaPrincipal{
                 aux2_precio1.className = 'text-decoration-line-through'
                 aux2_precio1.style.color = 'black'
                 aux_precio.textContent = '$' + aux2_precio[0] + '.00'
+                //badge
+                let badge = document.createElement('div')
+                badge.className = 'dto_recom badge bg-dark text-white position-absolute'
+                badge.style.top = '0.5rem'
+                badge.style.right = '0.5rem'
+                badge.textContent = `${(aux2_precio[0]/aux2_precio[1]-1).toFixed(2)*100}%`
+                final.appendChild(badge)
             }
             //---NOMBRE + PRECIO
             let precio = document.createElement('div')
@@ -239,7 +247,7 @@ class PaginaPrincipal{
             card.appendChild(imagen)
             card.appendChild(detalles)
             //---PRODUCTO DE PRUEBA
-            let final = document.createElement('div')
+            
             final.className = 'col mb-5'
             final.addEventListener('click',function(){PaginaProducto.mostrar_pagina_producto(almacen,value.getId(),carrito)})
             final.id = value.getId()
@@ -301,10 +309,14 @@ class PaginaProducto{
             document.getElementById(`recomendado_${i}`).addEventListener('click',function(){PaginaProducto.mostrar_pagina_producto(almacen,aux_prod.getId(),carrito)})
             document.getElementById(`rec_${i}_img`).src = aux_prod.getImagen()
             document.getElementById(`rec_${i}_nombre`).textContent = aux_prod.getNombre()
+            document.getElementById(`rec_${i}_precio0`).textContent = `$${aux_prod.getPrecio()[0]}.00`
             if(aux_prod.getPrecio()[1] != undefined){
                 document.getElementById(`rec_${i}_precio1`).textContent = `$${aux_prod.getPrecio()[1]}.00`
+                console.log(Math.round(aux_prod.getPrecio()[0]/aux_prod.getPrecio()[1]-1))
+                //DTO_RECOM_
+                document.getElementsByClassName('dto_recom')[i-1].textContent = `${(aux_prod.getPrecio()[0]/aux_prod.getPrecio()[1]-1).toFixed(2)*100}%`
             }
-            document.getElementById(`rec_${i}_precio0`).textContent = `$${aux_prod.getPrecio()[0]}.00`
+            
             llaves.splice(opt,1)
         }
     }
@@ -313,6 +325,7 @@ class PaginaProducto{
     Pagina Carrito, aquella en la que se muestra todos los pruductos ingresados en -Carrito-
 */
 class PaginaCarrito{
+    static tipos_envio = [2,3,5]
     //---Método que crea y añade al DOM los elementos necesarios para crear una página específica para el carrito
     static mostrar_carrito(almacen,carrito){
         Pagina.show_section('section_carrito')
@@ -435,7 +448,11 @@ class PaginaCarrito{
             }
             document.getElementById('resumen_items').textContent = `items ${carrito.length()}`
             document.getElementById('resumen_subtotal').textContent = `$${suma_total}.00`
-            document.getElementById('resumen_precio_final').textContent = `$${suma_total}.00`
+            let aux_selector = 0
+            document.getElementById('resumen_precio_final').textContent = `$${suma_total+PaginaCarrito.tipos_envio[document.getElementById('select_envio').value]}.00`
+            document.getElementById('select_envio').onchange = function(){
+                PaginaCarrito.mostrar_carrito(almacen,carrito)
+            }
         }
         console.log('Desplegada página de carrito')
     }
@@ -475,3 +492,5 @@ document.getElementById('solace_icon').addEventListener('click',function(){Pagin
 document.getElementById('btnShowForm').addEventListener('click',function(){btnShowForm(storage)})
 PaginaPrincipal.mostrar_almacen_productos(storage,cart);
 //storage.getProducto("1234").setNombre('POLO');
+
+
