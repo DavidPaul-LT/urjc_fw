@@ -73,8 +73,8 @@ class AlmacenProductos{
         ['1237','Pantalón corto de alto rendimiento',[35],'../product/1237.jpg','Puede que sean cortos, pero consiguen evitar la humedad, son antimicrobianos, tienen un bolsillo para el móvil en la parte delantera y un bolsillo trasero con cremallera. Perfecto para entrenar, viajar o descansar.'],
         ['1238','Jersey de cachemira mongola con cuello redondo',[50,90],'../product/1238.jpg','El clásico jersey de cachemira es intemporal. Ligero, suave y acogedor, perfecto para cualquier época del año y ocasión. Nuestra cachemira de calidad es increíblemente duradera y tres veces más cálida que la lana, y se obtiene de forma sostenible y ética.'],
         ['1239','Chaqueta camisera 100% lana merina',[120],'../product/1239.jpg','Nuestra chaqueta camisera de lana merina 100% es perfecta cuando las temperaturas empiezan a bajar. Confeccionada por expertos con lana merina hervida, esta chaqueta camisera tiene la silueta de una camisa, pero proporciona la calidez de una chaqueta. Con un aspecto intencionadamente sobredimensionado, es perfecta para vestirse a capas y se puede poner sobre cualquier prenda con facilidad.'],
-        ['1240','Pantalón acampanado Ultra-Stretch',[40,50],'../product/1240.jpg','Si los pantalones de trabajo y los de yoga tuvieran un hijo, sería éste. Este pantalón es de punto doble y muy elástico, está diseñado con un moderno corte de patada que queda muy bien con zapatos planos o con zapatillas de deporte.'],
-        ['1241','Leggings de alto rendimiento ultra suave',[40],'../product/1241.jpg','Nuestros leggings de alto rendimiento tienen todo lo que necesitan para convertirse en tus pantalones de entrenamiento favoritos, sin comprometer la apariencia. Cuentan con un tejido de secado rápido, que absorbe la humedad y que es antimicrobiano, con la elasticidad en 4 direcciones que tanto te gusta para que puedas hacer sentadillas sin preocupaciones.']
+        ['1240','Pantalón acampanado Ultra-Stretch',[40,50],'../product/1240.jpg','Si los pantalones de trabajo y los de yoga tuvieran un hijo, sería éste. Este pantalón es de punto doble y muy elástico y además queda fabuloso con zapatos planos o con zapatillas de deporte.'],
+        ['1241','Leggings de alto rendimiento ultra suave',[40],'../product/1241.jpg','Nuestros leggings de alto rendimiento tienen todo lo que necesitan para convertirse en tus pantalones de entrenamiento favoritos, sin comprometer la apariencia. Cuentan con un tejido de secado rápido, que absorbe la humedad y que es antimicrobiano, con la elasticidad óptima para que puedas hacer sentadillas sin preocupaciones.']
     ]
     //--- Inicializa un mapa que contendrá los productos clasificados por sus atributos -id-
     constructor(prods_prueba=true){
@@ -198,7 +198,7 @@ class PaginaPrincipal{
         upper.className = 'container px-4 px-lg-5 mt-5'
         upper.id = 'upper-container' //---Elemento padre de todos los elementos tipo card de productos
         upper.appendChild(master)
-        document.getElementById('section_principal').appendChild(upper) //---Master añadido como hijo de -upper-container-
+        document.getElementById('section_principal_almacen').appendChild(upper) //---Master añadido como hijo de -upper-container-
         for (let [key,value] of almacen.getAlmacen()) {
             //---Crea tarjetas de Producto para cada uno de los que está contenido en -AlmacenProducto-
             //---NOMBRE
@@ -209,9 +209,13 @@ class PaginaPrincipal{
             let aux_precio = document.createElement('p')
             let aux2_precio = value.getPrecio()
             if(aux2_precio.length == 1){
-                aux_precio.textContent = '$' + aux2_precio + '.00'
+                aux_precio.textContent = '$' + aux2_precio[0] + '.00'
             }else{
-                aux_precio.textContent = '$' + aux2_precio[0] + '.00 (DTO)'
+                let aux2_precio1 = document.createElement('span')
+                aux2_precio1.textContent = '$' + aux2_precio[1] + '.00'
+                aux2_precio1.className = 'text-decoration-line-through'
+                aux2_precio1.style.color = 'black'
+                aux_precio.textContent = '$' + aux2_precio[0] + '.00'
             }
             //---NOMBRE + PRECIO
             let precio = document.createElement('div')
@@ -425,23 +429,10 @@ class PaginaCarrito{
         console.log('Desplegada página de carrito')
     }
 }
-//---Extra clasificación
-function calificar(item){
-    let primero = item.id[0]; //captura el primer caracter;
-    let contador = item.id[1];
-    let nombre = item.id.substring(2); //captura todo menos el primer caracter
-    for(let i = 1; i < 6; i++){
-        if(i > contador){
-            document.getElementById((primero+i)+nombre).style.color = "black";
-        } else {
-            document.getElementById((primero+i)+nombre).style.color = "orange";
-        }
-    }
-}
 function btnShowForm(almacen){
     let form = document.getElementById("form"),
     btnShowForm = document.getElementById("btnShowForm"),
-    sectionProducts = document.getElementById("section_principal"),
+    sectionProducts = document.getElementById("section_principal_almacen"),
     bannerBF = document.getElementsByTagName('header')[0]
     if(form.style.display == "none"){
         form.style.display = "block";

@@ -82,53 +82,62 @@
                 <span class="visually-hidden">Next</span>
                 </button>
             </div>
-        </section>
-        <section class="row justify-content-center justify-content-md-start mb-5" id="formId">
-            <button id="btnShowForm" class="btn btn-outline-dark col py-5">Añadir Producto</button>
-            <form id="form" class="py-5 col-md-4 offset-md-4" style="border: 1px solid black; border-radius: 20px; display: none;">
+            <div id="section_principal_almacen">
+            </div>
+            <div class="row justify-content-center justify-content-md-start mb-5" id="formId">
+              <button id="btnShowForm" class="btn btn-outline-dark col py-5">Añadir Producto</button>
+              <form id="form" class="py-5 col-md-4 offset-md-4" style="border: 1px solid black; border-radius: 20px; display: none;">
+                  <div class="col-md-6 offset-md-3 mt-5">
+                      <label class="form-label">ID</label>
+                      <input type="text" class="form-control" id="idForm">
+                    </div>
+                  <div class="col-md-6 offset-md-3 mt-5">
+                  <label class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="nombreForm">
+                </div>
                 <div class="col-md-6 offset-md-3 mt-5">
-                    <label class="form-label">ID</label>
-                    <input type="text" class="form-control" id="idForm">
-                  </div>
+                  <label class="form-label">Imagen</label>
+                  <input type="text" class="form-control" id="imgForm">
+                </div>
                 <div class="col-md-6 offset-md-3 mt-5">
-                <label class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombreForm">
-              </div>
-              <div class="col-md-6 offset-md-3 mt-5">
-                <label class="form-label">Imagen</label>
-                <input type="text" class="form-control" id="imgForm">
-              </div>
-              <div class="col-md-6 offset-md-3 mt-5">
-                <label class="form-label">Precio</label>
-                <input type="text" class="form-control" id="priceForm">
-              </div>
-              <div class="col-md-6 offset-md-3 mt-5">
-                <label class="form-label">Descripción</label>
-                <input type="text" class="form-control" id="descripcionForm">
-              </div>
-              <div class="col-md-6 offset-md-5 mt-5">
-                <button id="btnForm" class="btn btn-outline-dark" onclick="saveProduct()" type="submit">Submit</button>
-              </div>
-            </form>
+                  <label class="form-label">Precio</label>
+                  <input type="text" class="form-control" id="priceForm">
+                </div>
+                <div class="col-md-6 offset-md-3 mt-5">
+                  <label class="form-label">Descripción</label>
+                  <input type="text" class="form-control" id="descripcionForm">
+                </div>
+                <div class="col-md-6 offset-md-5 mt-5">
+                  <button id="btnForm" class="btn btn-outline-dark" onclick="saveProduct()" type="submit">Submit</button>
+                </div>
+              </form>
+            </div>
         </section>
+        
         <!-- Section para la página de producto (imagen 600x700)-->
         <section id="section_producto" class="py-5" style="display: none;">
           <div class="container px-4 px-lg-5 my-5">
               <div class="row gx-4 gx-lg-5 align-items-center">
                   <div class="col-md-6"><img id="product_image" class="card-img-top mb-5 mb-md-0" src="../product/1234.JPG" alt="..." /></div>
                   <div class="col-md-6">
-                      <div class="small mb-1" id="product_id">ID: 1234</div>
-                      <h1 class="display-5 fw-bolder" id="product_name">Stretch Sweater Fleece Shirt</h1>
+                      <div class="small mb-1" id="product_id"></div>
+                      <h1 class="display-5 fw-bolder" id="product_name"></h1>
                       <div class="fs-5 mb-5">
-                          <span class="text-decoration-line-through" id="product_price1">$70.00</span>
-                          <span id="product_price0">$60.00</span>
+                          <span class="text-decoration-line-through" id="product_price1"></span>
+                          <span id="product_price0"></span>
                       </div>
-                      <p class="lead" id="product_descripcion">This shirt has a classic, versatile knit look, that is the perfect Fall layering shirt. Made with super soft and stretchy fabric, it provides a natural fit on your body.</p>
+                      <p class="lead" id="product_descripcion"></p>
                       <div class="d-flex" id="product_add_to_cart">
                           <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                          <button id="button_cart" class="btn btn-outline-dark flex-shrink-0" type="button" >
+                          <button id="button_cart" class="mx-1 btn btn-outline-dark flex-shrink-0" type="button" >
                               <i class="bi-cart-fill me-1"></i>
                               Añadir al carrito
+                          </button>
+                          <button id="button_modificar" class="mx-1 btn btn-outline-dark flex-shrink-0" type="button" >
+                            Modificar
+                          </button>
+                          <button id="button_eliminar" class="mx-1 btn btn-outline-dark flex-shrink-0" type="button" >
+                            Eliminar
                           </button>
                       </div>
                   </div>
