@@ -15,46 +15,47 @@ class Producto{
         this.#imagen = ruta_imagen
         this.#descripcion = descripcion
     }
+    // Cambiado todos los get y set
     //--- Método getter del atributo -id-
-    getId(){
+    get getId(){
         return this.#id
     }
     //--- Método setter del atributo -id- (el acceso a este método debería estar lo más restringido posible)
-    #setId(val){
+    set setId(val){
         this.#id = val
     }
     //--- Método getter del atributo -nombre-
-    getNombre(){
+    get getNombre(){
         return this.#nombre
     }
     //--- Método setter del atributo -nombre-
-    setNombre(val){
+    set setNombre(val){
         this.#nombre = val
         //modificar -inner_html-
     }
     //--- Método getter del atributo -precio-
-    getPrecio(){
+    get getPrecio(){
         return this.#precio
     }
     //--- Método setter del atributo -precio-
-    setPrecio(val){
+    set setPrecio(val){
         this.#precio = val
         //modificar -inner_html-
     }
     //--- Método getter del atributo -imagen-
-    getImagen(){
+    get getImagen(){
         return this.#imagen
     }
     //--- Método setter del atributo -imagen-
-    setImagen(val){
+    set setImagen(val){
         this.#imagen = val
     }
     //--- Método getter del atributo -descripcion-
-    getDescripcion(){
+    get getDescripcion(){
         return this.#descripcion
     }
     //--- Método setter del atributo -descripcion-
-    setDescripcion(val){
+    set setDescripcion(val){
         this.#descripcion = val
         //modificar -inner_html-
     }
@@ -90,10 +91,10 @@ class AlmacenProductos{
     }
     //--- Inserta un nuevo objeto -Producto- en -elementos-
     insertar(producto){
-        if (this.#elementos.get(producto.getId()) != undefined){
+        if (this.#elementos.get(producto.getId) != undefined){
             throw "KeyAlreadyUsedException" //---Raise KeyAlreadyUsedException (clave ya usada, busca otra o elimina el producto)
         }else{
-            this.#elementos.set(producto.getId(),producto)
+            this.#elementos.set(producto.getId,producto)
         }
     }
     //--- Inserta en -elementos- todos los productos de prueba
@@ -251,10 +252,10 @@ class MuestraProductos{
             //---NOMBRE
             let nombre = document.createElement('h5')
             nombre.className = 'fw-bolder name'
-            nombre.textContent = value.getNombre()
+            nombre.textContent = value.getNombre
             //---PRECIO
             let aux_precio = document.createElement('p')
-            aux_precio.textContent = '$' + value.getPrecio() + '.00'
+            aux_precio.textContent = '$' + value.getPrecio + '.00'
             //---NOMBRE + PRECIO
             let precio = document.createElement('div')
             precio.className = 'text-center'
@@ -268,7 +269,7 @@ class MuestraProductos{
             //---PRODUCT IMAGE
             let imagen = document.createElement('img')
             imagen.className = 'card-img-top'
-            imagen.src = value.getImagen()
+            imagen.src = value.getImagen
             imagen.alt = '...'
             //---PRODUCT IMAGE + PRODUCT DETAILS
             let card = document.createElement('div')
@@ -279,7 +280,7 @@ class MuestraProductos{
             let final = document.createElement('div')
             final.className = 'col mb-5'
             final.setAttribute('onclick','new PaginaProducto(this.almacen, this.id)')
-            final.id = value.getId()
+            final.id = value.getId
             final.appendChild(card)
             //---Añadir a master
             document.getElementById('master').appendChild(final)
@@ -319,30 +320,35 @@ class PaginaProducto extends Pagina{
         //nombre
         let nombre = document.createElement('div')
         producto.appendChild(nombre)
-        nombre.textContent = 'Nombre: ' + elemento.getNombre()
+        nombre.textContent = 'Nombre: ' + elemento.getNombre
         //precio
         let precio = document.createElement('div')
         producto.appendChild(precio)
-        precio.textContent = 'Precio: $' + elemento.getPrecio() + '.00'
+        precio.textContent = 'Precio: $' + elemento.getPrecio + '.00'
         //Ruta imagen
         let rutaImagen = document.createElement('div')
         producto.appendChild(rutaImagen)
-        rutaImagen.textContent = 'Ruta imagen: ' + elemento.getImagen()
+        rutaImagen.textContent = 'Ruta imagen: ' + elemento.getImagen
         //Descipción
         let descripcion = document.createElement('div')
         producto.appendChild(descripcion)
-        descripcion.textContent = 'Descripcion: ' + elemento.getDescripcion() 
+        descripcion.textContent = 'Descripcion: ' + elemento.getDescripcion 
         //Imagen
         let imagen = document.createElement('img')
         imagen.className = 'imagenProducto'
         producto.appendChild(imagen)
-        imagen.src = elemento.getImagen()
+        imagen.src = elemento.getImagen
         imagen.alt = '...'
         //Boton modificar
         let modificar = document.createElement('button')
         modificar.className = "btn btn-outline-dark mt-auto"
+        
+        modificar.id = "btnMod";  //añadido Paul
+        modificar.setAttribute('onclick', 'mostrarValoresProducto()', false); //añadido Paul
+
         producto.appendChild(modificar)
-        modificar.textContent = 'Modificar'
+        modificar.textContent = 'Modificar';
+
         //Funcion para modificar
         //Boton añadir al carrito
         let añadirCarrito = document.createElement('button')

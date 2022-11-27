@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="css/navBar.css">
         <link rel="stylesheet" href="css/carousel.css">
         <link rel="stylesheet" href="css/card.css">
+        <link rel="stylesheet" href="/basura.css"> <!-- añadido Paul-->
     </head>
     <body>
         <!-- Navigation-->
@@ -59,6 +60,42 @@
         <section class="py-5">
             
         </section>
+
+        <!-- Formulario -->
+
+        <div class="container contact-form" id="contactForm" style="display: none;">
+            <div class="contact-image">
+                <img src="/index/index_images/logoImg.jpeg" alt="rocket_contact"/>
+            </div>
+            <form method="post" id="form">
+               <div class="row">
+                    <div class="col-md-6" >
+                        <div class="form-group py-1">
+                            <input id="codigo" type="text" class="form-control" placeholder="" value=""/>
+                        </div>
+                        <div class="form-group py-1">
+                            <input id="nombre" type="text" class="form-control" placeholder="" value=""/>
+                        </div>
+                        <div class="form-group py-1">
+                            <input id="img" type="text" class="form-control" placeholder="" value=""/>
+                        </div>
+                        <div class="form-group py-1">
+                            <input id="precio" type="text" class="form-control" placeholder="" value=""/>
+                        </div>
+                        <div class="form-group py-1 text-center">
+                            <div id="btnSubmit" class="btnContact" onclick="modificarProducto()">Submit</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group py-1">
+                            <textarea id="descripcion" name="txtMsg" class="form-control" placeholder="Descripcion" style="width: 100%; height: 175px;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
         <!-- Footer-->
         <footer class="py-5 bg-info">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
@@ -67,5 +104,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script src="/basura.js"></script>
     </body>
 </html>
