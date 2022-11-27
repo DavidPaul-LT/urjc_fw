@@ -287,6 +287,8 @@ class PaginaProducto{
         console.log(`Accediendo a página producto con id: ${almacen.getProducto(id).getNombre()}`)
         //productos recomendados
         let llaves = Array.from(almacen.getAlmacen().keys())
+        //quita el producto que se exhibe en la pagina
+        llaves.splice(llaves.indexOf(id),1)
         for (let i = 1; i <= 4; i++){
             let opt = Math.floor(Math.random()*llaves.length)
             let aux_prod = almacen.getProducto(llaves[opt])
@@ -311,9 +313,7 @@ class PaginaCarrito{
         if(carrito.length()>0){
             let master = document.getElementById('cart_productos_mostrados')
             Pagina.errase('cart_productos_mostrados')
-            for (let pro of document.getElementsByClassName('producto_carrito')) {
-                master.removeChild(pro)
-            }
+            //document.getElementById('cart_productos_mostrados').style.display = 'none'
             //crea carrito_modificable
             let modificable = document.createElement('div')
             modificable.className = 'd-flex justify-content-between align-items-center mb-5'
@@ -399,7 +399,13 @@ class PaginaCarrito{
                 let a  = document.createElement('button')
                 a.className = 'text-muted'
                 a.textContent = 'X'
-                a.addEventListener('click',function(){carrito.eliminar(info.getId());PaginaCarrito.mostrar_carrito(almacen,carrito)}) //falta recargar la pagina de carrito
+                a.addEventListener('click',function(){
+                    carrito.eliminar(info.getId());
+                    if(carrito.length() == 0){
+                        PaginaPrincipal.mostrar_almacen_productos(almacen,carrito)
+                    }else{
+                        PaginaCarrito.mostrar_carrito(almacen,carrito)
+                    }})
                 let aux_i = document.createElement('i')
                 aux_i.className = 'fas fa-times'
                 a.appendChild(aux_i)
