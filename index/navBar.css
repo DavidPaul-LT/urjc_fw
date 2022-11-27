@@ -1,0 +1,23 @@
+body{
+    background-color: #e9e9e9;
+    margin: -8px 0px;
+}
+
+.container-fluid{
+    background-color: #90704d;
+}
+.navbar-brand > img{
+    height: 65px;
+    width: 85px;
+}
+.nav-link{
+    color: white;
+}
+    .nav-link:hover{
+        color: white;
+        text-decoration: underline white;
+    }
+
+span{
+    color: white;    
+}
