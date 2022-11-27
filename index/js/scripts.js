@@ -367,8 +367,7 @@ class PaginaProducto extends Pagina{
     }
     constructor(almacen_prods,id){
         super(almacen_prods) //---Borra por defecto todos los hijos de -section-
-        let storage2 = new AlmacenProductos();
-        this.#mostrar_pag_producto(storage2, id)
+        this.#mostrar_pag_producto(storage, id)
     }
 }
 /*
@@ -403,3 +402,42 @@ function calificar(item){
 let cart = new Carrito();
 let storage = new AlmacenProductos();
 let page = new PaginaPrincipal(storage);
+
+
+//BASURA
+
+
+function mostrarValoresProducto(){
+    let contactForm = document.getElementById("contactForm"),
+    btnMod = document.getElementById("btnMod");
+
+    if(contactForm.style.display == 'none'){
+        contactForm.style.display = 'block';
+        btnMod.textContent = 'Cerrar Formulario';
+    }else{
+        contactForm.style.display = 'none';
+        document.getElementById("form").reset();
+        btnMod.textContent = 'Modificar';
+    }
+
+    if(contactForm.style.display == 'block'){
+        let nombre = storage.getProducto("1235");
+        console.log(nombre);
+        document.getElementById('codigo').value = "1235";
+        document.getElementById('nombre').value = nombre.getNombre;
+        document.getElementById('img').value = nombre.getImagen;
+        document.getElementById('precio').value = nombre.getPrecio;
+        document.getElementById('descripcion').value = nombre.getDescripcion;
+    }
+}
+
+
+function modificarProducto(){
+    let nombre = storage.getProducto("1235");
+    
+    nombre.setNombre = document.getElementById('nombre').value;
+    nombre.setImagen = document.getElementById('img').value;
+    nombre.setPrecio = document.getElementById('precio').value;
+    nombre.setDescripcion = document.getElementById('descripcion').value;
+    console.log(nombre);
+}
