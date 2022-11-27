@@ -6,12 +6,14 @@ class Producto{
     #nombre
     #precio
     #imagen
+    #descripcion
     //--- Crea un nuevo ojeto de clase -Producto- con un -id- determinado por la ED -AlmacenProductos-
-    constructor(id,nombre,precio,ruta_imagen){
+    constructor(id,nombre,precio,ruta_imagen,descripcion){
         this.#id = id
         this.#nombre = nombre
         this.#precio = precio
         this.#imagen = ruta_imagen
+        this.#descripcion = descripcion
     }
     //--- Método getter del atributo -id-
     getId(){
@@ -47,6 +49,15 @@ class Producto{
     setImagen(val){
         this.#imagen = val
     }
+    //--- Método getter del atributo -descripcion-
+    getDescripcion(){
+        return this.#descripcion
+    }
+    //--- Método setter del atributo -descripcion-
+    setDescripcion(val){
+        this.#descripcion = val
+        //modificar -inner_html-
+    }
 }
 /* class AlmacenProductos:
     -Sirve como estructura de datos que almacena los distintos objetos -Producto- que se instancien
@@ -57,14 +68,14 @@ class AlmacenProductos{
     #elementos
     //---Añade al mapa de elementos unos productos de prueba
     static modelos = [
-        ['1234','Stretch Sweater Fleece Shirt',60,'../product/1234.jpg'],
-        ['1235','Flowknit Ultra-Soft Performance Polo',(35,40),'../product/1235.jpg'],
-        ['1236','Flowknit Ultra-Soft Performance Pant',(40,45),'../product/1236.jpg'],
-        ['1237','Flowknit Ultra-Soft Performance Short',35,'../product/1237.jpg'],
-        ['1238','Mongolian Cashmere Crewneck Sweater',(50,90),'../product/1238.jpg'],
-        ['1239','100% Merino Wool Shirt Jacket',120,'../product/1239.jpg'],
-        ['1240','Ultra-Stretch Ponte Kick Flare Pant',(40,50),'../product/1240.jpg'],
-        ['1241','Ultra-Soft Performance Legging - 25" Inseam',40,'../product/1241.jpg']
+        ['1234','Stretch Sweater Fleece Shirt',60,'../product/1234.jpg','Este es el elemento 1'],
+        ['1235','Flowknit Ultra-Soft Performance Polo',(35,40),'../product/1235.jpg','Este es el elemento 2'],
+        ['1236','Flowknit Ultra-Soft Performance Pant',(40,45),'../product/1236.jpg','Este es el elemento 3'],
+        ['1237','Flowknit Ultra-Soft Performance Short',35,'../product/1237.jpg','Este es el elemento 4'],
+        ['1238','Mongolian Cashmere Crewneck Sweater',(50,90),'../product/1238.jpg','Este es el elemento 5'],
+        ['1239','100% Merino Wool Shirt Jacket',120,'../product/1239.jpg','Este es el elemento 6'],
+        ['1240','Ultra-Stretch Ponte Kick Flare Pant',(40,50),'../product/1240.jpg','Este es el elemento 7'],
+        ['1241','Ultra-Soft Performance Legging - 25" Inseam',40,'../product/1241.jpg','Este es el elemento 8']
     ]
     //--- Inicializa un mapa que contendrá los productos clasificados por sus atributos -id-
     constructor(prods_prueba=true){
@@ -88,7 +99,7 @@ class AlmacenProductos{
     //--- Inserta en -elementos- todos los productos de prueba
     #productos_de_prueba(){
         for (let producto of AlmacenProductos.modelos) {
-            this.insertar(new Producto(producto[0],producto[1],producto[2],producto[3]))
+            this.insertar(new Producto(producto[0],producto[1],producto[2],producto[3],producto[4]))
         }
     }
     //--- Eliminar un objeto -Producto- de entre los ya contenidos en -elementos-
@@ -317,18 +328,34 @@ class PaginaProducto extends Pagina{
         let rutaImagen = document.createElement('div')
         producto.appendChild(rutaImagen)
         rutaImagen.textContent = 'Ruta imagen: ' + elemento.getImagen()
+        //Descipción
+        let descripcion = document.createElement('div')
+        producto.appendChild(descripcion)
+        descripcion.textContent = 'Descripcion: ' + elemento.getDescripcion() 
         //Imagen
         let imagen = document.createElement('img')
-        imagen.className = 'h-1'
+        imagen.className = 'imagenProducto'
         producto.appendChild(imagen)
         imagen.src = elemento.getImagen()
-
-        /*
-        let imagen = document.createElement('img')
-            imagen.className = 'card-img-top'
-            imagen.src = value.getImagen()
-            imagen.alt = '...'
-        */
+        imagen.alt = '...'
+        //Boton modificar
+        let modificar = document.createElement('button')
+        modificar.className = "btn btn-outline-dark mt-auto"
+        producto.appendChild(modificar)
+        modificar.textContent = 'Modificar'
+        //Funcion para modificar
+        //Boton añadir al carrito
+        let añadirCarrito = document.createElement('button')
+        añadirCarrito.className = "btn btn-outline-dark mt-auto"
+        producto.appendChild(añadirCarrito)
+        añadirCarrito.textContent = 'Añadir al carrito'
+        //Funcion para añadir al carrito
+        //Boton borrar
+        let borrar = document.createElement('button')
+        borrar.className = "btn btn-outline-dark mt-auto"
+        producto.appendChild(borrar)
+        borrar.textContent = 'Borrar'
+        //Funcion para borrar
         //comprobar que detecta el elemento (prueba)
         console.log(id)
     }
@@ -363,6 +390,8 @@ function calificar(item){
         }
     }
 }
+//---Boton home
+
 //---
 //pagina();
 let cart = new Carrito();

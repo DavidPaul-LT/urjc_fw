@@ -8,3 +8,7 @@
     border: 4px solid rgb(255, 255, 255, 0.500);
     transition: 200ms;
 }
+
+.imagenProducto{
+    width:25%;
+}
