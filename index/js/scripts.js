@@ -287,13 +287,15 @@ class PaginaProducto{
         }
         document.getElementById('product_price0').style.color = 'red'
         document.getElementById('product_descripcion').textContent = almacen.getProducto(id).getDescripcion()
-        //boton modificar
+        //boton eliminar
         let modi = document.getElementById('button_eliminar')
         modi.addEventListener('click',function(){
             almacen.eliminar(id)
             console.log(almacen.getAlmacen())
             Pagina.errase('section_principal_almacen')
             PaginaPrincipal.mostrar_almacen_productos(almacen,carrito)
+            //PENDIENTE
+            carrito.eliminar(info.getId())
         })
         //boton add_to_cart
         let div_add = document.getElementById('product_add_to_cart')
