@@ -260,7 +260,9 @@ class PaginaPrincipal{
             //---PRODUCTO DE PRUEBA
             
             final.className = 'col mb-5'
-            final.addEventListener('click',function(){PaginaProducto.mostrar_pagina_producto(almacen,value.getId(),carrito)})
+            final.addEventListener('click',function(){
+                PaginaProducto.mostrar_pagina_producto(almacen,value.getId(),carrito)
+            })
             final.id = value.getId()
             final.appendChild(card)
             //---Añadir a master
@@ -274,71 +276,85 @@ class PaginaPrincipal{
         }
     }
 }
-/*
-    Pagina Producto, aquella en la que se muestran todos los atributos de un determinado producto
-*/
+//PAGINA DE PRODUCTO
 class PaginaProducto{
-    //---Método que crea y añade al DOM los elementos que se precisen para la creación de una página individual de producto
     static mostrar_pagina_producto(almacen,id,carrito){
-        document.getElementById('product_add_to_cart').removeChild(document.getElementById('button_cart'))
+        // 1- Ocultar el resto de sections
         Pagina.show_section('section_producto')
+        // 2- Obtener atributos del Producto
+        let producto_info = almacen.getProducto(id)
+        console.log(producto_info)
+        // 3- Modificar
+        // Mod. id
         document.getElementById('product_id').textContent = 'ID: ' + id
-        document.getElementById('product_name').textContent = almacen.getProducto(id).getNombre()
-        document.getElementById('product_image').src = almacen.getProducto(id).getImagen()
-        let aux_precio = almacen.getProducto(id).getPrecio()
-        if(aux_precio.length > 1){
-            document.getElementById('product_price1').style.display = 'block'
-            document.getElementById('product_price1').textContent = `$${aux_precio[1]}.00`
-            document.getElementById('product_price1').style.color = 'brown'
-            document.getElementById('product_price0').textContent = `$${aux_precio[0]}.00`
-        }else{
+        // Mod. nombre
+        document.getElementById('product_name').textContent = producto_info.getNombre()
+        // Mod. imagen
+        document.getElementById('product_image').src = producto_info.getImagen()
+        // Mod. descripcion
+        document.getElementById('product_descripcion').textContent = producto_info.getDescripcion()
+        // Mod. precio
+        let precios = producto_info.getPrecio()
+        if (precios.length == 2){
             document.getElementById('product_price1').style.display = 'none'
-            document.getElementById('product_price0').textContent = `$${aux_precio[0]}.00`
+            document.getElementById('product_price1').textContent = `$${precios[1]}.00`
+            document.getElementById('product_price1').style.color = 'brown'
+        }else{
+            
+            document.getElementById('product_price1').style.display = 'none'
         }
+        document.getElementById('product_price0').textContent = `$${precios[0]}.00`
         document.getElementById('product_price0').style.color = 'red'
-        document.getElementById('product_descripcion').textContent = almacen.getProducto(id).getDescripcion()
-        //boton eliminar
-        let modi = document.getElementById('button_eliminar')
-        modi.addEventListener('click',function(){
+        // Atributos extra
+
+        // 3- Funcionalidad botones
+        //Botón eliminar
+        let elim = document.getElementById('button_eliminar')
+        elim.addEventListener('click',function(){
             almacen.eliminar(id)
             console.log(almacen.getAlmacen())
             Pagina.errase('section_principal_almacen')
             PaginaPrincipal.mostrar_almacen_productos(almacen,carrito)
-            //PENDIENTE
             carrito.eliminar(id)
         })
-        //boton add_to_cart
-        let div_add = document.getElementById('product_add_to_cart')
-        let button_cart = document.createElement('button')
-        button_cart.className = 'btn btn-outline-dark flex-shrink-0'
-        button_cart.type = 'button'
-        button_cart.addEventListener('click',function(){
+        //Botón modificar
+
+        //Botón añadir subelemento
+
+        //Botón añadir al carrito
+        document.getElementById('button_cart').addEventListener('click',function(){
             carrito.insertar(id);
-            console.log('Producto insertado en el carrito')})
-        button_cart.id = 'button_cart'
-        let i_aux = document.createElement('i')
-        i_aux.className = 'bi-cart-fill me-1'
-        i_aux.textContent = 'Añadir al carrito'
-        button_cart.appendChild(i_aux)
-        div_add.appendChild(button_cart)
-        console.log(`Accediendo a página producto con id: ${almacen.getProducto(id).getNombre()}`)
-        //productos recomendados
+            console.log('Producto insertado en el carrito');
+        })
+        //PRINT
+        console.log(`Accediendo a página producto con id: ${id}`)
+        //Productos recomendados
         let llaves = Array.from(almacen.getAlmacen().keys())
-        //quita el producto que se exhibe en la pagina
-        llaves.splice(llaves.indexOf(id),1)
-        for (let i = 1; i <= 4; i++){
+        llaves.splice(llaves.indexOf(id),1) //quita el producto mostrado en la página
+        for (let i = 1; i <= 4; i++) {
             let opt = Math.floor(Math.random()*llaves.length)
-            let aux_prod = almacen.getProducto(llaves[opt])
-            document.getElementById(`recomendado_${i}`).addEventListener('click',function(){PaginaProducto.mostrar_pagina_producto(almacen,aux_prod.getId(),carrito)})
-            document.getElementById(`rec_${i}_img`).src = aux_prod.getImagen()
-            document.getElementById(`rec_${i}_nombre`).textContent = aux_prod.getNombre()
-            document.getElementById(`rec_${i}_precio0`).textContent = `$${aux_prod.getPrecio()[0]}.00`
-            if(aux_prod.getPrecio()[1] != undefined){
-                document.getElementById(`rec_${i}_precio1`).textContent = `$${aux_prod.getPrecio()[1]}.00`
-                console.log(Math.round(aux_prod.getPrecio()[0]/aux_prod.getPrecio()[1]-1))
-                //DTO_RECOM_
-                document.getElementsByClassName('dto_recom')[i-1].textContent = `${(aux_prod.getPrecio()[0]/aux_prod.getPrecio()[1]-1).toFixed(2)*100}%`
+            let prod_recom = almacen.getProducto(llaves[opt])
+            document.getElementById(`recomendado_${i}`).addEventListener('click',function(){
+                PaginaProducto.mostrar_pagina_producto(almacen,llaves[opt],carrito)
+            })
+            //Nombre recomendados
+            document.getElementById(`rec_${i}_nombre`).textContent = prod_recom.getNombre()
+            //Imagen recomendados
+            document.getElementById(`rec_${i}_img`).src = prod_recom.getImagen()
+            //---
+            // Precio recomendados
+            let precios = prod_recom.getPrecio()
+            if (precios.length == 2){
+                document.getElementById(`rec_${i}_precio1`).style.display = 'none'
+                document.getElementById(`rec_${i}_precio1`).textContent = `$${precios[1]}.00`
+                // Badge
+                document.getElementsByClassName('dto_recom')[i-1].textContent = `${(prod_recom.getPrecio()[0]/prod_recom.getPrecio()[1]-1).toFixed(2)*100}%`
+            }else{
+                document.getElementById(`rec_${i}_precio1`).style.display = 'none'
             }
+            document.getElementById(`rec_${i}_precio0`).textContent = `$${precios[0]}.00`
+            //---
+            document.getElementById(`rec_${i}_precio0`).textContent = `$${prod_recom.getPrecio()[0]}.00`
             llaves.splice(opt,1)
         }
     }
