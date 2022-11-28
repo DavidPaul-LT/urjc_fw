@@ -311,9 +311,12 @@ class PaginaProducto{
         })
         //Botón modificar
         let modificar = document.getElementById("button_modificar");  //añadido Paul
+        document.getElementById('field').disabled = true;
+        console.log('disabled activado');
         modificar.addEventListener('click', function(){
-            mostrarValoresProducto(almacen.getProducto(id))
-        }); //añadido Paul
+            mostrarValoresProducto(almacen.getProducto(id)); //añadido Paul
+        })
+            
         //Botón modificarTrue
         let btnSubmit = document.getElementById("btnSubmit");
         btnSubmit.addEventListener('click', function(){
@@ -328,35 +331,6 @@ class PaginaProducto{
         })
         //PRINT
         console.log(`Accediendo a página producto con id: ${id}`)
-        //Productos recomendados
-        let llaves = Array.from(almacen.getAlmacen().keys())
-        llaves.splice(llaves.indexOf(id),1) //quita el producto mostrado en la página
-        for (let i = 1; i <= 4; i++) {
-            let opt = Math.floor(Math.random()*llaves.length)
-            let prod_recom = almacen.getProducto(llaves[opt])
-            document.getElementById(`recomendado_${i}`).addEventListener('click',function(){
-                PaginaProducto.mostrar_pagina_producto(almacen,llaves[opt],carrito)
-            })
-            //Nombre recomendados
-            document.getElementById(`rec_${i}_nombre`).textContent = prod_recom.getNombre
-            //Imagen recomendados
-            document.getElementById(`rec_${i}_img`).src = prod_recom.getImagen
-            //---
-            // Precio recomendados
-            let precios = prod_recom.getPrecio
-            if (precios.length == 2){
-                document.getElementById(`rec_${i}_precio1`).style.display = 'none'
-                document.getElementById(`rec_${i}_precio1`).textContent = `$${precios[1]}.00`
-                // Badge
-                document.getElementsByClassName('dto_recom')[i-1].textContent = `${(prod_recom.getPrecio[0]/prod_recom.getPrecio[1]-1).toFixed(2)*100}%`
-            }else{
-                document.getElementById(`rec_${i}_precio1`).style.display = 'none'
-            }
-            document.getElementById(`rec_${i}_precio0`).textContent = `$${precios[0]}.00`
-            //---
-            document.getElementById(`rec_${i}_precio0`).textContent = `$${prod_recom.getPrecio[0]}.00`
-            llaves.splice(opt,1)
-        }
     }
 }
 /*
@@ -524,7 +498,7 @@ function mostrarValoresProducto(producto){
 //---Redirige al formulario inserción/modificación según si el campo field se encuentre habilitado o no
 function decisionProducto(almacen, id, carrito){
     if(document.getElementById('field').disabled == false){
-        crearNuevoElemento(almacen);
+        crearNuevoElemento(almacen, carrito);
     } else {
         modificarProducto(almacen, id, carrito);
         console.log('entrar a modificar');
@@ -537,6 +511,7 @@ function modificarProducto(almacen, id, carrito){
     productoViejo.setImagen = document.getElementById('img').value;
     productoViejo.setPrecio = document.getElementById('precio').value;
     productoViejo.setDescripcion = document.getElementById('descripcion').value;
+    document.getElementById("contactForm").style.display = 'none';
     console.log(productoViejo);
     console.log('producto modificado');
     console.log(almacen);
@@ -566,6 +541,7 @@ function crearNuevoElemento(almacen, carrito){
     almacen.insertar(productoNuevo);
     console.log(almacen);
     PaginaPrincipal.mostrar_almacen_productos(almacen, carrito);
+    btnShowForm = document.getElementById("btnShowForm").textContent = 'Añadir Producto ';
 }
 
 // Hasta aquí el formulario
