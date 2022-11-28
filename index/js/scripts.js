@@ -30,7 +30,7 @@ class Producto{
         return this.#id
     }
     //--- Método setter del atributo -id- (el acceso a este método debería estar lo más restringido posible)
-    set #setId(val){
+    set setId(val){
         this.#id = val
     }
     //--- Método getter del atributo -nombre-
@@ -182,7 +182,7 @@ class Pagina{
         console.log('Section borrado correctamente')
     }
     //---Método que oculta los elementos section que no tengan el ID de section_type
-    static show_section(section_type, section_formulario){
+    static show_section(section_type, section_formulario=null){
         for (let sec of document.getElementsByTagName('section')) {
             if ((section_type == sec.id) || (section_formulario == sec.id)) {
                 sec.style.display = 'block'
@@ -268,10 +268,10 @@ class PaginaPrincipal{
         }
         console.log('Productos cargados en la página')
         PaginaPrincipal.almacen_creado = true
-        }else{
-            Pagina.show_section('section_principal', 'section_formulario')
-            console.log(`Mostrando página principal`)
         }
+        document.getElementById('field').disabled = false;
+        document.getElementById("contactForm").style.display = 'none';
+        document.getElementById("btnSubmit").addEventListener('click', function(){crearNuevoElemento(almacen)});
     }
 }
 /*
@@ -347,9 +347,9 @@ class PaginaProducto{
             }
             llaves.splice(opt,1)
         }
+        document.getElementById('field').disabled = true; //modificado PAUL
         document.getElementById("form").reset();// modificado PAUL
         document.getElementById('contactForm').style.display = 'none'; //MODIFICADO PAUL
-        document.getElementById('field').disabled = true; //modificado PAUL
         document.getElementById('btnCrear').style.display = 'none'; //MODIFICADO PAUL
     }
 }
@@ -398,7 +398,7 @@ class PaginaCarrito{
                 aux_nombre.className = 'col-md-3 col-lg-3 col-xl-3'
                 let nombre = document.createElement('h6')
                 nombre.className = 'text-black mb-0'
-                nombre.textContent = info.getNombre()
+                nombre.textContent = info.getNombre
                 aux_nombre.appendChild(nombre)
                 producto.appendChild(aux_nombre)
                 //selector
@@ -444,7 +444,7 @@ class PaginaCarrito{
                 aux_precio.className = 'col-md-3 col-lg-2 col-xl-2 offset-lg-1'
                 let precio = document.createElement('h6')
                 precio.className = 'mb-0'
-                if(info.getPrecio().length > 1){
+                if(info.getPrecio.length > 1){
                     precio.textContent = `$${info.getPrecio[0]}.00`
                     suma_total += veces*info.getPrecio[0]
                 }else{
@@ -503,6 +503,7 @@ function mostrarValoresProducto(id){
 
         contactForm.style.display = 'block';
         btnMod.textContent = 'Cerrar Formulario';
+        document.getElementById("form").reset();
     }else{
         contactForm.style.display = 'none';
         document.getElementById("form").reset();
@@ -554,7 +555,7 @@ function mostrarForm(){
     btnShowForm = document.getElementById("btnShowForm");
 
     if(contactForm.style.display == 'none'){
-
+        document.getElementById("form").reset();
         contactForm.style.display = 'block';
         btnShowForm.textContent = 'Cerrar Formulario';
     }else{
@@ -590,11 +591,9 @@ document.getElementById('carrito_master').addEventListener('click',function(){
     }
     
 })
-document.getElementById('home').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage)})
-document.getElementById('solace_icon').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage)})
-//document.getElementById('btnShowForm').addEventListener('click',function(){btnShowForm(storage)})
+document.getElementById('home').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage, cart)})
+document.getElementById('solace_icon').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage, cart)})
 PaginaPrincipal.mostrar_almacen_productos(storage,cart);
-//storage.getProducto("1234").setNombre('POLO');
 
 
  
