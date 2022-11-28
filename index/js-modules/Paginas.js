@@ -126,7 +126,7 @@ export class PaginaPrincipal{
             final.className = 'col mb-5'
             //final.setAttribute('onclick','Pagina.errase()')
             final.addEventListener('click',PaginaProducto.mostrar_pagina_producto)
-            final.id = value.getId
+            final.id = value.getId()
             final.appendChild(card)
             //---Añadir a master
             master.appendChild(final)

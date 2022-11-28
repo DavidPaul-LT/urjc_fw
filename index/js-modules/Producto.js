@@ -14,7 +14,7 @@ export class Producto{
         this.#imagen = ruta_imagen
     }
     //--- Método getter del atributo -id-
-    getId{
+    getId(){
         return this.#id
     }
     //--- Método setter del atributo -id- (el acceso a este método debería estar lo más restringido posible)

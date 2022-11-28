@@ -12,7 +12,7 @@ class Carrito{
     insertar(elemento){
         //--Pendiente: exigir que el usuario de una talla para insertar else alert()
         //--- identificador - simula un puntero a elemento 
-        let identificador = elemento.getId;
+        let identificador = elemento.getId();
         //---Añade un nuevo elemento a -elementos-
         if (this.#elementos.get(identificador)==undefined){
             this.#elementos.set(identificador,[elemento,1])
@@ -26,7 +26,7 @@ class Carrito{
     //---eliminar(obj Producto): borra todas las repeticiones de un producto dentro de -elementos-
     //  __Remove-from-cart on click button submit form checklist of Product(s)
     eliminar(elemento){
-        this.#elementos.set(elemento.getId,undefined)
+        this.#elementos.set(elemento.getId(),undefined)
     }
     //--- Debería desplegar el carrito en la página en la que se esté: icono-carrito onclick(obj.mostarCarrito())
     mostarCarrito(){
