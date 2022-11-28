@@ -78,12 +78,12 @@ class AlmacenProductos{
     //---Añade al mapa de elementos unos productos de prueba
     static modelos = [
         ['1234','Camisa de lana elástica',[60],'../product/1234.jpg','Esta camisa tiene un aspecto de punto clásico y versátil, perfecta para el otoño. Fabricada con un tejido súper suave y elástico, proporciona un ajuste natural al cuerpo.'],
-        ['1235','Polo de alto rendimiento',[35,40],'../product/1235.jpg','Este polo supersuave es ideal para el golf, los viajes o las citas nocturnas. Nuestro tejido Flowknit, increíblemente suave, no solo es sostenible, sino que facilita la absorción de la humedad y evita el mal olor, ofreciendo la máxima versatilidad. Nuestro Flowknit está fabricado con hilo de poliéster Global Recycle Standard, que desvía y recicla los plásticos destinados a los vertederos o al océano, para que puedas sentirte y verte bien con lo que llevas puesto.'],
-        ['1236','Pantalón de alto rendimiento',[40,45],'../product/1236.jpg','Nuestros joggers de alto rendimiento favoritos tienen un ajuste fino pero relajado siendo lo suficientemente elásticos para conseguir la máxima comodidad. Los gruesos cordones, los tobillos con puños y el diseño de dos bolsillos ofrecen una sensación de calidad.'],
+        ['1235','Polo de alto rendimiento',[40],'../product/1235.jpg','Este polo supersuave es ideal para el golf, los viajes o las citas nocturnas. Nuestro tejido Flowknit, increíblemente suave, no solo es sostenible, sino que facilita la absorción de la humedad y evita el mal olor, ofreciendo la máxima versatilidad. Nuestro Flowknit está fabricado con hilo de poliéster Global Recycle Standard, que desvía y recicla los plásticos destinados a los vertederos o al océano, para que puedas sentirte y verte bien con lo que llevas puesto.'],
+        ['1236','Pantalón de alto rendimiento',[45],'../product/1236.jpg','Nuestros joggers de alto rendimiento favoritos tienen un ajuste fino pero relajado siendo lo suficientemente elásticos para conseguir la máxima comodidad. Los gruesos cordones, los tobillos con puños y el diseño de dos bolsillos ofrecen una sensación de calidad.'],
         ['1237','Pantalón corto de alto rendimiento',[35],'../product/1237.jpg','Puede que sean cortos, pero consiguen evitar la humedad, son antimicrobianos, tienen un bolsillo para el móvil en la parte delantera y un bolsillo trasero con cremallera. Perfecto para entrenar, viajar o descansar.'],
-        ['1238','Jersey de cachemira mongola con cuello redondo',[50,90],'../product/1238.jpg','El clásico jersey de cachemira es intemporal. Ligero, suave y acogedor, perfecto para cualquier época del año y ocasión. Nuestra cachemira de calidad es increíblemente duradera y tres veces más cálida que la lana, y se obtiene de forma sostenible y ética.'],
+        ['1238','Jersey de cachemira mongola con cuello redondo',[90],'../product/1238.jpg','El clásico jersey de cachemira es intemporal. Ligero, suave y acogedor, perfecto para cualquier época del año y ocasión. Nuestra cachemira de calidad es increíblemente duradera y tres veces más cálida que la lana, y se obtiene de forma sostenible y ética.'],
         ['1239','Chaqueta camisera 100% lana merina',[120],'../product/1239.jpg','Nuestra chaqueta camisera de lana merina 100% es perfecta cuando las temperaturas empiezan a bajar. Confeccionada por expertos con lana merina hervida, esta chaqueta camisera tiene la silueta de una camisa, pero proporciona la calidez de una chaqueta. Con un aspecto intencionadamente sobredimensionado, es perfecta para vestirse a capas y se puede poner sobre cualquier prenda con facilidad.'],
-        ['1240','Pantalón acampanado Ultra-Stretch',[40,50],'../product/1240.jpg','Si los pantalones de trabajo y los de yoga tuvieran un hijo, sería éste. Este pantalón es de punto doble y muy elástico y además queda fabuloso con zapatos planos o con zapatillas de deporte.'],
+        ['1240','Pantalón acampanado Ultra-Stretch',[50],'../product/1240.jpg','Si los pantalones de trabajo y los de yoga tuvieran un hijo, sería éste. Este pantalón es de punto doble y muy elástico y además queda fabuloso con zapatos planos o con zapatillas de deporte.'],
         ['1241','Leggings de alto rendimiento ultra suave',[40],'../product/1241.jpg','Nuestros leggings de alto rendimiento tienen todo lo que necesitan para convertirse en tus pantalones de entrenamiento favoritos, sin comprometer la apariencia. Cuentan con un tejido de secado rápido, que absorbe la humedad y que es antimicrobiano, con la elasticidad óptima para que puedas hacer sentadillas sin preocupaciones.']
     ]
     //--- Inicializa un mapa que contendrá los productos clasificados por sus atributos -id-
@@ -217,21 +217,8 @@ class PaginaPrincipal{
             nombre.textContent = prod.getNombre
             //---PRECIO
             let aux_precio = document.createElement('p')
-            let prod_precio = prod.getPrecio
-            if(prod_precio.length == 2){
-                let aux2_precio1 = document.createElement('span')
-                aux2_precio1.textContent = '$' + prod_precio[1] + '.00'
-                aux2_precio1.className = 'text-decoration-line-through'
-                aux2_precio1.style.color = 'black'
-                //badge
-                let badge = document.createElement('div')
-                badge.className = 'dto_recom badge bg-dark text-white position-absolute'
-                badge.style.top = '0.5rem'
-                badge.style.right = '0.5rem'
-                badge.textContent = `${(prod_precio[0]/prod_precio[1]-1).toFixed(2)*100}%`
-                final.appendChild(badge)
-            }
-            aux_precio.textContent = '$' + prod_precio[0] + '.00'
+            let aux2_precio = prod.getPrecio
+                aux_precio.textContent = '$' + aux2_precio + '.00'
             //---NOMBRE + PRECIO
             let precio = document.createElement('div')
             precio.className = 'text-center'
@@ -286,17 +273,9 @@ class PaginaProducto{
         // Mod. descripcion
         document.getElementById('product_descripcion').textContent = producto_info.getDescripcion
         // Mod. precio
-        let precios = producto_info.getPrecio
-        if (precios.length == 2){
-            document.getElementById('product_price1').style.display = 'none'
-            document.getElementById('product_price1').textContent = `$${precios[1]}.00`
-            document.getElementById('product_price1').style.color = 'brown'
-        }else{
-            
-            document.getElementById('product_price1').style.display = 'none'
-        }
-        document.getElementById('product_price0').textContent = `$${precios[0]}.00`
-        document.getElementById('product_price0').style.color = 'red'
+        let aux_precio = almacen.getProducto(id).getPrecio
+        document.getElementById('product_price0').textContent = `$${aux_precio}.00`
+        document.getElementById('product_price0').style.color = 'black'
         // Atributos extra
 
         // 3- Funcionalidad botones
