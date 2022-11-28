@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="css/navBar.css">
         <link rel="stylesheet" href="css/carousel.css">
         <link rel="stylesheet" href="css/card.css">
+        <link rel="stylesheet" href="../index/css/formulario.css">
     </head>
     <body>
         <!-- Navigation-->
@@ -83,34 +84,6 @@
                 </button>
             </div>
             <div id="section_principal_almacen">
-            </div>
-            <div class="row justify-content-center justify-content-md-start mb-5" id="formId">
-              <button id="btnShowForm" class="btn btn-outline-dark col py-5">Añadir Producto</button>
-              <form id="form" class="py-5 col-md-4 offset-md-4" style="border: 1px solid black; border-radius: 20px; display: none;">
-                  <div class="col-md-6 offset-md-3 mt-5">
-                      <label class="form-label">ID</label>
-                      <input type="text" class="form-control" id="idForm">
-                    </div>
-                  <div class="col-md-6 offset-md-3 mt-5">
-                  <label class="form-label">Nombre</label>
-                  <input type="text" class="form-control" id="nombreForm">
-                </div>
-                <div class="col-md-6 offset-md-3 mt-5">
-                  <label class="form-label">Imagen</label>
-                  <input type="text" class="form-control" id="imgForm">
-                </div>
-                <div class="col-md-6 offset-md-3 mt-5">
-                  <label class="form-label">Precio</label>
-                  <input type="text" class="form-control" id="priceForm">
-                </div>
-                <div class="col-md-6 offset-md-3 mt-5">
-                  <label class="form-label">Descripción</label>
-                  <input type="text" class="form-control" id="descripcionForm">
-                </div>
-                <div class="col-md-6 offset-md-5 mt-5">
-                  <button id="btnForm" class="btn btn-outline-dark" onclick="saveProduct()" type="submit">Submit</button>
-                </div>
-              </form>
             </div>
         </section>
         <!-- Section para la página de producto (imagen 600x700)-->
@@ -224,6 +197,51 @@
           </div>
         </div>
         </section>
+
+        <!-- Section para formulario -->
+              
+              <!-- Btn para añadir producto -->
+        <section id="section_formulario">
+          <div class="col-md-6 offset-md-3 justify-content-center" id="btnCrear">
+            <div id="btnShowForm" class="btnContact-np btn mb-5 bg-info" onclick="mostrarForm()">Añadir Producto</div>
+          </div>
+                
+          <!-- Formulario -->
+          
+          <div class="container contact-form" id="contactForm" style="display: none;">
+            <div class="contact-image">
+              <img src="/index/index_images/logoImg.jpeg" alt="rocket_contact"/>
+            </div>
+            <form method="post" id="form">
+              <div class="row">
+                <div class="col-md-6" >
+                  <fieldset class="form-group py-1" id="field">
+                    <input id="codigo" class="form-control" placeholder="Código" value=""/>
+                  </fieldset>
+                  <div class="form-group py-1">
+                    <input id="nombre" type="text" class="form-control" placeholder="Nombre" value=""/>
+                  </div>
+                  <div class="form-group py-1">
+                    <input id="img" type="text" class="form-control" placeholder="Ruta imagen" value=""/>
+                  </div>
+                  <div class="form-group py-1">
+                    <input id="precio" type="text" class="form-control" placeholder="Precio" value=""/>
+                  </div>
+                  <div class="form-group py-1 text-center">
+                    <div id="btnSubmit" class="btnContact bg-info">Submit</div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group py-1">
+                    <textarea id="descripcion" name="txtMsg" class="form-control" placeholder="Descripcion" style="width: 100%; height: 175px;"></textarea>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+
+
         <!-- Section para la página de carrito-->
         <section id="section_carrito" class="h-100 h-custom" style="background-color: #d2c9ff; display: none;">
             <div class="container py-5 h-100">
