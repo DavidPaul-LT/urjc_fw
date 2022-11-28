@@ -328,6 +328,7 @@ class PaginaProducto{
         })
         //PRINT
         console.log(`Accediendo a página producto con id: ${id}`)
+        /* ---DIV PRODUCTOS RECOMENDADOS
         //Productos recomendados
         let llaves = Array.from(almacen.getAlmacen().keys())
         llaves.splice(llaves.indexOf(id),1) //quita el producto mostrado en la página
@@ -357,6 +358,7 @@ class PaginaProducto{
             document.getElementById(`rec_${i}_precio0`).textContent = `$${prod_recom.getPrecio()[0]}.00`
             llaves.splice(opt,1)
         }
+        */
     }
 }
 /*
