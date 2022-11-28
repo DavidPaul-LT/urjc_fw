@@ -103,7 +103,7 @@ class AlmacenProductos{
     }
     //--- Eliminar un objeto -Producto- de entre los ya contenidos en -elementos-
     eliminar(producto){
-        this.#elementos.set(producto.getId(),null)
+        this.#elementos.delete(producto)
     }
     //--- Consigue un atributo en función de su -id-
     getProducto(id){
@@ -188,9 +188,9 @@ class Pagina{
 */
 class PaginaPrincipal{
     //---Método que crea y añade al DOM los elementos necesarios para mostrar los elementos contenidos en un -AlmacenProductos-
-    static almacen_creado = false
     static mostrar_almacen_productos(almacen,carrito){
-        if(!PaginaPrincipal.almacen_creado){
+        if(true){
+        Pagina.show_section('section_principal')
         //---Crear master
         let master = document.createElement('div')
         master.className = 'row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center'
@@ -286,6 +286,14 @@ class PaginaProducto{
         }
         document.getElementById('product_price0').style.color = 'red'
         document.getElementById('product_descripcion').textContent = almacen.getProducto(id).getDescripcion()
+        //boton modificar
+        let modi = document.getElementById('button_eliminar')
+        modi.addEventListener('click',function(){
+            almacen.eliminar(id)
+            console.log(almacen.getAlmacen())
+            Pagina.errase('section_principal_almacen')
+            PaginaPrincipal.mostrar_almacen_productos(almacen,carrito)
+        })
         //boton add_to_cart
         let div_add = document.getElementById('product_add_to_cart')
         let button_cart = document.createElement('button')
