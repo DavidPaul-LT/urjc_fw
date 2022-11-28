@@ -58,7 +58,7 @@
         </header>
         <!-- Section para la página principal-->
         <section id="section_principal" class="py-5" style="display: block;">
-            <!-- Carusell --> 
+            <!-- Carusell -->
             <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                 <div class="carousel-item active" data-bs-interval="4000">
@@ -84,6 +84,10 @@
                 </button>
             </div>
             <div id="section_principal_almacen">
+            </div>
+            <!-- Botón añadir elemento -->
+            <div class="col-md-6 offset-md-3 justify-content-center" id="btnCrear">
+              <div id="btnShowForm" class="btnContact-np btn mb-5 bg-info" onclick="mostrarForm()">Añadir Producto</div>
             </div>
         </section>
         <!-- Section para la página de producto (imagen 600x700)-->
@@ -200,51 +204,38 @@
           </div>
         </div>
         </section>
-
         <!-- Section para formulario -->
-              
-        <!-- Btn para añadir producto -->
-        <section id="section_formulario">
-          <div class="col-md-6 offset-md-3 justify-content-center" id="btnCrear">
-            <div id="btnShowForm" class="btnContact-np btn mb-5 bg-info" onclick="mostrarForm()">Añadir Producto</div>
+        <div class="container contact-form" id="contactForm" style="display: none;">
+          <div class="contact-image">
+            <img src="/index/index_images/logoImg.jpeg" alt="rocket_contact"/>
           </div>
-                
-          <!-- Formulario -->
-          
-          <div class="container contact-form" id="contactForm" style="display: none;">
-            <div class="contact-image">
-              <img src="/index/index_images/logoImg.jpeg" alt="rocket_contact"/>
-            </div>
-            <form method="post" id="form">
-              <div class="row">
-                <div class="col-md-6" >
-                  <fieldset class="form-group py-1" id="field">
-                    <input id="codigo" class="form-control" placeholder="Código" value=""/>
-                  </fieldset>
-                  <div class="form-group py-1">
-                    <input id="nombre" type="text" class="form-control" placeholder="Nombre" value=""/>
-                  </div>
-                  <div class="form-group py-1">
-                    <input id="img" type="text" class="form-control" placeholder="Ruta imagen" value=""/>
-                  </div>
-                  <div class="form-group py-1">
-                    <input id="precio" type="text" class="form-control" placeholder="Precio" value=""/>
-                  </div>
-                  <div class="form-group py-1 text-center">
-                    <div id="btnSubmit" class="btnContact bg-info">Submit</div>
-                  </div>
+          <form method="post" id="form">
+            <div class="row">
+              <div class="col-md-6" >
+                <fieldset class="form-group py-1" id="field">
+                  <input id="codigo" class="form-control" placeholder="Código" value=""/>
+                </fieldset>
+                <div class="form-group py-1">
+                  <input id="nombre" type="text" class="form-control" placeholder="Nombre" value=""/>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group py-1">
-                    <textarea id="descripcion" name="txtMsg" class="form-control" placeholder="Descripcion" style="width: 100%; height: 175px;"></textarea>
-                  </div>
+                <div class="form-group py-1">
+                  <input id="img" type="text" class="form-control" placeholder="Ruta imagen" value=""/>
+                </div>
+                <div class="form-group py-1">
+                  <input id="precio" type="text" class="form-control" placeholder="Precio" value=""/>
+                </div>
+                <div class="form-group py-1 text-center">
+                  <div id="btnSubmit" class="btnContact bg-info">Submit</div>
                 </div>
               </div>
-            </form>
-          </div>
-        </section>
-      
-
+              <div class="col-md-6">
+                <div class="form-group py-1">
+                  <textarea id="descripcion" name="txtMsg" class="form-control" placeholder="Descripcion" style="width: 100%; height: 175px;"></textarea>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
         <!-- Section para la página de carrito-->
         <section id="section_carrito" class="h-100 h-custom" style="background-color: #d2c9ff; display: none;">
             <div class="container py-5 h-100">
@@ -295,7 +286,7 @@
                 </div>
               </div>
             </div>
-          </section>
+        </section>
         <!-- Footer-->
         <footer class="py-5 bg-info">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; SOLACE Online Shop 2022</p></div>
