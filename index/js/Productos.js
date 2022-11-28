@@ -18,7 +18,7 @@ class Producto{
         return this.#min_index
     }
     //--- Devuelve la propiedad -id- de cada producto (id no puede ser modificado, solo consultado)
-    getId(){
+    getId{
         return this.#id
     }
     mostarNuevoProducto(){
@@ -38,7 +38,7 @@ class AlmacenProductos{
     }
     //--- Inserta un nuevo producto en 
     insertarProducto(p){
-        this.#lista[p.getId()] = p
+        this.#lista[p.getId] = p
         this.#length += 1
     }
     eliminarProducto(p_id){

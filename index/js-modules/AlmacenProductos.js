@@ -30,10 +30,10 @@ export class AlmacenProductos{
     }
     //--- Inserta un nuevo objeto -Producto- en -elementos-
     insertar(producto){
-        if (this.#elementos.get(producto.getId()) != undefined){
+        if (this.#elementos.get(producto.getId) != undefined){
             throw "KeyAlreadyUsedException" //---Raise KeyAlreadyUsedException (clave ya usada, busca otra o elimina el producto)
         }else{
-            this.#elementos.set(producto.getId(),producto)
+            this.#elementos.set(producto.getId,producto)
         }
     }
     //--- Inserta en -elementos- todos los productos de prueba
@@ -44,11 +44,11 @@ export class AlmacenProductos{
     }
     //--- Eliminar un objeto -Producto- de entre los ya contenidos en -elementos-
     eliminar(producto){
-        this.#elementos.set(producto.getId(),null)
+        this.#elementos.set(producto.getId,null)
     }
     //--- Oculta al usuario un elemento de -AlmacenProductos-
     invisibilizar(producto){
-        aux = document.getElementById(producto.getId())
+        aux = document.getElementById(producto.getId)
         aux.style.display = 'none'
     }
     //--- Consigue un atributo en función de su -id-
