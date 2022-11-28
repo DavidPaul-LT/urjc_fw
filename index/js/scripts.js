@@ -7,6 +7,7 @@ class Producto{
     #precio
     #imagen
     #descripcion
+    #atrib_extra
     //--- Crea un nuevo ojeto de clase -Producto- con un -id- determinado por la ED -AlmacenProductos-
     constructor(id,nombre,precio,ruta_imagen,descripcion){
         this.#id = id
@@ -14,6 +15,15 @@ class Producto{
         this.#precio = precio
         this.#imagen = ruta_imagen
         this.#descripcion = descripcion
+        this.#atrib_extra = new Map() //guarda los atributos extra
+    }
+    //--- Método getter de -atrib-extra-
+    getAtribExtra(){
+        return this.#atrib_extra
+    }
+    //--- Método setter de -atrib-extra-
+    setAtribExtra(nombre_atrib,valor_atrib){
+        this.#atrib_extra.set(nombre_atrib,valor_atrib)
     }
     //--- Método getter del atributo -id-
     getId(){
@@ -295,7 +305,7 @@ class PaginaProducto{
             Pagina.errase('section_principal_almacen')
             PaginaPrincipal.mostrar_almacen_productos(almacen,carrito)
             //PENDIENTE
-            carrito.eliminar(info.getId())
+            carrito.eliminar(id)
         })
         //boton add_to_cart
         let div_add = document.getElementById('product_add_to_cart')
