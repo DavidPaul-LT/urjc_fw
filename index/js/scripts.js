@@ -190,8 +190,8 @@ class PaginaPrincipal{
     //---Método que crea y añade al DOM los elementos necesarios para mostrar los elementos contenidos en un -AlmacenProductos-
     static mostrar_almacen_productos(almacen,carrito){
         if(true){
-        Pagina.show_section('section_principal')
         Pagina.errase('section_principal_almacen')
+        Pagina.show_section('section_principal')
         //---Crear master
         let master = document.createElement('div')
         master.className = 'row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center'
@@ -315,24 +315,19 @@ class PaginaProducto{
         //quita el producto que se exhibe en la pagina
         llaves.splice(llaves.indexOf(id),1)
         for (let i = 1; i <= 4; i++){
-            if(llaves.length > 4){
-                let opt = Math.floor(Math.random()*llaves.length)
-                let aux_prod = almacen.getProducto(llaves[opt])
-                document.getElementById(`recomendado_${i}`).addEventListener('click',function(){PaginaProducto.mostrar_pagina_producto(almacen,aux_prod.getId(),carrito)})
-                document.getElementById(`rec_${i}_img`).src = aux_prod.getImagen()
-                document.getElementById(`rec_${i}_nombre`).textContent = aux_prod.getNombre()
-                document.getElementById(`rec_${i}_precio0`).textContent = `$${aux_prod.getPrecio()[0]}.00`
-                if(aux_prod.getPrecio()[1] != undefined){
-                    document.getElementById(`rec_${i}_precio1`).textContent = `$${aux_prod.getPrecio()[1]}.00`
-                    console.log(Math.round(aux_prod.getPrecio()[0]/aux_prod.getPrecio()[1]-1))
-                    //DTO_RECOM_
-                    document.getElementsByClassName('dto_recom')[i-1].textContent = `${(aux_prod.getPrecio()[0]/aux_prod.getPrecio()[1]-1).toFixed(2)*100}%`
-                }
-                llaves.splice(opt,1)
-            }else{
-                console.log('No ha sido posible generar un nuevo producto recomendado')
+            let opt = Math.floor(Math.random()*llaves.length)
+            let aux_prod = almacen.getProducto(llaves[opt])
+            document.getElementById(`recomendado_${i}`).addEventListener('click',function(){PaginaProducto.mostrar_pagina_producto(almacen,aux_prod.getId(),carrito)})
+            document.getElementById(`rec_${i}_img`).src = aux_prod.getImagen()
+            document.getElementById(`rec_${i}_nombre`).textContent = aux_prod.getNombre()
+            document.getElementById(`rec_${i}_precio0`).textContent = `$${aux_prod.getPrecio()[0]}.00`
+            if(aux_prod.getPrecio()[1] != undefined){
+                document.getElementById(`rec_${i}_precio1`).textContent = `$${aux_prod.getPrecio()[1]}.00`
+                console.log(Math.round(aux_prod.getPrecio()[0]/aux_prod.getPrecio()[1]-1))
+                //DTO_RECOM_
+                document.getElementsByClassName('dto_recom')[i-1].textContent = `${(aux_prod.getPrecio()[0]/aux_prod.getPrecio()[1]-1).toFixed(2)*100}%`
             }
-            
+            llaves.splice(opt,1)
         }
     }
 }
