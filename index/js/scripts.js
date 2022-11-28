@@ -16,45 +16,45 @@ class Producto{
         this.#descripcion = descripcion
     }
     //--- Método getter del atributo -id-
-    getId(){
+    get getId(){
         return this.#id
     }
     //--- Método setter del atributo -id- (el acceso a este método debería estar lo más restringido posible)
-    #setId(val){
+    set setId(val){
         this.#id = val
     }
     //--- Método getter del atributo -nombre-
-    getNombre(){
+    get getNombre(){
         return this.#nombre
     }
     //--- Método setter del atributo -nombre-
-    setNombre(val){
+    set setNombre(val){
         this.#nombre = val
         //modificar -inner_html-
     }
     //--- Método getter del atributo -precio-
-    getPrecio(){
+    get getPrecio(){
         return this.#precio
     }
     //--- Método setter del atributo -precio-
-    setPrecio(val){
+    set setPrecio(val){
         this.#precio = val
         //modificar -inner_html-
     }
     //--- Método getter del atributo -imagen-
-    getImagen(){
+    get getImagen(){
         return this.#imagen
     }
     //--- Método setter del atributo -imagen-
-    setImagen(val){
+    set setImagen(val){
         this.#imagen = val
     }
     //--- Método getter del atributo -descripcion-
-    getDescripcion(){
+    get getDescripcion(){
         return this.#descripcion
     }
     //--- Método setter del atributo -descripcion-
-    setDescripcion(val){
+    set setDescripcion(val){
         this.#descripcion = val
     }
 }
@@ -89,10 +89,10 @@ class AlmacenProductos{
     }
     //--- Inserta un nuevo objeto -Producto- en -elementos-
     insertar(producto){
-        if (this.#elementos.get(producto.getId()) != undefined){
+        if (this.#elementos.get(producto.getId) != undefined){
             throw "KeyAlreadyUsedException" //---Raise KeyAlreadyUsedException (clave ya usada, busca otra o elimina el producto)
         }else{
-            this.#elementos.set(producto.getId(),producto)
+            this.#elementos.set(producto.getId,producto)
         }
     }
     //--- Inserta en -elementos- todos los productos de prueba
@@ -207,10 +207,10 @@ class PaginaPrincipal{
             //---NOMBRE
             let nombre = document.createElement('h5')
             nombre.className = 'fw-bolder name'
-            nombre.textContent = value.getNombre()
+            nombre.textContent = value.getNombre
             //---PRECIO
             let aux_precio = document.createElement('p')
-            let aux2_precio = value.getPrecio()
+            let aux2_precio = value.getPrecio
             if(aux2_precio.length == 1){
                 aux_precio.textContent = '$' + aux2_precio[0] + '.00'
             }else{
@@ -239,7 +239,7 @@ class PaginaPrincipal{
             //---PRODUCT IMAGE
             let imagen = document.createElement('img')
             imagen.className = 'card-img-top'
-            imagen.src = value.getImagen()
+            imagen.src = value.getImagen
             imagen.alt = '...'
             //---PRODUCT IMAGE + PRODUCT DETAILS
             let card = document.createElement('div')
@@ -249,8 +249,8 @@ class PaginaPrincipal{
             //---PRODUCTO DE PRUEBA
             
             final.className = 'col mb-5'
-            final.addEventListener('click',function(){PaginaProducto.mostrar_pagina_producto(almacen,value.getId(),carrito)})
-            final.id = value.getId()
+            final.addEventListener('click',function(){PaginaProducto.mostrar_pagina_producto(almacen,value.getId,carrito)})
+            final.id = value.getId
             final.appendChild(card)
             //---Añadir a master
             master.appendChild(final)
@@ -278,9 +278,9 @@ class PaginaProducto{
         document.getElementById('product_add_to_cart').removeChild(document.getElementById('button_cart'))
         Pagina.show_section('section_producto')
         document.getElementById('product_id').textContent = 'ID: ' + id
-        document.getElementById('product_name').textContent = almacen.getProducto(id).getNombre()
-        document.getElementById('product_image').src = almacen.getProducto(id).getImagen()
-        let aux_precio = almacen.getProducto(id).getPrecio()
+        document.getElementById('product_name').textContent = almacen.getProducto(id).getNombre
+        document.getElementById('product_image').src = almacen.getProducto(id).getImagen
+        let aux_precio = almacen.getProducto(id).getPrecio
         if(aux_precio.length > 1){
             document.getElementById('product_price1').style.display = 'block'
             document.getElementById('product_price1').textContent = `$${aux_precio[1]}.00`
@@ -291,10 +291,11 @@ class PaginaProducto{
             document.getElementById('product_price0').textContent = `$${aux_precio[0]}.00`
         }
         document.getElementById('product_price0').style.color = 'red'
-        document.getElementById('product_descripcion').textContent = almacen.getProducto(id).getDescripcion()
+        document.getElementById('product_descripcion').textContent = almacen.getProducto(id).getDescripcion
         //boton Modificar
-        let modificar = document.getElementById("button_cart");
-        modificar.addEventListener('click', function(){mostrarValoresProducto(id)});
+        let modificar = document.getElementById("button_modificar");
+        modificar.addEventListener('click', function(){mostrarValoresProducto(id)}); //añadido Paul
+        //modificar.addEventListener('onclick', function(){mostrarValoresProducto(id)}) ;
         //boton add_to_cart
         let div_add = document.getElementById('product_add_to_cart')
         let button_cart = document.createElement('button')
@@ -307,7 +308,7 @@ class PaginaProducto{
         i_aux.textContent = 'Añadir al carrito'
         button_cart.appendChild(i_aux)
         div_add.appendChild(button_cart)
-        console.log(`Accediendo a página producto con id: ${almacen.getProducto(id).getNombre()}`)
+        console.log(`Accediendo a página producto con id: ${almacen.getProducto(id).getNombre}`)
         //productos recomendados
         let llaves = Array.from(almacen.getAlmacen().keys())
         //quita el producto que se exhibe en la pagina
@@ -315,24 +316,24 @@ class PaginaProducto{
         for (let i = 1; i <= 4; i++){
             let opt = Math.floor(Math.random()*llaves.length)
             let aux_prod = almacen.getProducto(llaves[opt])
-            document.getElementById(`recomendado_${i}`).addEventListener('click',function(){PaginaProducto.mostrar_pagina_producto(almacen,aux_prod.getId(),carrito)})
-            document.getElementById(`rec_${i}_img`).src = aux_prod.getImagen()
-            document.getElementById(`rec_${i}_nombre`).textContent = aux_prod.getNombre()
-            document.getElementById(`rec_${i}_precio0`).textContent = `$${aux_prod.getPrecio()[0]}.00`
-            if(aux_prod.getPrecio()[1] != undefined){
-                document.getElementById(`rec_${i}_precio1`).textContent = `$${aux_prod.getPrecio()[1]}.00`
-                console.log(Math.round(aux_prod.getPrecio()[0]/aux_prod.getPrecio()[1]-1))
+            document.getElementById(`recomendado_${i}`).addEventListener('click',function(){PaginaProducto.mostrar_pagina_producto(almacen,aux_prod.getId,carrito)})
+            document.getElementById(`rec_${i}_img`).src = aux_prod.getImagen
+            document.getElementById(`rec_${i}_nombre`).textContent = aux_prod.getNombre
+            document.getElementById(`rec_${i}_precio0`).textContent = `$${aux_prod.getPrecio[0]}.00`
+            if(aux_prod.getPrecio[1] != undefined){
+                document.getElementById(`rec_${i}_precio1`).textContent = `$${aux_prod.getPrecio[1]}.00`
+                console.log(Math.round(aux_prod.getPrecio[0]/aux_prod.getPrecio[1]-1))
                 //DTO_RECOM_
-                document.getElementsByClassName('dto_recom')[i-1].textContent = `${(aux_prod.getPrecio()[0]/aux_prod.getPrecio()[1]-1).toFixed(2)*100}%`
+                document.getElementsByClassName('dto_recom')[i-1].textContent = `${(aux_prod.getPrecio[0]/aux_prod.getPrecio[1]-1).toFixed(2)*100}%`
             }
             
             llaves.splice(opt,1)
         }
         // Paul añadió
-        document.getElementById("form").reset();// modificado PAUL
-    	document.getElementById('contactForm').style.display = 'none'; //MODIFICADO PAUL
+    	document.getElementById('contactForm').style.display = 'block'; //MODIFICADO PAUL
         document.getElementById('field').disabled = true; //modificado PAUL
         document.getElementById('btnCrear').style.display = 'none'; //MODIFICADO PAUL
+        document.getElementById("form").reset();// modificado PAUL
     }
 }
 /*
@@ -476,10 +477,9 @@ class PaginaCarrito{
 
 function mostrarValoresProducto(id){
     let contactForm = document.getElementById("contactForm"),
-    btnMod = document.getElementById("btnMod");
+    btnMod = document.getElementById("button_modificar");
 
     if(contactForm.style.display == 'none'){
-
         contactForm.style.display = 'block';
         btnMod.textContent = 'Cerrar Formulario';
     }else{
@@ -496,6 +496,7 @@ function mostrarValoresProducto(id){
 function valores(id){
         let nombre = storage.getProducto(id);
         console.log(nombre);
+        console.log('separacion');
         document.getElementById('codigo').value = id;
         document.getElementById('nombre').value = nombre.getNombre;
         document.getElementById('img').value = nombre.getImagen;
@@ -520,61 +521,47 @@ function modificarProducto(){
     nombre.setPrecio = document.getElementById('precio').value;
     nombre.setDescripcion = document.getElementById('descripcion').value;
     console.log(nombre);
+    console.log("separacion");
 }
 
-function mostrarForm(){
+function mostrarForm(almacen){
     let contactForm = document.getElementById("contactForm"),
-    btnShowForm = document.getElementById("btnShowForm");
+    btnShowForm = document.getElementById("btnShowForm"),
+    sectionProducts = document.getElementById("section_principal_almacen"),
+    bannerBF = document.getElementsByTagName('header')[0];
 
     if(contactForm.style.display == 'none'){
-
+        sectionProducts.style.display = "none";
+        bannerBF.style.display = "none";
         contactForm.style.display = 'block';
         btnShowForm.textContent = 'Cerrar Formulario';
     }else{
         contactForm.style.display = 'none';
         document.getElementById("form").reset();
-        btnShowForm.textContent = 'Modificar';
+        btnShowForm.textContent = 'Añadir Producto';
+        sectionProducts.style.display = "block";
+        bannerBF.style.display = "block";
     }
 }
 
 function crearNuevoElemento(){
-    let productoNuevo = new Producto();
-    debugger;
+    let productoNuevo = new Producto(),
+    sectionProducts = document.getElementById("section_principal_almacen"),
+    bannerBF = document.getElementsByTagName('header')[0];
+
     productoNuevo.setId = document.getElementById('codigo').value;
     productoNuevo.setNombre = document.getElementById('nombre').value;
     productoNuevo.setImagen = document.getElementById('img').value;
     productoNuevo.setPrecio = document.getElementById('precio').value;
     productoNuevo.setDescripcion = document.getElementById('descripcion').value;
     storage.insertar(productoNuevo);
-    console.log(storage);
-
+    sectionProducts.style.display = "block";
+    bannerBF.style.display = "block";
     PaginaPrincipal.mostrar_almacen_productos(storage,cart);
+    console.log(storage);
 }
 
 // Hasta aquí llegó el formulario
-
-
-/*   FORMULARIO VIEJO
-function btnShowForm(almacen){
-    let form = document.getElementById("form"),
-    btnShowForm = document.getElementById("btnShowForm"),
-    sectionProducts = document.getElementById("section_principal_almacen"),
-    bannerBF = document.getElementsByTagName('header')[0]
-    if(form.style.display == "none"){
-        form.style.display = "block";
-        sectionProducts.style.display = "none";
-        bannerBF.style.display = "none";
-    } else {
-        bannerBF.style.display = "block";
-        console.log(almacen.getProducto("1234").getNombre());
-        btnShowForm.style.display = 'block';
-        form.style.display = "none";
-        btnShowForm.textContent = "+";
-        sectionProducts.style.display = "block";
-    }
-}
-*/
-
 //---
 //pagina();
 let cart = new Carrito(); //---variable -Carrito-
@@ -589,7 +576,7 @@ document.getElementById('carrito_master').addEventListener('click',function(){
 })
 document.getElementById('home').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage)})
 document.getElementById('solace_icon').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage)})
-document.getElementById('btnShowForm').addEventListener('click',function(){btnShowForm(storage)})
+document.getElementById('btnShowForm').addEventListener('click',function(){mostrarForm(storage)})
 PaginaPrincipal.mostrar_almacen_productos(storage,cart);
 //storage.getProducto("1234").setNombre('POLO');
 

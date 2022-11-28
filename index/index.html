@@ -85,35 +85,8 @@
             </div>
             <div id="section_principal_almacen">
             </div>
-            <div class="row justify-content-center justify-content-md-start mb-5" id="formId">
-              <button id="btnShowForm" class="btn btn-outline-dark col py-5">Añadir Producto</button>
-              <form id="form" class="py-5 col-md-4 offset-md-4" style="border: 1px solid black; border-radius: 20px; display: none;">
-                  <div class="col-md-6 offset-md-3 mt-5">
-                      <label class="form-label">ID</label>
-                      <input type="text" class="form-control" id="idForm">
-                    </div>
-                  <div class="col-md-6 offset-md-3 mt-5">
-                  <label class="form-label">Nombre</label>
-                  <input type="text" class="form-control" id="nombreForm">
-                </div>
-                <div class="col-md-6 offset-md-3 mt-5">
-                  <label class="form-label">Imagen</label>
-                  <input type="text" class="form-control" id="imgForm">
-                </div>
-                <div class="col-md-6 offset-md-3 mt-5">
-                  <label class="form-label">Precio</label>
-                  <input type="text" class="form-control" id="priceForm">
-                </div>
-                <div class="col-md-6 offset-md-3 mt-5">
-                  <label class="form-label">Descripción</label>
-                  <input type="text" class="form-control" id="descripcionForm">
-                </div>
-                <div class="col-md-6 offset-md-5 mt-5">
-                  <button id="btnForm" class="btn btn-outline-dark" onclick="saveProduct()" type="submit">Submit</button>
-                </div>
-              </form>
-            </div>
         </section>
+
         <!-- Section para la página de producto (imagen 600x700)-->
         <section id="section_producto" class="py-5" style="display: none;">
           <div class="container px-4 px-lg-5 my-5">
@@ -125,34 +98,71 @@
                       <div class="fs-5 mb-5">
                           <span class="text-decoration-line-through" id="product_price1"></span>
                           <span id="product_price0"></span>
-                      </div>
-                      <p class="lead" id="product_descripcion"></p>
-                      <div class="d-flex" id="product_add_to_cart">
-                          <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                          <button id="button_cart" class="mx-1 btn btn-outline-dark flex-shrink-0" type="button" >
-                              <i class="bi-cart-fill me-1"></i>
-                              Añadir al carrito
-                          </button>
+                        </div>
+                        <p class="lead" id="product_descripcion"></p>
+                        <div class="d-flex" id="product_add_to_cart">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                            <button id="button_cart" class="mx-1 btn btn-outline-dark flex-shrink-0" type="button" >
+                                <i class="bi-cart-fill me-1"></i>
+                                Añadir al carrito
+                            </button>
                           <button id="button_modificar" class="mx-1 btn btn-outline-dark flex-shrink-0" type="button">
-                            Modificar
+                              Modificar
                           </button>
                           <button id="button_eliminar" class="mx-1 btn btn-outline-dark flex-shrink-0" type="button" >
                             Eliminar
-                          </button>
+                        </button>
                       </div>
-                  </div>
+                    </div>
               </div>
           </div>
+          <!-- Section para formulario -->
+          <section>
+              <div class="col-md-6 offset-md-3 justify-content-center" id="btnCrear">
+                <div id="btnShowForm" class="btn btnContact-np mb-5 bg-info">Añadir Producto</div>
+              </div>
+              <div class="container contact-form" id="contactForm" style="display: none;">
+                <div class="contact-image">
+                    <img src="/index/index_images/logoImg.jpeg" alt="rocket_contact"/>
+                </div>
+                <form method="post" id="form">
+                  <div class="row">
+                    <div class="col-md-6" >
+                      <fieldset class="form-group py-1" id="field">
+                          <input id="codigo" class="form-control" placeholder="Código" value=""/>
+                      </fieldset>
+                      <div class="form-group py-1">
+                          <input id="nombre" type="text" class="form-control" placeholder="Nombre" value=""/>
+                      </div>
+                      <div class="form-group py-1">
+                          <input id="img" type="text" class="form-control" placeholder="Ruta imagen" value=""/>
+                      </div>
+                      <div class="form-group py-1">
+                          <input id="precio" type="text" class="form-control" placeholder="Precio" value=""/>
+                      </div>
+                      <div class="form-group py-1 text-center">
+                          <div id="btnSubmit" class="btnContact bg-info" onclick="decisionProducto()">Submit</div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group py-1">
+                          <textarea id="descripcion" name="txtMsg" class="form-control" placeholder="Descripcion" style="width: 100%; height: 175px;"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </section>
           <!-- Related items section-->
-        <div id='productos-relacionados' class="py-5 bg-light">
-          <div class="container px-4 px-lg-5 mt-5">
-              <h2 class="fw-bolder mb-4">Podría interesarte también</h2>
-              <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                  <div id="recomendado_1" class="col mb-5">
-                      <div class="card h-100">
-                          <!--  badge-->
-                          <div class="dto_recom badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem"></div>
-                          <!-- Product image-->
+          <div id='productos-relacionados' class="py-5 bg-light">
+              <div class="container px-4 px-lg-5 mt-5">
+                  <h2 class="fw-bolder mb-4">Podría interesarte también</h2>
+                  <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                      <div id="recomendado_1" class="col mb-5">
+                          <div class="card h-100">
+                              <!--  badge-->
+                              <div class="dto_recom badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem"></div>
+                              <!-- Product image-->
                           <img id="rec_1_img" class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                           <!-- Product details-->
                           <div class="card-body p-4">
