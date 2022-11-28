@@ -188,7 +188,7 @@ class Pagina{
 */
 class PaginaPrincipal{
     //---Método que crea y añade al DOM los elementos necesarios para mostrar los elementos contenidos en un -AlmacenProductos-
-    static mostrar_almacen_productos(almacen){
+    static mostrar_almacen_productos(almacen, carrito=null){
         //---Crear master
         let master = document.createElement('div')
         master.className = 'row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center'
@@ -247,7 +247,7 @@ class PaginaPrincipal{
             //---PRODUCTO DE PRUEBA
             
             final.className = 'col mb-5'
-            final.addEventListener('click',function(){PaginaProducto.mostrar_pagina_producto(almacen,value.getId)})
+            final.addEventListener('click',function(){PaginaProducto.mostrar_pagina_producto(almacen,value.getId,carrito)})
             final.id = value.getId
             final.appendChild(card)
             //---Añadir a master
@@ -284,7 +284,10 @@ class PaginaProducto{
         //boton modificar 
         let modificar = document.getElementById("button_modificar");  //añadido Paul
         modificar.addEventListener('click', function(){mostrarValoresProducto(id, almacen)}); //añadido Paul
-        
+        //boton modificarTrue
+        let btnSubmit = document.getElementById("btnSubmit");
+        btnSubmit.addEventListener('click', function(){decisionProducto(almacen, id)});
+
         //boton add_to_cart
         let div_add = document.getElementById('product_add_to_cart')
         let button_cart = document.createElement('button')
@@ -363,7 +366,7 @@ class PaginaCarrito{
                 aux_img.className = 'col-md-2 col-lg-2 col-xl-2'
                 let img = document.createElement('img')
                 img.className = 'img-fluid rounded-3'
-                img.src = info.getImagen()
+                img.src = info.getImagen
                 img.alt = '...'
                 aux_img.appendChild(img)
                 producto.appendChild(aux_img)
@@ -372,7 +375,7 @@ class PaginaCarrito{
                 aux_nombre.className = 'col-md-3 col-lg-3 col-xl-3'
                 let nombre = document.createElement('h6')
                 nombre.className = 'text-black mb-0'
-                nombre.textContent = info.getNombre()
+                nombre.textContent = info.getNombre
                 aux_nombre.appendChild(nombre)
                 producto.appendChild(aux_nombre)
                 //selector
@@ -418,12 +421,12 @@ class PaginaCarrito{
                 aux_precio.className = 'col-md-3 col-lg-2 col-xl-2 offset-lg-1'
                 let precio = document.createElement('h6')
                 precio.className = 'mb-0'
-                if(info.getPrecio().length > 1){
-                    precio.textContent = `$${info.getPrecio()[0]}.00`
-                    suma_total += veces*info.getPrecio()[0]
+                if(info.getPrecio.length > 1){
+                    precio.textContent = `$${info.getPrecio[0]}.00`
+                    suma_total += veces*info.getPrecio[0]
                 }else{
-                    precio.textContent = `$${info.getPrecio()}.00`
-                    suma_total += veces*info.getPrecio()
+                    precio.textContent = `$${info.getPrecio}.00`
+                    suma_total += veces*info.getPrecio
                 }
                 aux_precio.appendChild(precio)
                 producto.appendChild(aux_precio)
@@ -434,7 +437,7 @@ class PaginaCarrito{
                 a.className = 'text-muted'
                 a.textContent = 'X'
                 a.addEventListener('click',function(){
-                    carrito.eliminar(info.getId());
+                    carrito.eliminar(info.getId);
                     if(carrito.length() == 0){
                         PaginaPrincipal.mostrar_almacen_productos(almacen,carrito)
                     }else{
@@ -464,14 +467,13 @@ class PaginaCarrito{
     }
 }
 
-
 /* 
     Formulario
 */
 
 //BOTONES FUNCIONES
 
-function mostrarValoresProducto(id, almacen){
+function mostrarValoresProducto(id){
     let contactForm = document.getElementById("contactForm"),
     btnMod = document.getElementById("button_modificar");
 
@@ -500,21 +502,22 @@ function valores(id){
         document.getElementById('descripcion').value = Productoviejo.getDescripcion;
 }
 
-function decisionProducto(almacen){
+function decisionProducto(almacen, id){
     if(document.getElementById('field').disabled == false){
         crearNuevoElemento(almacen);
     } else {
-        modificarProducto();
+        modificarProducto(almacen, id);
     }
 }
 
 
-function modificarProducto(){
-    nombre.setNombre = document.getElementById('nombre').value;
-    nombre.setImagen = document.getElementById('img').value;
-    nombre.setPrecio = document.getElementById('precio').value;
-    nombre.setDescripcion = document.getElementById('descripcion').value;
-    console.log(nombre);
+function modificarProducto(almacen, id){
+    let productoViejo = almacen.getProducto(id);
+    productoViejo.setNombre = document.getElementById('nombre').value;
+    productoViejo.setImagen = document.getElementById('img').value;
+    productoViejo.setPrecio = document.getElementById('precio').value;
+    productoViejo.setDescripcion = document.getElementById('descripcion').value;
+    console.log(productoViejo);
 }
 
 function mostrarForm(){
@@ -552,7 +555,7 @@ let cart = new Carrito(); //---variable -Carrito-
 let storage = new AlmacenProductos(); //---variable -AlmacenProductos-
 document.getElementById('carrito_master').addEventListener('click',function(){
     if(cart.length() > 0){
-        PaginaCarrito.mostrar_carrito(storage)
+        PaginaCarrito.mostrar_carrito(storage, cart)
     }else{
         alert('Ups, parece que no has añadido nada aún a tu carrito\n¿Por qué no pruebas insertar algun producto?')
     }
@@ -561,7 +564,7 @@ document.getElementById('carrito_master').addEventListener('click',function(){
 document.getElementById('home').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage)})
 document.getElementById('solace_icon').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage)})
 //document.getElementById('btnShowForm').addEventListener('click',function(){btnShowForm(storage)})
-PaginaPrincipal.mostrar_almacen_productos(storage);
+PaginaPrincipal.mostrar_almacen_productos(storage, cart);
 //storage.getProducto("1234").setNombre('POLO');
 
 
