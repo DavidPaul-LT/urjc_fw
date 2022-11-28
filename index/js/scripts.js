@@ -182,9 +182,9 @@ class Pagina{
         console.log('Section borrado correctamente')
     }
     //---Método que oculta los elementos section que no tengan el ID de section_type
-    static show_section(section_type){
+    static show_section(section_type, section_formulario){
         for (let sec of document.getElementsByTagName('section')) {
-            if (section_type == sec.id) {
+            if ((section_type == sec.id) || (section_formulario == sec.id)) {
                 sec.style.display = 'block'
             }
             else{
@@ -201,7 +201,7 @@ class PaginaPrincipal{
     static mostrar_almacen_productos(almacen,carrito){
         if(true){
         Pagina.errase('section_principal_almacen')
-        Pagina.show_section('section_principal')
+        Pagina.show_section('section_principal', 'section_formulario')
         //---Crear master
         let master = document.createElement('div')
         master.className = 'row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center'
@@ -269,7 +269,7 @@ class PaginaPrincipal{
         console.log('Productos cargados en la página')
         PaginaPrincipal.almacen_creado = true
         }else{
-            Pagina.show_section('section_principal')
+            Pagina.show_section('section_principal', 'section_formulario')
             console.log(`Mostrando página principal`)
         }
     }
@@ -281,7 +281,7 @@ class PaginaProducto{
     //---Método que crea y añade al DOM los elementos que se precisen para la creación de una página individual de producto
     static mostrar_pagina_producto(almacen,id,carrito){
         document.getElementById('product_add_to_cart').removeChild(document.getElementById('button_cart'))
-        Pagina.show_section('section_producto')
+        Pagina.show_section('section_producto', 'section_formulario') 
         document.getElementById('product_id').textContent = 'ID: ' + id
         document.getElementById('product_name').textContent = almacen.getProducto(id).getNombre
         document.getElementById('product_image').src = almacen.getProducto(id).getImagen
@@ -307,6 +307,12 @@ class PaginaProducto{
             //PENDIENTE
             carrito.eliminar(id)
         })
+        //boton modificar
+        let modificar = document.getElementById("button_modificar");  //añadido Paul
+        modificar.addEventListener('click', function(){mostrarValoresProducto(id, almacen)}); //añadido Paul
+        //boton modificarTrue
+        let btnSubmit = document.getElementById("btnSubmit");
+        btnSubmit.addEventListener('click', function(){decisionProducto(almacen, id, carrito)});
         //boton add_to_cart
         let div_add = document.getElementById('product_add_to_cart')
         let button_cart = document.createElement('button')
@@ -333,7 +339,7 @@ class PaginaProducto{
             document.getElementById(`rec_${i}_img`).src = aux_prod.getImagen
             document.getElementById(`rec_${i}_nombre`).textContent = aux_prod.getNombre
             document.getElementById(`rec_${i}_precio0`).textContent = `$${aux_prod.getPrecio[0]}.00`
-            if(aux_prod.getPrecio()[1] != undefined){
+            if(aux_prod.getPrecio[1] != undefined){
                 document.getElementById(`rec_${i}_precio1`).textContent = `$${aux_prod.getPrecio[1]}.00`
                 console.log(Math.round(aux_prod.getPrecio[0]/aux_prod.getPrecio[1]-1))
                 //DTO_RECOM_
@@ -341,6 +347,10 @@ class PaginaProducto{
             }
             llaves.splice(opt,1)
         }
+        document.getElementById("form").reset();// modificado PAUL
+        document.getElementById('contactForm').style.display = 'none'; //MODIFICADO PAUL
+        document.getElementById('field').disabled = true; //modificado PAUL
+        document.getElementById('btnCrear').style.display = 'none'; //MODIFICADO PAUL
     }
 }
 /*
@@ -479,24 +489,95 @@ class PaginaCarrito{
         console.log('Desplegada página de carrito')
     }
 }
-function btnShowForm(almacen){
-    let form = document.getElementById("form"),
-    btnShowForm = document.getElementById("btnShowForm"),
-    sectionProducts = document.getElementById("section_principal_almacen"),
-    bannerBF = document.getElementsByTagName('header')[0]
-    if(form.style.display == "none"){
-        form.style.display = "block";
-        sectionProducts.style.display = "none";
-        bannerBF.style.display = "none";
-    } else {
-        bannerBF.style.display = "block";
-        console.log(almacen.getProducto("1234").getNombre);
-        btnShowForm.style.display = 'block';
-        form.style.display = "none";
-        btnShowForm.textContent = "+";
-        sectionProducts.style.display = "block";
+/* 
+    Formulario
+*/
+
+//BOTONES FUNCIONES
+
+function mostrarValoresProducto(id){
+    let contactForm = document.getElementById("contactForm"),
+    btnMod = document.getElementById("button_modificar");
+
+    if(contactForm.style.display == 'none'){
+
+        contactForm.style.display = 'block';
+        btnMod.textContent = 'Cerrar Formulario';
+    }else{
+        contactForm.style.display = 'none';
+        document.getElementById("form").reset();
+        btnMod.textContent = 'Modificar';
+    }
+    
+    if(document.getElementById('field').disabled == true){
+        return valores(id);
     }
 }
+
+function valores(id){
+        let Productoviejo = storage.getProducto(id);
+        console.log(Productoviejo);
+        document.getElementById('codigo').value = id;
+        document.getElementById('nombre').value = Productoviejo.getNombre;
+        document.getElementById('img').value = Productoviejo.getImagen;
+        document.getElementById('precio').value = Productoviejo.getPrecio;
+        document.getElementById('descripcion').value = Productoviejo.getDescripcion;
+}
+
+function decisionProducto(almacen, id, carrito){
+    if(document.getElementById('field').disabled == false){
+        crearNuevoElemento(almacen);
+    } else {
+        modificarProducto(almacen, id, carrito);
+        console.log('entrar a modificar');
+
+    }
+}
+
+
+function modificarProducto(almacen, id){
+    let productoViejo = almacen.getProducto(id);
+    productoViejo.setNombre = document.getElementById('nombre').value;
+    productoViejo.setImagen = document.getElementById('img').value;
+    productoViejo.setPrecio = document.getElementById('precio').value;
+    productoViejo.setDescripcion = document.getElementById('descripcion').value;
+    console.log(productoViejo);
+    console.log('producto modificado');
+    console.log(almacen);
+    PaginaPrincipal.mostrar_almacen_productos(almacen, cart);
+
+
+}
+
+function mostrarForm(){
+    let contactForm = document.getElementById("contactForm"),
+    btnShowForm = document.getElementById("btnShowForm");
+
+    if(contactForm.style.display == 'none'){
+
+        contactForm.style.display = 'block';
+        btnShowForm.textContent = 'Cerrar Formulario';
+    }else{
+        contactForm.style.display = 'none';
+        document.getElementById("form").reset();
+        btnShowForm.textContent = 'Añadir Producto';
+    }
+}
+
+function crearNuevoElemento(almacen, carrito){
+    let productoNuevo = new Producto();
+    productoNuevo.setId = document.getElementById('codigo').value;
+    productoNuevo.setNombre = document.getElementById('nombre').value;
+    productoNuevo.setImagen = document.getElementById('img').value;
+    productoNuevo.setPrecio = document.getElementById('precio').value;
+    productoNuevo.setDescripcion = document.getElementById('descripcion').value;
+    almacen.insertar(productoNuevo);
+    console.log(almacen);
+
+    PaginaPrincipal.mostrar_almacen_productos(almacen, carrito);
+}
+
+// Hasta aquí el formulario
 //---
 //pagina();
 let cart = new Carrito(); //---variable -Carrito-
@@ -511,8 +592,9 @@ document.getElementById('carrito_master').addEventListener('click',function(){
 })
 document.getElementById('home').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage)})
 document.getElementById('solace_icon').addEventListener('click',function(){PaginaPrincipal.mostrar_almacen_productos(storage)})
-document.getElementById('btnShowForm').addEventListener('click',function(){btnShowForm(storage)})
+//document.getElementById('btnShowForm').addEventListener('click',function(){btnShowForm(storage)})
 PaginaPrincipal.mostrar_almacen_productos(storage,cart);
 //storage.getProducto("1234").setNombre('POLO');
 
 
+ 
