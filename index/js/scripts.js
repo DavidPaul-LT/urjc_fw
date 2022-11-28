@@ -202,6 +202,8 @@ class PaginaPrincipal{
     //---Método que crea y añade al DOM los elementos necesarios para mostrar los elementos contenidos en un -AlmacenProductos-
     static mostrar_almacen_productos(almacen,carrito){
         if(!PaginaPrincipal.almacen_creado){
+        let btnSubmit = document.getElementById('btnSubmit');
+        btnSubmit.addEventListener('click', function(){decisionProducto(almacen)});
         //---Crear master
         let master = document.createElement('div')
         master.className = 'row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center'
@@ -269,7 +271,7 @@ class PaginaPrincipal{
         console.log('Productos cargados en la página')
         PaginaPrincipal.almacen_creado = true
         }else{
-            Pagina.show_section('section_principal')
+            Pagina.show_section('section_principal', 'section_formulario')
             console.log(`Mostrando página principal`)
         }
     }
@@ -281,7 +283,7 @@ class PaginaProducto{
     //---Método que crea y añade al DOM los elementos que se precisen para la creación de una página individual de producto
     static mostrar_pagina_producto(almacen,id,carrito){
         document.getElementById('product_add_to_cart').removeChild(document.getElementById('button_cart'))
-        Pagina.show_section('section_producto', 'section_formulario') 
+        Pagina.show_section('section_producto') 
         document.getElementById('product_id').textContent = 'ID: ' + id
         document.getElementById('product_name').textContent = almacen.getProducto(id).getNombre
         document.getElementById('product_image').src = almacen.getProducto(id).getImagen
@@ -485,7 +487,7 @@ class PaginaCarrito{
 
 //BOTONES FUNCIONES
 
-function mostrarValoresProducto(id){
+function mostrarValoresProducto(id, almacen){
     let contactForm = document.getElementById("contactForm"),
     btnMod = document.getElementById("button_modificar");
 
@@ -514,29 +516,22 @@ function valores(id){
         document.getElementById('descripcion').value = Productoviejo.getDescripcion;
 }
 
-function decisionProducto(almacen, id, carrito){
+function decisionProducto(almacen, id){
     if(document.getElementById('field').disabled == false){
         crearNuevoElemento(almacen);
     } else {
-        modificarProducto(almacen, id, carrito);
-        console.log('entrar a modificar');
-
+        modificarProducto(almacen, id);
     }
 }
 
 
 function modificarProducto(almacen, id){
-    let productoViejo = almacen.getProducto(id);
-    productoViejo.setNombre = document.getElementById('nombre').value;
-    productoViejo.setImagen = document.getElementById('img').value;
-    productoViejo.setPrecio = document.getElementById('precio').value;
-    productoViejo.setDescripcion = document.getElementById('descripcion').value;
-    console.log(productoViejo);
-    console.log('producto modificado');
-    console.log(almacen);
-    PaginaPrincipal.mostrar_almacen_productos(almacen, cart);
-
-
+    let nombre = almacen.getProducto(id);
+    nombre.setNombre = document.getElementById('nombre').value;
+    nombre.setImagen = document.getElementById('img').value;
+    nombre.setPrecio = document.getElementById('precio').value;
+    nombre.setDescripcion = document.getElementById('descripcion').value;
+    console.log(nombre);
 }
 
 function mostrarForm(){
@@ -554,7 +549,8 @@ function mostrarForm(){
     }
 }
 
-function crearNuevoElemento(almacen, carrito){
+function crearNuevoElemento(almacen){
+    debugger;
     let productoNuevo = new Producto();
     productoNuevo.setId = document.getElementById('codigo').value;
     productoNuevo.setNombre = document.getElementById('nombre').value;
@@ -564,10 +560,10 @@ function crearNuevoElemento(almacen, carrito){
     almacen.insertar(productoNuevo);
     console.log(almacen);
 
-    PaginaPrincipal.mostrar_almacen_productos(almacen, carrito);
+    PaginaPrincipal.mostrar_almacen_productos(almacen);
 }
-
 // Hasta aquí el formulario
+
 
 //---
 //pagina();
