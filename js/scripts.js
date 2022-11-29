@@ -298,7 +298,7 @@ class PaginaProducto{
         //Botón modificarTrue
         let btnSubmit = document.getElementById("btnSubmit");
         btnSubmit.addEventListener('click', function(){
-            modificarProducto(almacen, id, carrito)
+            modificarProducto(almacen.getProducto(id))
         });
         //Botón añadir subelemento
 
@@ -483,32 +483,38 @@ function mostrarValoresProducto(producto){
 }*/
 
 //--- modifica el producto y nos lleva a la pagina principal
-function modificarProducto(almacen, id, carrito){
+function modificarProducto(productoViejo){
     document.getElementById("button_modificar").textContent = 'Modificar';
-    let productoViejo = almacen.getProducto(id);
-    productoViejo.setNombre() = document.getElementById('nombre').value;; 
-    productoViejo.setImagen() = document.getElementById('img').value;; 
-    productoViejo.setPrecio() = document.getElementById('precio').value;; 
-    productoViejo.setDescripcion() = document.getElementById('descripcion').value;; 
     console.log(productoViejo);
-    document.getElementById("contactForm").style.display = 'none';
+    productoViejo[1] = document.getElementById('nombre').value;; 
+    productoViejo[2] = document.getElementById('img').value;; 
+    productoViejo[3] = document.getElementById('precio').value;; 
+    productoViejo[4] = document.getElementById('descripcion').value;; 
+    cerrarForm();
     console.log('producto modificado');
-    console.log(almacen);
-    PaginaPrincipal.mostrar_almacen_productos(almacen, carrito);
+    console.log(storage);
+    PaginaPrincipal.mostrar_almacen_productos(almacen, cart);
 }
 
 //--- muestra el formulario o lo oculta al hacer click sobre el botón de la pagina principal
 function mostrarForm(){
-    let contactForm = document.getElementById("contactForm"),
-    btnShowForm = document.getElementById("btnShowForm");
     document.getElementById("form").reset();
-    if(contactForm.style.display == 'none'){
-        contactForm.style.display = 'block';
-        btnShowForm.textContent = 'Cerrar Formulario';
+    if(document.getElementById("contactForm").style.display == 'none'){
+        abrirForm();
     }else{
-        contactForm.style.display = 'none';
-        btnShowForm.textContent = 'Añadir Producto';
+        cerrarForm();
     }
+}
+
+function cerrarForm(){
+    document.getElementById("contactForm").style.display = 'none';
+    document.getElementById("btnShowForm").textContent = 'Añadir Producto';
+    document.getElementById("form").reset();
+}
+
+function abrirForm(){
+    document.getElementById("contactForm").style.display = 'block';
+    document.getElementById("btnShowForm").textContent = 'Cerrar Formulario';
 }
 
 //--- recoge los datos del formulario y crea un nuevo Producto que se añadirá a AlmacenProductos
