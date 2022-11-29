@@ -123,7 +123,7 @@ class Carrito{
     constructor(){
         this.#elementos = new Map()
         this.#cart_obj = document.getElementById('carrito')
-        this.#length = 0
+        this.#length = 0;
     }
     //--- Devuelve la longitud del carrito
     length(){
@@ -171,9 +171,8 @@ class Pagina{
         while (sec.firstChild){
             sec.removeChild(sec.lastChild)
         }
-        console.log('Section borrado correctamente')
     }
-    //---Método que oculta los elementos section que no tengan el ID de section_type
+    //---Método que oculta los elementos que no tengan el ID de section_type
     static show_section(section_type, section_formulario=null){
         for (let sec of document.getElementsByTagName('section')) {
             if ((section_type == sec.id) || (section_formulario == sec.id)) {
@@ -190,6 +189,7 @@ class Pagina{
 //  Pagina principal, aquella en la que se muestra los productos de AlmacenProductos
 class PaginaPrincipal{
     static mostrar_almacen_productos(almacen,carrito){
+
         // 1- Ocultar otros section
         Pagina.show_section('section_principal')
         // 2- Borrar el anterior contenido del section
@@ -205,19 +205,22 @@ class PaginaPrincipal{
         upper.className = 'container px-4 px-lg-5 mt-5'
         upper.append(master)
         document.getElementById('section_principal_almacen').appendChild(upper)
+        if(producto_info.size == 0){
+            master.textContent = 'no hay productos en la lista';
+        }
         //---Iteración sobre productos del almacén
-        for (let [key,prod] of producto_info){
-            //---Crea tarjetas de Producto para cada uno de los que está contenido en -AlmacenProducto-
-            let final = document.createElement('div')
-            //---NOMBRE
-            let nombre = document.createElement('h5')
-            nombre.className = 'fw-bolder name'
-            nombre.textContent = prod.getNombre
-            //---PRECIO
-            let aux_precio = document.createElement('p')
-            let aux2_precio = prod.getPrecio
+            for (let [key,prod] of producto_info){
+                //---Crea tarjetas de Producto para cada uno de los que está contenido en -AlmacenProducto-
+                let final = document.createElement('div')
+                //---NOMBRE
+                let nombre = document.createElement('h5')
+                nombre.className = 'fw-bolder name'
+                nombre.textContent = prod.getNombre
+                //---PRECIO
+                let aux_precio = document.createElement('p')
+                let aux2_precio = prod.getPrecio
                 aux_precio.textContent = '$' + aux2_precio + '.00'
-            //---NOMBRE + PRECIO
+                //---NOMBRE + PRECIO
             let precio = document.createElement('div')
             precio.className = 'text-center'
             precio.appendChild(nombre)
@@ -244,7 +247,7 @@ class PaginaPrincipal{
             final.appendChild(card)
             //---Añadir a master
             master.appendChild(final)
-        }
+            }
         document.getElementById('field').disabled = false;
         document.getElementById("btnSubmit").addEventListener('click', function(){
             crearNuevoElemento(almacen, carrito);
@@ -290,15 +293,17 @@ class PaginaProducto{
         //Botón modificar
         let button_modificar = document.getElementById("button_modificar");  //añadido Paul
         document.getElementById('field').disabled = true;
-        console.log(document.getElementById('field').disabled); 
         button_modificar.addEventListener('click', function(){
+            let i = confirm("Quieres modificar el producto?");
+            if(i == true){
             mostrarValoresProducto(almacen.getProducto(id)); //añadido Paul
+            }
         })
             
         //Botón modificarTrue
         let btnSubmit = document.getElementById("btnSubmit");
         btnSubmit.addEventListener('click', function(){
-            modificarProducto(almacen.getProducto(id))
+                modificarProducto(almacen.getProducto(id))
         });
         //Botón añadir subelemento
 
@@ -458,12 +463,12 @@ function mostrarValoresProducto(producto){
     if(contactForm.style.display == 'none'){        //condicion para mostrar o cerrar el formulario
         contactForm.style.display = 'block';
         btnMod.textContent = 'Cerrar Formulario';
+        console.log(producto);
     }else{
         contactForm.style.display = 'none';
         btnMod.textContent = 'Modificar';
     }
     if(document.getElementById('field').disabled == true){      //condicion para confirmar que estamos en la pagina de producto
-        console.log(producto);
         document.getElementById('codigo').value = producto.getId;
         document.getElementById('nombre').value = producto.getNombre;
         document.getElementById('img').value = producto.getImagen;
@@ -472,29 +477,17 @@ function mostrarValoresProducto(producto){
     }
 }
 
-//--- redirige al formulario inserción/modificación según si el campo field se encuentre habilitado o no
-/*function decisionProducto(almacen, id, carrito){
-    if(document.getElementById('field').disabled == false){
-        crearNuevoElemento(almacen, carrito);
-    } else {
-        modificarProducto(almacen, id, carrito);
-        console.log('entrar a modificar');
-    }
-}*/
-
 //--- modifica el producto y nos lleva a la pagina principal
 function modificarProducto(productoViejo){
     document.getElementById("button_modificar").textContent = 'Modificar';
-    console.log(productoViejo);
     productoViejo[1] = document.getElementById('nombre').value;; 
     productoViejo[2] = document.getElementById('img').value;; 
     productoViejo[3] = document.getElementById('precio').value;; 
     productoViejo[4] = document.getElementById('descripcion').value;; 
-    cerrarForm();
     console.log('producto modificado');
-    console.log(storage);
-    PaginaPrincipal.mostrar_almacen_productos(almacen, cart);
-}
+    PaginaPrincipal.mostrar_almacen_productos(storage, cart);
+    cerrarForm();
+    }
 
 //--- muestra el formulario o lo oculta al hacer click sobre el botón de la pagina principal
 function mostrarForm(){
