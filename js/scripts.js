@@ -16,7 +16,7 @@ class Producto{
         this.#atrib_extra = new Map() //guarda los atributos extra
     }
     //--- Método getter de -atrib-extra-
-    getAtribExtra(){
+    get getAtribExtra(){
         return this.#atrib_extra
     }
     //--- Método setter de -atrib-extra-
@@ -28,7 +28,7 @@ class Producto{
         return this.#id
     }
     //--- Método setter del atributo -id- (el acceso a este método debería estar lo más restringido posible)
-    set setId(val){
+    #setId(val){
         this.#id = val
     }
     //--- Método getter del atributo -nombre-
@@ -36,7 +36,7 @@ class Producto{
         return this.#nombre
     }
     //--- Método setter del atributo -nombre-
-    set setNombre(val){
+    setNombre(val){
         this.#nombre = val
         //modificar -inner_html-
     }
@@ -45,7 +45,7 @@ class Producto{
         return this.#precio
     }
     //--- Método setter del atributo -precio-
-    set setPrecio(val){
+    setPrecio(val){
         this.#precio = val
         //modificar -inner_html-
     }
@@ -54,7 +54,7 @@ class Producto{
         return this.#imagen
     }
     //--- Método setter del atributo -imagen-
-    set setImagen(val){
+    setImagen(val){
         this.#imagen = val
     }
     //--- Método getter del atributo -descripcion-
@@ -62,7 +62,7 @@ class Producto{
         return this.#descripcion
     }
     //--- Método setter del atributo -descripcion-
-    set setDescripcion(val){
+    setDescripcion(val){
         this.#descripcion = val
     }
 }
@@ -131,6 +131,7 @@ class Carrito{
     }
     //--- Guarda como llave el identificador de un obj. -Producto- ya almacenado en -AlmacenProductos-
     insertar(id_producto,cantidad=1){
+        console.log(this.#elementos)
         let aux = this.#elementos.get(id_producto)
         if (aux == undefined){
             this.#elementos.set(id_producto,1)
@@ -245,9 +246,10 @@ class PaginaPrincipal{
             master.appendChild(final)
         }
         document.getElementById('field').disabled = false;
-        document.getElementById("contactForm").style.display = 'none';
         document.getElementById("btnSubmit").addEventListener('click', function(){
-            crearNuevoElemento(almacen)
+            crearNuevoElemento(almacen, carrito);
+            document.getElementById('form').reset();
+            document.getElementById('contactForm').style.display = 'none';
         });
     }
 }
@@ -286,17 +288,17 @@ class PaginaProducto{
             carrito.eliminar(id)
         })
         //Botón modificar
-        let modificar = document.getElementById("button_modificar");  //añadido Paul
+        let button_modificar = document.getElementById("button_modificar");  //añadido Paul
         document.getElementById('field').disabled = true;
-        console.log('disabled activado');
-        modificar.addEventListener('click', function(){
+        console.log(document.getElementById('field').disabled); 
+        button_modificar.addEventListener('click', function(){
             mostrarValoresProducto(almacen.getProducto(id)); //añadido Paul
         })
             
         //Botón modificarTrue
         let btnSubmit = document.getElementById("btnSubmit");
         btnSubmit.addEventListener('click', function(){
-            decisionProducto(almacen, id, carrito)
+            modificarProducto(almacen, id, carrito)
         });
         //Botón añadir subelemento
 
@@ -471,24 +473,25 @@ function mostrarValoresProducto(producto){
 }
 
 //--- redirige al formulario inserción/modificación según si el campo field se encuentre habilitado o no
-function decisionProducto(almacen, id, carrito){
+/*function decisionProducto(almacen, id, carrito){
     if(document.getElementById('field').disabled == false){
         crearNuevoElemento(almacen, carrito);
     } else {
         modificarProducto(almacen, id, carrito);
         console.log('entrar a modificar');
     }
-}
+}*/
 
 //--- modifica el producto y nos lleva a la pagina principal
 function modificarProducto(almacen, id, carrito){
+    document.getElementById("button_modificar").textContent = 'Modificar';
     let productoViejo = almacen.getProducto(id);
-    productoViejo.setNombre = document.getElementById('nombre').value;
-    productoViejo.setImagen = document.getElementById('img').value;
-    productoViejo.setPrecio = document.getElementById('precio').value;
-    productoViejo.setDescripcion = document.getElementById('descripcion').value;
-    document.getElementById("contactForm").style.display = 'none';
+    productoViejo.setNombre() = document.getElementById('nombre').value;; 
+    productoViejo.setImagen() = document.getElementById('img').value;; 
+    productoViejo.setPrecio() = document.getElementById('precio').value;; 
+    productoViejo.setDescripcion() = document.getElementById('descripcion').value;; 
     console.log(productoViejo);
+    document.getElementById("contactForm").style.display = 'none';
     console.log('producto modificado');
     console.log(almacen);
     PaginaPrincipal.mostrar_almacen_productos(almacen, carrito);
@@ -524,7 +527,7 @@ function crearNuevoElemento(almacen, carrito){
 // Hasta aquí el formulario
 
 
-//  Variables con valores generales 
+//Variables con valores generales 
 //---variable -Carrito-
 let cart = new Carrito(); 
 //---variable -AlmacenProductos-
