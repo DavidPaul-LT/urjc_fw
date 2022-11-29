@@ -1,6 +1,4 @@
-/* class Producto:
-    Clase (pseudo)inmutable que sirve como contenedor de los atributos de un determinado producto de la página
-*/
+//  class Producto: Clase (pseudo)inmutable que sirve como contenedor de los atributos de un determinado producto de la página
 class Producto{
     #id
     #nombre
@@ -68,23 +66,23 @@ class Producto{
         this.#descripcion = val
     }
 }
+
 /* class AlmacenProductos:
     -Sirve como estructura de datos que almacena los distintos objetos -Producto- que se instancien
     -Garantiza la unicidad de los IDs
-    -Parametros -producto- son facilitados por el formulario de creación/modificación
-*/
+    -Parametros -producto- son facilitados por el formulario de creación/modificación */
 class AlmacenProductos{
     #elementos
     //---Añade al mapa de elementos unos productos de prueba
     static modelos = [
-        ['1234','Camisa de lana elástica',[60],'../product/1234.jpg','Esta camisa tiene un aspecto de punto clásico y versátil, perfecta para el otoño. Fabricada con un tejido súper suave y elástico, proporciona un ajuste natural al cuerpo.'],
-        ['1235','Polo de alto rendimiento',[40],'../product/1235.jpg','Este polo supersuave es ideal para el golf, los viajes o las citas nocturnas. Nuestro tejido Flowknit, increíblemente suave, no solo es sostenible, sino que facilita la absorción de la humedad y evita el mal olor, ofreciendo la máxima versatilidad. Nuestro Flowknit está fabricado con hilo de poliéster Global Recycle Standard, que desvía y recicla los plásticos destinados a los vertederos o al océano, para que puedas sentirte y verte bien con lo que llevas puesto.'],
-        ['1236','Pantalón de alto rendimiento',[45],'../product/1236.jpg','Nuestros joggers de alto rendimiento favoritos tienen un ajuste fino pero relajado siendo lo suficientemente elásticos para conseguir la máxima comodidad. Los gruesos cordones, los tobillos con puños y el diseño de dos bolsillos ofrecen una sensación de calidad.'],
-        ['1237','Pantalón corto de alto rendimiento',[35],'../product/1237.jpg','Puede que sean cortos, pero consiguen evitar la humedad, son antimicrobianos, tienen un bolsillo para el móvil en la parte delantera y un bolsillo trasero con cremallera. Perfecto para entrenar, viajar o descansar.'],
-        ['1238','Jersey de cachemira mongola con cuello redondo',[90],'../product/1238.jpg','El clásico jersey de cachemira es intemporal. Ligero, suave y acogedor, perfecto para cualquier época del año y ocasión. Nuestra cachemira de calidad es increíblemente duradera y tres veces más cálida que la lana, y se obtiene de forma sostenible y ética.'],
-        ['1239','Chaqueta camisera 100% lana merina',[120],'../product/1239.jpg','Nuestra chaqueta camisera de lana merina 100% es perfecta cuando las temperaturas empiezan a bajar. Confeccionada por expertos con lana merina hervida, esta chaqueta camisera tiene la silueta de una camisa, pero proporciona la calidez de una chaqueta. Con un aspecto intencionadamente sobredimensionado, es perfecta para vestirse a capas y se puede poner sobre cualquier prenda con facilidad.'],
-        ['1240','Pantalón acampanado Ultra-Stretch',[50],'../product/1240.jpg','Si los pantalones de trabajo y los de yoga tuvieran un hijo, sería éste. Este pantalón es de punto doble y muy elástico y además queda fabuloso con zapatos planos o con zapatillas de deporte.'],
-        ['1241','Leggings de alto rendimiento ultra suave',[40],'../product/1241.jpg','Nuestros leggings de alto rendimiento tienen todo lo que necesitan para convertirse en tus pantalones de entrenamiento favoritos, sin comprometer la apariencia. Cuentan con un tejido de secado rápido, que absorbe la humedad y que es antimicrobiano, con la elasticidad óptima para que puedas hacer sentadillas sin preocupaciones.']
+        ['1234','Camisa de lana elástica',[60],'images/product/1234.jpg','Esta camisa tiene un aspecto de punto clásico y versátil, perfecta para el otoño. Fabricada con un tejido súper suave y elástico, proporciona un ajuste natural al cuerpo.'],
+        ['1235','Polo de alto rendimiento',[40],'images/product/1235.jpg','Este polo supersuave es ideal para el golf, los viajes o las citas nocturnas. Nuestro tejido Flowknit, increíblemente suave, no solo es sostenible, sino que facilita la absorción de la humedad y evita el mal olor, ofreciendo la máxima versatilidad. Nuestro Flowknit está fabricado con hilo de poliéster Global Recycle Standard, que desvía y recicla los plásticos destinados a los vertederos o al océano, para que puedas sentirte y verte bien con lo que llevas puesto.'],
+        ['1236','Pantalón de alto rendimiento',[45],'images/product/1236.jpg','Nuestros joggers de alto rendimiento favoritos tienen un ajuste fino pero relajado siendo lo suficientemente elásticos para conseguir la máxima comodidad. Los gruesos cordones, los tobillos con puños y el diseño de dos bolsillos ofrecen una sensación de calidad.'],
+        ['1237','Pantalón corto de alto rendimiento',[35],'images/product/1237.jpg','Puede que sean cortos, pero consiguen evitar la humedad, son antimicrobianos, tienen un bolsillo para el móvil en la parte delantera y un bolsillo trasero con cremallera. Perfecto para entrenar, viajar o descansar.'],
+        ['1238','Jersey de cachemira mongola con cuello redondo',[90],'images/product/1238.jpg','El clásico jersey de cachemira es intemporal. Ligero, suave y acogedor, perfecto para cualquier época del año y ocasión. Nuestra cachemira de calidad es increíblemente duradera y tres veces más cálida que la lana, y se obtiene de forma sostenible y ética.'],
+        ['1239','Chaqueta camisera 100% lana merina',[120],'images/product/1239.jpg','Nuestra chaqueta camisera de lana merina 100% es perfecta cuando las temperaturas empiezan a bajar. Confeccionada por expertos con lana merina hervida, esta chaqueta camisera tiene la silueta de una camisa, pero proporciona la calidez de una chaqueta. Con un aspecto intencionadamente sobredimensionado, es perfecta para vestirse a capas y se puede poner sobre cualquier prenda con facilidad.'],
+        ['1240','Pantalón acampanado Ultra-Stretch',[50],'images/product/1240.jpg','Si los pantalones de trabajo y los de yoga tuvieran un hijo, sería éste. Este pantalón es de punto doble y muy elástico y además queda fabuloso con zapatos planos o con zapatillas de deporte.'],
+        ['1241','Leggings de alto rendimiento ultra suave',[40],'images/product/1241.jpg','Nuestros leggings de alto rendimiento tienen todo lo que necesitan para convertirse en tus pantalones de entrenamiento favoritos, sin comprometer la apariencia. Cuentan con un tejido de secado rápido, que absorbe la humedad y que es antimicrobiano, con la elasticidad óptima para que puedas hacer sentadillas sin preocupaciones.']
     ]
     //--- Inicializa un mapa que contendrá los productos clasificados por sus atributos -id-
     constructor(prods_prueba=true){
@@ -116,9 +114,8 @@ class AlmacenProductos{
         return this.#elementos.get(id)
     }
 }
-/* class Carrito
--Cada uno de sus elementos simula ser un puntero a una posición del objeto -AlmacenProductos-
-*/
+
+//  class Carrito: -Cada uno de sus elementos simula ser un puntero a una posición del objeto -AlmacenProductos-
 class Carrito{
     #elementos
     #cart_obj
@@ -159,9 +156,9 @@ class Carrito{
         return this.#elementos
     }
 }
-/*
-    Pagina
-*/
+
+
+//    Pagina
 class Pagina{
     //---La clase Pagina no se puede instanciar
     constructor(){
@@ -187,9 +184,9 @@ class Pagina{
         }
     }
 }
-/*
-    Pagina principal, aquella en la que se muestra los productos de AlmacenProductos
-*/
+
+
+//  Pagina principal, aquella en la que se muestra los productos de AlmacenProductos
 class PaginaPrincipal{
     static mostrar_almacen_productos(almacen,carrito){
         // 1- Ocultar otros section
@@ -254,9 +251,9 @@ class PaginaPrincipal{
         });
     }
 }
-/*
-    Página de producto, aquella en la que se muestra un Producto
-*/
+
+
+//  Página de producto, aquella en la que se muestra un Producto
 class PaginaProducto{
     static mostrar_pagina_producto(almacen,id,carrito){
         // 1- Ocultar el resto de sections
@@ -312,9 +309,9 @@ class PaginaProducto{
         console.log(`Accediendo a página producto con id: ${id}`)
     }
 }
-/*
-    Pagina Carrito, aquella en la que se muestra todos los pruductos ingresados en -Carrito-
-*/
+
+
+//  Pagina Carrito, aquella en la que se muestra todos los pruductos ingresados en -Carrito-
 class PaginaCarrito{
     static tipos_envio = [2,3,5]
     //---Método que crea y añade al DOM los elementos necesarios para crear una página específica para el carrito
@@ -448,24 +445,22 @@ class PaginaCarrito{
         console.log('Desplegada página de carrito')
     }
 }
-/* 
-    Formulario
-*/
 
-//BOTONES FUNCIONES
-//---Muestra el formulario de modificación de los atributos de Producto
+
+//  Formulario
+//--- muestra el formulario con los valores del producto a modificar
 function mostrarValoresProducto(producto){
     let contactForm = document.getElementById("contactForm"),
     btnMod = document.getElementById("button_modificar");
     document.getElementById("form").reset();
-    if(contactForm.style.display == 'none'){
+    if(contactForm.style.display == 'none'){        //condicion para mostrar o cerrar el formulario
         contactForm.style.display = 'block';
         btnMod.textContent = 'Cerrar Formulario';
     }else{
         contactForm.style.display = 'none';
         btnMod.textContent = 'Modificar';
     }
-    if(document.getElementById('field').disabled == true){
+    if(document.getElementById('field').disabled == true){      //condicion para confirmar que estamos en la pagina de producto
         console.log(producto);
         document.getElementById('codigo').value = producto.getId;
         document.getElementById('nombre').value = producto.getNombre;
@@ -474,7 +469,8 @@ function mostrarValoresProducto(producto){
         document.getElementById('descripcion').value = producto.getDescripcion;
     }
 }
-//---Redirige al formulario inserción/modificación según si el campo field se encuentre habilitado o no
+
+//--- redirige al formulario inserción/modificación según si el campo field se encuentre habilitado o no
 function decisionProducto(almacen, id, carrito){
     if(document.getElementById('field').disabled == false){
         crearNuevoElemento(almacen, carrito);
@@ -484,6 +480,7 @@ function decisionProducto(almacen, id, carrito){
     }
 }
 
+//--- modifica el producto y nos lleva a la pagina principal
 function modificarProducto(almacen, id, carrito){
     let productoViejo = almacen.getProducto(id);
     productoViejo.setNombre = document.getElementById('nombre').value;
@@ -496,7 +493,8 @@ function modificarProducto(almacen, id, carrito){
     console.log(almacen);
     PaginaPrincipal.mostrar_almacen_productos(almacen, carrito);
 }
-//--- Muestra el div del formulario o lo oculta al hacer click sobre el botón del section_principal
+
+//--- muestra el formulario o lo oculta al hacer click sobre el botón de la pagina principal
 function mostrarForm(){
     let contactForm = document.getElementById("contactForm"),
     btnShowForm = document.getElementById("btnShowForm");
@@ -509,25 +507,29 @@ function mostrarForm(){
         btnShowForm.textContent = 'Añadir Producto';
     }
 }
-//---Recoge los datos del formulario y crea un nuevo Producto que se añadirá a AlmacenProductos
+
+//--- recoge los datos del formulario y crea un nuevo Producto que se añadirá a AlmacenProductos
 function crearNuevoElemento(almacen, carrito){
-    let productoNuevo = new Producto();
-    productoNuevo.setId = document.getElementById('codigo').value;
-    productoNuevo.setNombre = document.getElementById('nombre').value;
-    productoNuevo.setImagen = document.getElementById('img').value;
-    productoNuevo.setPrecio = document.getElementById('precio').value;
-    productoNuevo.setDescripcion = document.getElementById('descripcion').value;
+    id = document.getElementById('codigo').value;
+    nombre = document.getElementById('nombre').value;
+    imagen = document.getElementById('img').value;
+    precio = document.getElementById('precio').value;
+    descripcion = document.getElementById('descripcion').value;
+    let productoNuevo = new Producto(id, nombre, precio, imagen, descripcion);
     almacen.insertar(productoNuevo);
     console.log(almacen);
+    btnShowForm = document.getElementById("btnShowForm").textContent = 'Añadir Producto';
     PaginaPrincipal.mostrar_almacen_productos(almacen, carrito);
-    btnShowForm = document.getElementById("btnShowForm").textContent = 'Añadir Producto ';
 }
-
 // Hasta aquí el formulario
-//---
-//pagina();
-let cart = new Carrito(); //---variable -Carrito-
-let storage = new AlmacenProductos(); //---variable -AlmacenProductos-
+
+
+//  Variables con valores generales 
+//---variable -Carrito-
+let cart = new Carrito(); 
+//---variable -AlmacenProductos-
+let storage = new AlmacenProductos(); 
+
 document.getElementById('carrito_master').addEventListener('click',function(){
     if(cart.length() > 0){
         PaginaCarrito.mostrar_carrito(storage,cart)
