@@ -88,7 +88,7 @@ class AlmacenProductos{
     constructor(prods_prueba=true){
         this.#elementos = new Map()
         if (prods_prueba){
-            this.#productos_de_prueba()
+            this.#productos_de_prueba();
         }
     }
     //--- Método getter de -elementos-
@@ -107,7 +107,9 @@ class AlmacenProductos{
     }
     //--- Eliminar un objeto -Producto- de entre los ya contenidos en -elementos-
     eliminar(producto){
+        //Elimina todo un porducto, pasado por el id
         this.#elementos.delete(producto)
+
     }
     //--- Consigue un atributo en función de su -id-
     getProducto(id){
