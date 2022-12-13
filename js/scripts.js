@@ -71,49 +71,49 @@ class Producto{
     -Sirve como estructura de datos que almacena los distintos objetos -Producto- que se instancien
     -Garantiza la unicidad de los IDs
     -Parametros -producto- son facilitados por el formulario de creación/modificación */
-class AlmacenProductos{
-    #elementos
-    //---Añade al mapa de elementos unos productos de prueba
-    static modelos = [
-        ['1234','Camisa de lana elástica',[60],'images/product/1234.jpg','Esta camisa tiene un aspecto de punto clásico y versátil, perfecta para el otoño. Fabricada con un tejido súper suave y elástico, proporciona un ajuste natural al cuerpo.'],
-        ['1235','Polo de alto rendimiento',[40],'images/product/1235.jpg','Este polo supersuave es ideal para el golf, los viajes o las citas nocturnas. Nuestro tejido Flowknit, increíblemente suave, no solo es sostenible, sino que facilita la absorción de la humedad y evita el mal olor, ofreciendo la máxima versatilidad. Nuestro Flowknit está fabricado con hilo de poliéster Global Recycle Standard, que desvía y recicla los plásticos destinados a los vertederos o al océano, para que puedas sentirte y verte bien con lo que llevas puesto.'],
-        ['1236','Pantalón de alto rendimiento',[45],'images/product/1236.jpg','Nuestros joggers de alto rendimiento favoritos tienen un ajuste fino pero relajado siendo lo suficientemente elásticos para conseguir la máxima comodidad. Los gruesos cordones, los tobillos con puños y el diseño de dos bolsillos ofrecen una sensación de calidad.'],
-        ['1237','Pantalón corto de alto rendimiento',[35],'images/product/1237.jpg','Puede que sean cortos, pero consiguen evitar la humedad, son antimicrobianos, tienen un bolsillo para el móvil en la parte delantera y un bolsillo trasero con cremallera. Perfecto para entrenar, viajar o descansar.'],
-        ['1238','Jersey de cachemira mongola con cuello redondo',[90],'images/product/1238.jpg','El clásico jersey de cachemira es intemporal. Ligero, suave y acogedor, perfecto para cualquier época del año y ocasión. Nuestra cachemira de calidad es increíblemente duradera y tres veces más cálida que la lana, y se obtiene de forma sostenible y ética.'],
-        ['1239','Chaqueta camisera 100% lana merina',[120],'images/product/1239.jpg','Nuestra chaqueta camisera de lana merina 100% es perfecta cuando las temperaturas empiezan a bajar. Confeccionada por expertos con lana merina hervida, esta chaqueta camisera tiene la silueta de una camisa, pero proporciona la calidez de una chaqueta. Con un aspecto intencionadamente sobredimensionado, es perfecta para vestirse a capas y se puede poner sobre cualquier prenda con facilidad.'],
-        ['1240','Pantalón acampanado Ultra-Stretch',[50],'images/product/1240.jpg','Si los pantalones de trabajo y los de yoga tuvieran un hijo, sería éste. Este pantalón es de punto doble y muy elástico y además queda fabuloso con zapatos planos o con zapatillas de deporte.'],
-        ['1241','Leggings de alto rendimiento ultra suave',[40],'images/product/1241.jpg','Nuestros leggings de alto rendimiento tienen todo lo que necesitan para convertirse en tus pantalones de entrenamiento favoritos, sin comprometer la apariencia. Cuentan con un tejido de secado rápido, que absorbe la humedad y que es antimicrobiano, con la elasticidad óptima para que puedas hacer sentadillas sin preocupaciones.']
-    ]
-    //--- Inicializa un mapa que contendrá los productos clasificados por sus atributos -id-
-    constructor(prods_prueba=true){
-        this.#elementos = new Map()
-        if (prods_prueba){
-            this.#productos_de_prueba()
+    class AlmacenProductos{
+        #elementos
+        //---Añade al mapa de elementos unos productos de prueba
+        static modelos = [
+            ['1234','Camisa de lana elástica',[60],'images/product/1234.jpg','Esta camisa tiene un aspecto de punto clásico y versátil, perfecta para el otoño. Fabricada con un tejido súper suave y elástico, proporciona un ajuste natural al cuerpo.'],
+            ['1235','Polo de alto rendimiento',[40],'images/product/1235.jpg','Este polo supersuave es ideal para el golf, los viajes o las citas nocturnas. Nuestro tejido Flowknit, increíblemente suave, no solo es sostenible, sino que facilita la absorción de la humedad y evita el mal olor, ofreciendo la máxima versatilidad. Nuestro Flowknit está fabricado con hilo de poliéster Global Recycle Standard, que desvía y recicla los plásticos destinados a los vertederos o al océano, para que puedas sentirte y verte bien con lo que llevas puesto.'],
+            ['1236','Pantalón de alto rendimiento',[45],'images/product/1236.jpg','Nuestros joggers de alto rendimiento favoritos tienen un ajuste fino pero relajado siendo lo suficientemente elásticos para conseguir la máxima comodidad. Los gruesos cordones, los tobillos con puños y el diseño de dos bolsillos ofrecen una sensación de calidad.'],
+            ['1237','Pantalón corto de alto rendimiento',[35],'images/product/1237.jpg','Puede que sean cortos, pero consiguen evitar la humedad, son antimicrobianos, tienen un bolsillo para el móvil en la parte delantera y un bolsillo trasero con cremallera. Perfecto para entrenar, viajar o descansar.'],
+            ['1238','Jersey de cachemira mongola con cuello redondo',[90],'images/product/1238.jpg','El clásico jersey de cachemira es intemporal. Ligero, suave y acogedor, perfecto para cualquier época del año y ocasión. Nuestra cachemira de calidad es increíblemente duradera y tres veces más cálida que la lana, y se obtiene de forma sostenible y ética.'],
+            ['1239','Chaqueta camisera 100% lana merina',[120],'images/product/1239.jpg','Nuestra chaqueta camisera de lana merina 100% es perfecta cuando las temperaturas empiezan a bajar. Confeccionada por expertos con lana merina hervida, esta chaqueta camisera tiene la silueta de una camisa, pero proporciona la calidez de una chaqueta. Con un aspecto intencionadamente sobredimensionado, es perfecta para vestirse a capas y se puede poner sobre cualquier prenda con facilidad.'],
+            ['1240','Pantalón acampanado Ultra-Stretch',[50],'images/product/1240.jpg','Si los pantalones de trabajo y los de yoga tuvieran un hijo, sería éste. Este pantalón es de punto doble y muy elástico y además queda fabuloso con zapatos planos o con zapatillas de deporte.'],
+            ['1241','Leggings de alto rendimiento ultra suave',[40],'images/product/1241.jpg','Nuestros leggings de alto rendimiento tienen todo lo que necesitan para convertirse en tus pantalones de entrenamiento favoritos, sin comprometer la apariencia. Cuentan con un tejido de secado rápido, que absorbe la humedad y que es antimicrobiano, con la elasticidad óptima para que puedas hacer sentadillas sin preocupaciones.']
+        ]
+        //--- Inicializa un mapa que contendrá los productos clasificados por sus atributos -id-
+        constructor(prods_prueba=true){
+            this.#elementos = new Map()
+            if (prods_prueba){
+                this.#productos_de_prueba()
+            }
+        }
+        //--- Método getter de -elementos-
+        getAlmacen(){
+            return this.#elementos
+        }
+        //--- Inserta un nuevo objeto -Producto- en -elementos-
+        insertar(producto){
+            this.#elementos.set(producto.getId,producto)
+        }
+        //--- Inserta en -elementos- todos los productos de prueba
+        #productos_de_prueba(){
+            for (let producto of AlmacenProductos.modelos) {
+                this.insertar(new Producto(producto[0],producto[1],producto[2],producto[3],producto[4]))
+            }
+        }
+        //--- Eliminar un objeto -Producto- de entre los ya contenidos en -elementos-
+        eliminar(producto){
+            this.#elementos.delete(producto)
+        }
+        //--- Consigue un atributo en función de su -id-
+        getProducto(id){
+            return this.#elementos.get(id)
         }
     }
-    //--- Método getter de -elementos-
-    getAlmacen(){
-        return this.#elementos
-    }
-    //--- Inserta un nuevo objeto -Producto- en -elementos-
-    insertar(producto){
-        this.#elementos.set(producto.getId,producto)
-    }
-    //--- Inserta en -elementos- todos los productos de prueba
-    #productos_de_prueba(){
-        for (let producto of AlmacenProductos.modelos) {
-            this.insertar(new Producto(producto[0],producto[1],producto[2],producto[3],producto[4]))
-        }
-    }
-    //--- Eliminar un objeto -Producto- de entre los ya contenidos en -elementos-
-    eliminar(producto){
-        this.#elementos.delete(producto)
-    }
-    //--- Consigue un atributo en función de su -id-
-    getProducto(id){
-        return this.#elementos.get(id)
-    }
-}
 
 //  class Carrito: -Cada uno de sus elementos simula ser un puntero a una posición del objeto -AlmacenProductos-
 class Carrito{
@@ -221,33 +221,33 @@ class PaginaPrincipal{
                 let aux2_precio = prod.getPrecio
                 aux_precio.textContent = '$' + aux2_precio + '.00'
                 //---NOMBRE + PRECIO
-            let precio = document.createElement('div')
-            precio.className = 'text-center'
-            precio.appendChild(nombre)
-            precio.appendChild(aux_precio)
-            //---PRODUCT DETAILS (precio + nombre)
-            let detalles = document.createElement('div')
-            detalles.className = 'card-body p-4'
-            detalles.appendChild(precio)
-            //---PRODUCT IMAGE
-            let imagen = document.createElement('img')
-            imagen.className = 'card-img-top'
-            imagen.src = prod.getImagen
-            imagen.alt = '...'
-            //---CARD = PRODUCT IMAGE + PRODUCT DETAILS
-            let card = document.createElement('div')
-            card.className = 'card h-100'
-            card.appendChild(imagen)
-            card.appendChild(detalles)
-            //---FINAL = PADRE DE CARD
-            final.className = 'col mb-5'
-            final.addEventListener('click',function(){
-                PaginaProducto.mostrar_pagina_producto(almacen,key,carrito)
-            })
-            final.appendChild(card)
-            //---Añadir a master
-            master.appendChild(final)
-            }
+                let precio = document.createElement('div')
+                precio.className = 'text-center'
+                precio.appendChild(nombre)
+                precio.appendChild(aux_precio)
+                //---PRODUCT DETAILS (precio + nombre)
+                let detalles = document.createElement('div')
+                detalles.className = 'card-body p-4'
+                detalles.appendChild(precio)
+                //---PRODUCT IMAGE
+                let imagen = document.createElement('img')
+                imagen.className = 'card-img-top'
+                imagen.src = prod.getImagen
+                imagen.alt = '...'
+                //---CARD = PRODUCT IMAGE + PRODUCT DETAILS
+                let card = document.createElement('div')
+                card.className = 'card h-100'
+                card.appendChild(imagen)
+                card.appendChild(detalles)
+                //---FINAL = PADRE DE CARD
+                final.className = 'col mb-5'
+                final.addEventListener('click',function(){
+                    PaginaProducto.mostrar_pagina_producto(almacen,key,carrito)
+                })
+                final.appendChild(card)
+                //---Añadir a master
+                master.appendChild(final)
+                }
         document.getElementById('field').disabled = false;
         document.getElementById("btnSubmit").addEventListener('click', function(){
             crearNuevoElemento(almacen, carrito);
