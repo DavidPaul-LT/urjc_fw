@@ -284,11 +284,13 @@ class PaginaProducto{
         //Botón eliminar
         let elim = document.getElementById('button_eliminar')
         elim.addEventListener('click',function(){
-            almacen.eliminar(id)
-            console.log(almacen.getAlmacen())
-            Pagina.errase('section_principal_almacen')
-            PaginaPrincipal.mostrar_almacen_productos(almacen,carrito)
-            carrito.eliminar(id)
+            if(confirm('Estás seguro de querer borrar?')){
+                almacen.eliminar(id)
+                console.log(almacen.getAlmacen())
+                Pagina.errase('section_principal_almacen')
+                PaginaPrincipal.mostrar_almacen_productos(almacen,carrito)
+                carrito.eliminar(id)
+            }
         })
         //Botón modificar
         let button_modificar = document.getElementById("button_modificar");  //añadido Paul
@@ -305,8 +307,6 @@ class PaginaProducto{
         btnSubmit.addEventListener('click', function(){
                 modificarProducto(almacen.getProducto(id))
         });
-        //Botón añadir subelemento
-
         //Botón añadir al carrito
         document.getElementById('button_cart').addEventListener('click',function(){
             carrito.insertar(id);
