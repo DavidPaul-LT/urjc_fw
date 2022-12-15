@@ -242,15 +242,32 @@ class Form{
         Form.showFormInputs(storage,productID)
     }
     static showFormInputs(storage,productID=null){
-        PageUtils.removeChilds("submit_button_parent")
+        PageUtils.removeChilds("form_content")
+        //PageUtils.removeChilds("submit_button_parent")//elm
+        let auxButton = document.createElement("div")
+        auxButton.className = "form-group py-1 text-center"
         let button = document.createElement("div")
-        document.getElementById("submit_button_parent").appendChild(button)
         button.className = "btnContact bg-info"
         button.textContent = "Submit"
         //---Insert form
         if(productID==null){
-            for (const defSubelement of Product.defaultSubelements) {
-                document.getElementById(`form_${defSubelement}`).value = ""
+            for (const defSubelement of Product.defaultSubelements){
+                let atrib = document.createElement("div")
+                atrib.className = "form-group py-1"
+                let inp
+                if(defSubelement != "description"){
+                    inp = document.createElement("input")
+                    inp.type = "text"
+                }else{
+                    inp = document.createElement("textarea")
+                    inp.name = "txtMsg"
+                }
+                inp.className = "input_field form-control"
+                inp.id = `form_${defSubelement}`
+                inp.value = ""
+                inp.placeholder = defSubelement
+                atrib.appendChild(inp)
+                document.getElementById("form_content").appendChild(atrib)
             }
             button.addEventListener("click",function(){
                 Form.saveData(storage)
@@ -259,12 +276,39 @@ class Form{
         //---Modification form
         else{
             for (const [subName,subValue] of storage.getElement(productID).getSubelements()){
-                document.getElementById(`form_${subName}`).value = subValue
+                let atrib = document.createElement("div")
+                atrib.className = "form-group py-1"
+                let inp
+                if(subName != "description"){
+                    inp = document.createElement("input")
+                    inp.type = "text"
+                }else{
+                    inp = document.createElement("textarea")
+                    inp.name = "txtMsg"
+                }
+                inp.className = "input_field form-control"
+                inp.id = `form_${subName}`
+                inp.value = subValue
+                inp.placeholder = subName
+                /*
+                let deleteSubElm = document.createElement("button")
+                deleteSubElm.textContent = "Delete subelement"
+                deleteSubElm.addEventListener("click",function(){
+                    storage.getElement(productID).deleteSubelement(subName)
+                    Form.saveData(storage,productID)
+                })
+                */
+                atrib.appendChild(inp)
+                //atrib.appendChild(deleteSubElm)
+                document.getElementById("form_content").appendChild(atrib)
             }
             button.addEventListener("click",function(){
                 Form.saveData(storage,productID)
             })
         }
+        auxButton.appendChild(button)
+        document.getElementById("form_content").appendChild(auxButton)
+        //document.getElementById("submit_button_parent").appendChild(button)//elm
     }
     static saveData(storage,deletePred=null){
         let newProduct = new Product()
@@ -285,7 +329,7 @@ class Form{
 //---TESTS
 let storageSim = new Storage();
 MainPage.displayStorage(storageSim);
-//storageSim.getElement(1234).setSubelement("abrigo","ABRIGO NUEVO")
+storageSim.getElement(1234).setSubelement("abrigo","ABRIGO NUEVO")
 //---AJUSTES INDIVIDUALES
 document.getElementById("brand").addEventListener("click",function(){
     MainPage.displayStorage(storageSim);
