@@ -64,9 +64,14 @@ class Storage{
         return this.#elements
     }
     //---insertElement: sets to -autoIndex- key the -element- value
-    insertElement(element){
-        this.#elements.set(Storage.autoIndex,element)
-        Storage.autoIndex += 1
+    insertElement(element,pos=null){
+        if(pos==null){
+            this.#elements.set(Storage.autoIndex,element)
+            Storage.autoIndex += 1
+        }else{
+            this.#elements.set(pos,element)
+        }
+        
     }
     //---getElement: return the value contained in -index- key position
     getElement(index){
@@ -211,9 +216,11 @@ class ProductPage{
                     break;
                 case "delete_element":
                     button.addEventListener("click",function(){
-                        storage.deleteElement(productID)
-                        MainPage.displayStorage(storage)
-                        console.log("Product deleted")
+                        if(confirm("¿Seguro que quieres borrar este producto?")){
+                            storage.deleteElement(productID)
+                            MainPage.displayStorage(storage)
+                            console.log("Product deleted")
+                        }
                     })
                     break;
                 default:
@@ -317,10 +324,8 @@ class Form{
             newProduct.setSubelement(inputField.id.substring(5),inputField.value)
             console.log("Atribute loaded")
         }
-        storage.insertElement(newProduct)
-        if(deletePred != null){
-            storage.deleteElement(deletePred)
-        }
+        storage.insertElement(newProduct,deletePred)
+        
         console.log("Storage modified")
         document.getElementById("form_section").style.display = "block"
         MainPage.displayStorage(storage)
