@@ -184,31 +184,14 @@ class ProductPage{
         }
         console.log("All product's subelements were loaded")
         let prodButtons = document.getElementById("product_buttons")
-        PageUtils.removeChilds("product_buttons")
-        let quantity = document.createElement("input")
-        quantity.id = "inputQuantity"
-        quantity.className = "form-control text-center me-3"
-        quantity.type = "num"
-        quantity.value = "1"
-        quantity.style = "max-width: 3rem"
-        prodButtons.appendChild(quantity)
-        for (const element_buttons of ["add_to_cart","add_subelement","modify_subelements","delete_element"]) {
+        PageUtils.removeChilds("product_buttons")   
+        for (const element_buttons of ["modify_subelements","delete_element"]) {
             let button = document.createElement("button")
             button.className = "btn btn-outline-dark flex-shrink-0"
             button.id = element_buttons
             button.type = "button"
             button.textContent = element_buttons
             switch (element_buttons) {
-                case "add_to_cart":
-                    button.addEventListener("click",function(){
-                        alert("Cart not implemented yet")
-                    })
-                    break;
-                case "add_subelement":
-                    button.addEventListener("click",function(){
-                        alert("Add subelement form not implemneted yed")
-                    })
-                    break;
                 case "modify_subelements":
                     button.addEventListener("click",function(){
                         Form.displayForm(storage,productID)
@@ -253,6 +236,9 @@ class Form{
         //PageUtils.removeChilds("submit_button_parent")//elm
         let auxButton = document.createElement("div")
         auxButton.className = "form-group py-1 text-center"
+        let addButton = document.createElement("div");
+        addButton.className = "btnContact bg-info text-center";
+        addButton.textContent = "+";
         let button = document.createElement("div")
         button.className = "btnContact bg-info"
         button.textContent = "Submit"
@@ -275,6 +261,10 @@ class Form{
                 inp.placeholder = defSubelement
                 atrib.appendChild(inp)
                 document.getElementById("form_content").appendChild(atrib)
+
+                if(inp.value == ""){
+                    storage.getElement(productID).deleteSubelement(subName);
+                }
             }
             button.addEventListener("click",function(){
                 Form.saveData(storage)
@@ -297,6 +287,9 @@ class Form{
                 inp.id = `form_${subName}`
                 inp.value = subValue
                 inp.placeholder = subName
+                if(inp.value == ""){
+                    storage.getElement(productID).deleteSubelement(subName);
+                }
                 /*
                 let deleteSubElm = document.createElement("button")
                 deleteSubElm.textContent = "Delete subelement"
@@ -309,12 +302,31 @@ class Form{
                 //atrib.appendChild(deleteSubElm)
                 document.getElementById("form_content").appendChild(atrib)
             }
+            addButton.addEventListener("click",function(){
+                let newRow = document.createElement("div");
+                newRow.className = "form-group py-1 input-group";
+
+                let newAtrib = document.createElement("input");
+                newAtrib.type = "text";
+                newAtrib.className = "input_field form-control";
+                newAtrib.placeholder = "sub elemento";
+                let newValue = document.createElement("input");
+                newValue.type = "text";
+                newValue.className = "input_field form-control 25";
+                newValue.placeholder = "valor";
+
+                newRow.appendChild(newAtrib);
+                newRow.appendChild(newValue);
+                document.getElementById("form_content").insertBefore(newRow, auxButton);
+            })
             button.addEventListener("click",function(){
                 Form.saveData(storage,productID)
             })
         }
         auxButton.appendChild(button)
+
         document.getElementById("form_content").appendChild(auxButton)
+        document.getElementById("form_content").appendChild(addButton);
         //document.getElementById("submit_button_parent").appendChild(button)//elm
     }
     static saveData(storage,deletePred=null){
