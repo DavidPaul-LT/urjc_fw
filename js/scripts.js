@@ -97,9 +97,9 @@ class PageUtils{
         }
     }
     //---
-    static showOnly(sectionToShow){
+    static showOnly(sectionToShow, carousel=null){
         for (const section of document.getElementsByTagName("section")){
-            if(section.id == sectionToShow){
+            if(section.id == sectionToShow || section.id == carousel){
                 section.style.display = "block"
             }
             else{
@@ -114,7 +114,7 @@ class PageUtils{
 class MainPage{
     static displayStorage(storage){
         //---Sets display none to all the -section- whose id != "main_section"
-        PageUtils.showOnly("main_section")
+        PageUtils.showOnly("main_section", "carousel_section")
         let upperContainer = document.getElementById("product_container")
         //---Deletes all -product_container-'s elements
         PageUtils.removeChilds("product_container")
