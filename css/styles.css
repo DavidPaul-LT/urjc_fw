@@ -4,6 +4,9 @@
 * Copyright 2013-2022 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-homepage/blob/master/LICENSE)
 */
+html{
+  display: block;
+}
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -5452,8 +5455,6 @@ textarea.form-control-lg {
 .toast-container > :not(:last-child) {
   margin-bottom: 0.75rem;
 }
-
-
 
 .toast-header {
   display: flex;
