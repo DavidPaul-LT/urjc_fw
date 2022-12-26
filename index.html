@@ -13,6 +13,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/carousel.css">
+        <link rel="stylesheet" href="css/formulario.css">
     </head>
     <body>
         <!-- Navigation-->
@@ -113,30 +114,17 @@
                 </div>
             </div>
         </section>
-        <section id="form_section" class="container contact-form" style="display: none;">
-            <form method="post" id="form">
-                <div class="row">
-                  <div id="form_content" class="col-md-6" >
-                    <div class="form-group py-1">
-                        <input id="form_name" type="text" class="input_field form-control" placeholder="Nombre" value=""/>
+        <center>
+            <section id="form_section" class="contact-form" style="display: none;">
+                <form method="post" id="form" class="form"> 
+                    <div class="row">
+                        <div id="form_content" class="col-md-6" >
+                        </div>
                     </div>
-                    <div class="form-group py-1">
-                        <input id="form_image" type="text" class="input_field form-control" placeholder="Ruta imagen" value=""/>
-                    </div>
-                    <div class="form-group py-1">
-                        <input id="form_price" type="text" class="input_field form-control" placeholder="Precio" value=""/>
-                    </div>
-                    <div class="form-group py-1">
-                        <textarea id="form_description" name="txtMsg" class="input_field form-control" placeholder="Descripcion" style="width: 100%; height: 175px;"></textarea>
-                      </div>
-                    <div id="submit_button_parent" class="form-group py-1 text-center">
-                      <div id="submit_button" class="btnContact bg-info">Submit</div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-        </section>
-        <!-- Footer-->
+                </form>
+            </section>
+        </center>
+    <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>
         </footer>

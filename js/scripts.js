@@ -223,9 +223,9 @@ class Form{
             document.getElementById("form_section").style.display = "none"
             console.log("Form hidden")
         }else{
-            console.log("Form showed")
             document.getElementById("form_section").style.display = "block"
             Form.showFormInputs(storage,productID)
+            console.log("Form showed")
         }
     }
      static showFormInputs(storage,productID=null){
@@ -235,9 +235,9 @@ class Form{
         PageUtils.removeChilds("form_content")
         //PageUtils.removeChilds("submit_button_parent")//elm
         let auxButton = document.createElement("div")
-        auxButton.className = "form-group py-1 text-center"
+        auxButton.className = "form-group py-3"
         let addButton = document.createElement("div");
-        addButton.className = "btnContact bg-info text-center";
+        addButton.className = "btnContact bg-info";
         addButton.textContent = "+";
         let button = document.createElement("div")
         button.className = "btnContact bg-info"
@@ -269,34 +269,26 @@ class Form{
         //---Modification form
         else{
             for (const [subName,subValue] of storage.getElement(productID).getSubelements()){
-                let atrib = document.createElement("div")
-                atrib.className = "form-group py-1"
-                let inp
-                if(subName != "description"){
+                if(subValue == ""){
+                    storage.getElement(productID).deleteSubelement(subName);
+                } else {
+                    let atrib = document.createElement("div")
+                    atrib.className = "form-group py-1"
+                    let inp
                     inp = document.createElement("input")
                     inp.type = "text"
-                }else{
-                    inp = document.createElement("textarea")
-                    inp.name = "txtMsg"
+                    inp.className = "input_field form-control"
+                    inp.id = `form_${subName}`
+                    inp.value = subValue
+                    inp.placeholder = subName
+                    /*if(inp.value == ""){
+                        storage.getElement(productID).deleteSubelement(subName);
+                    }*/
+
+                    atrib.appendChild(inp)
+                    //atrib.appendChild(deleteSubElm)
+                    document.getElementById("form_content").appendChild(atrib)
                 }
-                inp.className = "input_field form-control"
-                inp.id = `form_${subName}`
-                inp.value = subValue
-                inp.placeholder = subName
-                if(inp.value == ""){
-                    storage.getElement(productID).deleteSubelement(subName);
-                }
-                /*
-                let deleteSubElm = document.createElement("button")
-                deleteSubElm.textContent = "Delete subelement"
-                deleteSubElm.addEventListener("click",function(){
-                    storage.getElement(productID).deleteSubelement(subName)
-                    Form.saveData(storage,productID)
-                })
-                */
-                atrib.appendChild(inp)
-                //atrib.appendChild(deleteSubElm)
-                document.getElementById("form_content").appendChild(atrib)
             }
             addButton.addEventListener("click",function(){
                 let newRow = document.createElement("div");
@@ -329,7 +321,7 @@ class Form{
     static saveData(storage,deletePred=null){
         let maximo = document.getElementsByClassName("input_field").length;
         let newProduct = new Product()
-        console.log(maximo);
+        console.log(maximo + "es esto");
         for (const inputField of document.getElementsByClassName("input_field")){
             console.log(inputField.id.substring(0))
             newProduct.setSubelement(inputField.id.substring(5),inputField.value)
