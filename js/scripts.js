@@ -228,7 +228,7 @@ class Form{
             Form.showFormInputs(storage,productID)
         }
     }
-    static showFormInputs(storage,productID=null){
+     static showFormInputs(storage,productID=null){
         Form.showFormInputs(storage,productID)
     }
     static showFormInputs(storage,productID=null){
@@ -261,10 +261,6 @@ class Form{
                 inp.placeholder = defSubelement
                 atrib.appendChild(inp)
                 document.getElementById("form_content").appendChild(atrib)
-
-                if(inp.value == ""){
-                    storage.getElement(productID).deleteSubelement(subName);
-                }
             }
             button.addEventListener("click",function(){
                 Form.saveData(storage)
@@ -322,17 +318,20 @@ class Form{
             button.addEventListener("click",function(){
                 Form.saveData(storage,productID)
             })
+            document.getElementById("form_content").appendChild(addButton);
+            console.log(storage.getElement(productID).getSubelements());
         }
+        
         auxButton.appendChild(button)
-
         document.getElementById("form_content").appendChild(auxButton)
-        document.getElementById("form_content").appendChild(addButton);
         //document.getElementById("submit_button_parent").appendChild(button)//elm
-    }
+    } 
     static saveData(storage,deletePred=null){
+        let maximo = document.getElementsByClassName("input_field").length;
         let newProduct = new Product()
+        console.log(maximo);
         for (const inputField of document.getElementsByClassName("input_field")){
-            console.log(inputField.id.substring(5))
+            console.log(inputField.id.substring(0))
             newProduct.setSubelement(inputField.id.substring(5),inputField.value)
             console.log("Atribute loaded")
         }
