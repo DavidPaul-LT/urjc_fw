@@ -153,10 +153,17 @@ class MainPage{
             console.log("Product was showed")
         }
         console.log("All products were shown successfuly!")
+        // in case of any elements show a message  
+        if(document.getElementsByClassName("card").length == 0){
+            let message = document.createElement("div");
+            message.textContent = "No hay elementos disponibles";
+            message.className = "text-center py-5";
+            upperContainer.appendChild(message);
+        }
     }
 }
 /*
-    class ProductPage: display all Product's subelemnets in "product_section"
+class ProductPage: display all Product's subelemnets in "product_section"
 */
 class ProductPage{
     static displayProduct(storage,productID,productInfo){
@@ -284,7 +291,7 @@ class Form{
                     inp = document.createElement("input")
                     inp.type = "text"
                     inp.className = "input_field form-control"
-                    inp.id = `form_${subName}`
+                    inp.id = subName
                     inp.value = subValue
                     inp.placeholder = subName
                     /*if(inp.value == ""){
@@ -329,9 +336,7 @@ class Form{
     } 
     static saveData(storage,deletePred=null){
         if(!deletePred){
-            let maximo = document.getElementsByClassName("input_field").length;
             let newProduct = new Product()
-            console.log(maximo + "es esto");
             for (const inputField of document.getElementsByClassName("input_field")){
                 console.log(inputField.id.substring(0))
                 newProduct.setSubelement(inputField.id.substring(5),inputField.value)
@@ -339,6 +344,9 @@ class Form{
             }
             storage.insertElement(newProduct,deletePred)
         } else {
+            for(const [subName,subValue] of storage.getElement(deletePred).getSubelements()){
+                storage.getElement(deletePred).setSubelement(document.getElementById(`${subName}`).placeholder,document.getElementById(`${subName}`).value)
+            }
             let maximo = document.getElementsByClassName("AtribName").length;
             let i = 0;
             while(i < maximo){
