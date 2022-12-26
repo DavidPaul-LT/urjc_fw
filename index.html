@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="css/formulario.css">
     </head>
     <body>
-        <!-- Navigation-->
+        <!-- Navegation bar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-info">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="#!" id="brand">SOLACE</a>
@@ -59,15 +59,11 @@
         <section id="carousel_section"> 
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="assets/carrousel_images/carrousel1.jpg" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="assets/carrousel_images/carrousel2.jpg" class="d-block w-100" alt="...">
-                  </div>
-                  <div class="carousel-item">
-                    <img src="assets/carrousel_images/carrousel4.jpg" class="d-block w-100" alt="...">
-                  </div>
+                  <div class="carousel-item active"><img src="assets/carrousel_images/carrousel1.jpg" class="d-block w-100" alt="..."></div>
+                  <div class="carousel-item"><img src="assets/carrousel_images/carrousel2.jpg" class="d-block w-100" alt="..."></div>
+                  <div class="carousel-item"><img src="assets/carrousel_images/carrousel4.jpg" class="d-block w-100" alt="..."></div>
+                  <div class="carousel-item"><img src="assets/carrousel_images/carrousel5.jpg" class="d-block w-100" alt="..."></div>
+                  <div class="carousel-item"><img src="assets/carrousel_images/carrousel6.jpg" class="d-block w-100" alt="..."></div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -81,49 +77,43 @@
         </section>
     
 
-        <!--Section principal: contiene los elementos contenidos en el almacén-->
-        <section id="main_section" class="py-5">
+        <!--Main Section: contiene los elementos contenidos en el almacén-->
+        <section id="main_section" class="py-1">
             <!--DIV que contiene la lista de elementos-->
-            <div class="container px-4 px-lg-5 mt-5">
-                <div id="product_container" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-5 justify-content-center"></div>
+            <div class="container px-5 px-lg-5 mt-5">
+                <div id="product_container" class="row gx-5 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"></div>
             </div>
-            <div class="col-md-6 offset-md-3 justify-content-center text-center">
-                <div id="form_button" class="btnContact-np btn mb-5 bg-info">Añadir producto</div>
-            </div>
+            <div class="col-md-6 offset-md-3 justify-content-center text-center"><div id="form_button" class="btnContact-np btn mb-5 bg-info">Añadir producto</div></div>
         </section>
-        <!--Section producto: contiene los subelemento de un determinado elemento-->
+
+        <!--Product Section: contiene los subelemento de un determinado elemento-->
         <section id="product_section" class="py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img id="product_image" class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." /></div>
                     <div class="col-md-6">
-                        <img id="product_image" class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg" alt="..." />
-                    </div>
-                    <div class="col-md-6">
-                        <div id="product_id" class="small mb-1">SKU: BST-498</div>
-                        <h1 id="product_name" class="display-5 fw-bolder">Shop item template</h1>
-                        <div class="fs-5 mb-5">
-                            <span id="product_price">$40.00</span>
-                        </div>
-                        <p id="product_description" class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
-                        <div id="extra_subelements">
-                            
-                        </div>
-                        <div id="product_buttons" class="d-flex">
-                        </div>
+                        <div id="product_id" class="small mb-1"></div>
+                        <h1 id="product_name" class="display-5 fw-bolder"></h1>
+                        <div class="fs-5 mb-5"><span id="product_price"></span></div>
+                        <p id="product_description" class="lead"></p>
+                        <div id="extra_subelements"></div>
+                        <div id="product_buttons" class="d-flex"></div>
                     </div>
                 </div>
             </div>
         </section>
+        
+
+        <!-- Form Section -->
         <center>
-            <section id="form_section" class="contact-form" style="display: none;">
-                <form method="post" id="form" class="form"> 
-                    <div class="row">
-                        <div id="form_content" class="col-md-6" >
-                        </div>
-                    </div>
-                </form>
-            </section>
+        <section id="form_section" class="contact-form" style="display: none;">
+            <form method="post" id="form" class="form"> 
+                <div id="form_content" class="col-md-6" >
+                </div>
+            </form>
+        </section>
         </center>
+        
     <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p></div>

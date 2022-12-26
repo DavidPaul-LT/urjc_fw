@@ -113,6 +113,9 @@ class PageUtils{
 */
 class MainPage{
     static displayStorage(storage){
+        // close form helper
+        document.getElementById("form_section").style.display = "none"
+        document.getElementById("form_button").textContent = "añadir producto";
         //---Sets display none to all the -section- whose id != "main_section"
         PageUtils.showOnly("main_section", "carousel_section")
         let upperContainer = document.getElementById("product_container")
@@ -221,9 +224,11 @@ class Form{
         let aux = document.getElementById("form_section").style.display
         if(aux == "block"){
             document.getElementById("form_section").style.display = "none"
+            document.getElementById("form_button").textContent = "añadir producto";
             console.log("Form hidden")
         }else{
             document.getElementById("form_section").style.display = "block"
+            document.getElementById("form_button").textContent = "cerrar formulario";
             Form.showFormInputs(storage,productID)
             console.log("Form showed")
         }
@@ -268,6 +273,7 @@ class Form{
         }
         //---Modification form
         else{
+            let cantidadAtributos = 0;
             for (const [subName,subValue] of storage.getElement(productID).getSubelements()){
                 if(subValue == ""){
                     storage.getElement(productID).deleteSubelement(subName);
@@ -296,12 +302,15 @@ class Form{
 
                 let newAtrib = document.createElement("input");
                 newAtrib.type = "text";
-                newAtrib.className = "input_field form-control";
+                newAtrib.className = "AtribName form-control";
                 newAtrib.placeholder = "sub elemento";
+                newAtrib.id = "newAN" + cantidadAtributos;
                 let newValue = document.createElement("input");
                 newValue.type = "text";
-                newValue.className = "input_field form-control 25";
+                newValue.className = "AtribValue form-control 25";
                 newValue.placeholder = "valor";
+                newValue.id = "newVN" + cantidadAtributos;
+                cantidadAtributos += 1;
 
                 newRow.appendChild(newAtrib);
                 newRow.appendChild(newValue);
@@ -319,16 +328,26 @@ class Form{
         //document.getElementById("submit_button_parent").appendChild(button)//elm
     } 
     static saveData(storage,deletePred=null){
-        let maximo = document.getElementsByClassName("input_field").length;
-        let newProduct = new Product()
-        console.log(maximo + "es esto");
-        for (const inputField of document.getElementsByClassName("input_field")){
-            console.log(inputField.id.substring(0))
-            newProduct.setSubelement(inputField.id.substring(5),inputField.value)
-            console.log("Atribute loaded")
+        if(!deletePred){
+            let maximo = document.getElementsByClassName("input_field").length;
+            let newProduct = new Product()
+            console.log(maximo + "es esto");
+            for (const inputField of document.getElementsByClassName("input_field")){
+                console.log(inputField.id.substring(0))
+                newProduct.setSubelement(inputField.id.substring(5),inputField.value)
+                console.log("Atribute loaded")
+            }
+            storage.insertElement(newProduct,deletePred)
+        } else {
+            let maximo = document.getElementsByClassName("AtribName").length;
+            let i = 0;
+            while(i < maximo){
+                if(document.getElementById(`newAN${maximo - 1}`).value != ""){
+                    storage.getElement(deletePred).setSubelement(document.getElementById(`newAN${i}`).value, document.getElementById(`newVN${i}`).value);
+                }
+                i++;
+            }
         }
-        storage.insertElement(newProduct,deletePred)
-        
         console.log("Storage modified")
         document.getElementById("form_section").style.display = "block"
         MainPage.displayStorage(storage)
