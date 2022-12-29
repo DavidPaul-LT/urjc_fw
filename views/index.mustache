@@ -14,16 +14,16 @@
 		<!--Section principal: contiene los elementos contenidos en el almacén-->
         <section id="main_section" class="py-5">
             <!--DIV que contiene la lista de elementos-->
-            <div class="container px-4 px-lg-5 mt-5">
-                <div id="product_container" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-5 justify-content-center">
+            <div class="container px-4 px-lg-4 mt-4">
+                <div id="product_container" class="row gx-4 gx-lg-4 row-cols-2 row-cols-md-3 row-cols-xl-5 justify-content-center">
                     {{#storage}}
 					<!--ELEMENTO-->
-                    <div id="upper" class="col mb-5">
-                        <a id="master" class="card h-100" href="product/{{id}}">
+                    <div id="upper" class="col py-4 px-4 mb-4">
+                        <a id="master" class="card h-100" href="product/{{id}}" style="color: black;">
                             <!-- Product image-->
                             <img class="card-img-top" src="{{image}}" alt="..." />
                             <!-- Product details-->
-                            <div id="details" class="card-body p-4">
+                            <div id="details" class="card-body py-2">
                                 <div id="details_content" class="text-center">
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">{{name}}</h5>
@@ -39,9 +39,11 @@
 			{{^storage}}
 				<p>No products added yet.</p>
 			{{/storage}}
-            <div class="col-md-6 offset-md-3 justify-content-center">
-                <div id="form_button" class="btnContact-np btn mb-5 bg-info">Añadir producto</div>
-            </div>
+            <center>
+                <div class="col-md-6">
+                    <div id="form_button" class="btnContact-np btn bg-info">Añadir producto</div>
+                </div>
+            </center>
         </section>
         {{> footer_bootstrap}}
 	</body>
