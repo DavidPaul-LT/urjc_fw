@@ -1,6 +1,0 @@
-name: Flowknit Ultra-Soft Performance Polo
-price: USD35
-colors: [grey,green,blue,red]
-sizes: [S,M,L,XL]
-cat: Polo
-page: https://www.onequince.com/men/recycled-flowknit-performance-polo?color=navy&gender=men&tracker=collection__All%20Products
