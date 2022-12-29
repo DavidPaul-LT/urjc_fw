@@ -10,20 +10,20 @@ router.get('/', (req, res) => {
     });
 }); 
 //--- POST from Insertion Form
-router.post('/post/new', (req, res) => {
+router.post('/product/new', (req, res) => {
     let {name, image, price, description} = req.body;
     boardService.addPost({name, image, price, description});
     res.render('saved_product');
 });
 //---gets from -storage- the Product whose -id- is param id
-router.get('/post/:id', (req, res) => {
+router.get('/product/:id', (req, res) => {
     let product = storageService.getElement(req.params.id);
     res.render('show_product', {product});
 });
 //---removes from -storage- the Product associated with param id key
-router.get('/post/:id/delete', (req, res) => {
+router.get('/product/:id/delete', (req, res) => {
     storageService.removeElement(req.params.id);
-    res.render('deleted_product');
+    res.redirect('/');
 });
 
 export default router;
