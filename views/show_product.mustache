@@ -1,0 +1,40 @@
+<html>
+	{{> head}}
+	<body>
+		{{> navigation}}
+		<!--Section producto: contiene los subelemento de un determinado elemento-->
+        <section id="product_section" class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6">
+                        <img id="product_image" class="card-img-top mb-5 mb-md-0" src="{{product.image}}" alt="..." />
+                    </div>
+                    <div class="col-md-6">
+                        <div id="product_id" class="small mb-1">SKU: BST-498</div>
+                        <h1 id="product_name" class="display-5 fw-bolder">{{product.name}}</h1>
+                        <div class="fs-5 mb-5">
+                            <span id="product_price">${{product.price}}.00</span>
+                        </div>
+                        <p id="product_description" class="lead">{{product.description}}</p>
+                        <div id="extra_subelements">
+                            
+                        </div>
+                        <div id="product_buttons" class="d-flex">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <i class="bi-cart-fill me-1"></i>
+                                Add to cart
+                            </button>
+                            <button id="form_subelements" class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <i class="bi bi-sliders2-vertical"></i>
+                                Modificar
+                            </button>
+                            <a href="/product/{{product.id}}/delete" class="btn btn-outline-dark flex-shrink-0">Delete product</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+		{{> footer_bootstrap}}
+	</body>
+</html>
