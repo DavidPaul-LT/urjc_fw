@@ -1,17 +1,5 @@
 <html>
-	<head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Solace Online Shop Homepage</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
+	{{> head}}
 	<body>
 		<!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-info">
@@ -56,30 +44,29 @@
             <!--DIV que contiene la lista de elementos-->
             <div class="container px-4 px-lg-5 mt-5">
                 <div id="product_container" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-5 justify-content-center">
-                    <!--ELEMENTO-->
-					{{#posts}}
+                    {{#storage}}
+					<!--ELEMENTO-->
                     <div id="upper" class="col mb-5">
-                        <div id="master" class="card h-100">
+                        <a id="master" class="card h-100" href="post/{{id}}">
                             <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <img class="card-img-top" src="{{image}}" alt="..." />
                             <!-- Product details-->
                             <div id="details" class="card-body p-4">
                                 <div id="details_content" class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
-									<a href="post/{{id}}">{{user}} {{title}}</a><br>
+                                    <h5 class="fw-bolder">{{name}}</h5>
                                     <!-- Product price-->
-                                    <p>$40.00 - $80.00</p>
+                                    <p>${{price}}.00</p>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
-					{{/posts}}			
+					{{/storage}}			
                 </div>
             </div>
-			{{^posts}}
-				<p>No posts yet.</p>
-			{{/posts}}
+			{{^storage}}
+				<p>No product added yet.</p>
+			{{/storage}}
             <div class="col-md-6 offset-md-3 justify-content-center">
                 <div id="form_button" class="btnContact-np btn mb-5 bg-info">Añadir producto</div>
             </div>
@@ -90,7 +77,5 @@
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS
-        <script src="js/scripts.js"></script>-->
 	</body>
 </html>

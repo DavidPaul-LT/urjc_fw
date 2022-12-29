@@ -4,24 +4,25 @@ import * as storageService from './storageService.js';
 const router = express.Router();
 //---gets from -storage- all the Product instances
 router.get('/', (req, res) => {
+    let datos = storageService.getStorage();
     res.render('index', { 
-        storage: storageService.storage.getElements()
+        storage: datos
     });
 }); 
 //--- POST from Insertion Form
 router.post('/post/new', (req, res) => {
-    let { user, title, text } = req.body;
-    boardService.addPost({ user, title, text });
+    let {name, image, price, description} = req.body;
+    boardService.addPost({name, image, price, description});
     res.render('saved_post');
 });
 //---gets from -storage- the Product whose -id- is param id
 router.get('/post/:id', (req, res) => {
-    let product = storageService.storage.getElement(req.params.id);
-    res.render('show_post', { product });
+    let product = storageService.getElement(req.params.id);
+    res.render('show_post', {product});
 });
 //---removes from -storage- the Product associated with param id key
 router.get('/post/:id/delete', (req, res) => {
-    storageService.storage.deleteElement(req.params.id);
+    storageService.removeElement(req.params.id);
     res.render('deleted_post');
 });
 
