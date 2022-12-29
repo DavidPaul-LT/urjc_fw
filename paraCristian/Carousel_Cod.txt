@@ -1,0 +1,25 @@
+<!-- Carusell -->
+  <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="4000">
+        <img src="../index/carousel_images/balancing-g64abab1aa_1920.jpg"  class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item" data-bs-interval="4000">
+        <img src="../index/carousel_images/people-g859a0dbd6_1920.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item" data-bs-interval="4000">
+        <img src="../index/carousel_images/woman-g528aea1de_1920.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item" data-bs-interval="4000">
+        <img src="../index/carousel_images/woman-gd2ea872d2_1920.jpg" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
