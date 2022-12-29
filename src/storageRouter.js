@@ -5,7 +5,7 @@ const router = express.Router();
 //---gets from -storage- all the Product instances
 router.get('/', (req, res) => {
     res.render('index', { 
-        products: storageService.storage.getElements()
+        storage: storageService.storage.getElements()
     });
 }); 
 //--- POST from Insertion Form

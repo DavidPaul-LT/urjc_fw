@@ -1,7 +1,8 @@
+import { Product } from "./productService.js"
 /*
     Class Storage: Contains all the Product instances created
 */
-export class Storage{
+export class Storage{ 
     static autoIndex = 1234
     static defaultProducts = [
         ['Camisa de lana elástica',60,'assets/product/1234.jpg','Esta camisa tiene un aspecto de punto clásico y versátil, perfecta para el otoño. Fabricada con un tejido súper suave y elástico, proporciona un ajuste natural al cuerpo.'],

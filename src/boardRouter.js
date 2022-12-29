@@ -4,7 +4,7 @@ import * as boardService from './boardService.js';
 const router = express.Router();
  
 router.get('/', (req, res) => {
-
+ 
     res.render('index', { 
         posts: boardService.getPosts() 
     });

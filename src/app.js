@@ -16,7 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../public'));
 
 
-
+ 
 app.use('/', boardRouter);
+//app.use('/', storageRouter);
 
 app.listen(3000, () => console.log('Listening on port 3000!'));
