@@ -2,33 +2,75 @@
 	{{> head}}
 	<body>
 		{{> navigation}}
-		<!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">SOLACE</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Descuentos de hasta el 50%</p>
+        <!-- Carousel -->
+        <section id="carousel_section"> 
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="assets/carrousel_images/CPIC1.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1><b>SOLACE</b></h1>
+                            <h4 class="text-info">Descuentos de hasta el 50%</h4>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/carrousel_images/CPIC2.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1><b>SOLACE</b></h1>
+                            <h4 class="text-info">Descuentos de hasta el 50%</h4>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/carrousel_images/CPIC4.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1><b>SOLACE</b></h1>
+                            <h4 class="text-info">Descuentos de hasta el 50%</h4>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/carrousel_images/CPIC5.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1><b>SOLACE</b></h1>
+                            <h4 class="text-info">Descuentos de hasta el 50%</h4>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/carrousel_images/CPIC6.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1><b>SOLACE</b></h1>
+                            <h4 class="text-info">Descuentos de hasta el 50%</h4>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </header>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </section>
 		<!--Section principal: contiene los elementos contenidos en el almacén-->
         <section id="main_section" class="py-5">
             <!--DIV que contiene la lista de elementos-->
-            <div class="container px-4 px-lg-4 mt-4">
-                <div id="product_container" class="row gx-4 gx-lg-4 row-cols-2 row-cols-md-3 row-cols-xl-5 justify-content-center">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div id="product_container" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-5 justify-content-center">
                     {{#storage}}
 					<!--ELEMENTO-->
-                    <div id="upper" class="col py-4 px-4 mb-4">
+                    <div id="upper" class="col mb-5">
                         <a id="master" class="card h-100" href="product/{{id}}" style="color: black;">
                             <!-- Product image-->
                             <img class="card-img-top" src="{{image}}" alt="..." />
                             <!-- Product details-->
-                            <div id="details" class="card-body py-2">
+                            <div id="details" class="card-body p-4">
                                 <div id="details_content" class="text-center">
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">{{name}}</h5>
                                     <!-- Product price-->
-                                    <p>${{price}}.00</p>
+                                    <br>
+                                    <p class="position-absolute bottom-0 start-50 translate-middle-x">${{price}}.00</p>
                                 </div>
                             </div>
                         </a>
