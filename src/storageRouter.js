@@ -1,10 +1,11 @@
 import express from 'express';
 import * as storageService from './storageService.js';
+import * as form from './form.js';
 
 const router = express.Router();
 //---gets from -storage- all the Product instances
 router.get('/', (req, res) => {
-    let datos = storageService.getStorage();
+    c
     res.render('index', { 
         storage: datos
     });
@@ -17,6 +18,8 @@ router.post('/product/new', (req, res) => {
 });
 //---gets from -storage- the Product whose -id- is param id
 router.get('/product/:id', (req, res) => {
+    let datos = storageService.getStorage();
+    form.Form.showFormInputs(datos, req.params.id);
     let product = storageService.getElement(req.params.id);
     res.render('show_product', {product});
 });

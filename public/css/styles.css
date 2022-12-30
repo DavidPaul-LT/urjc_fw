@@ -1,3 +1,4 @@
+
 @charset "UTF-8";
 /*!
 * Start Bootstrap - Shop Homepage v5.0.5 (https://startbootstrap.com/template/shop-homepage)
@@ -11272,6 +11273,7 @@ textarea.form-control-lg {
     display: grid !important;
   }
 
+
   .d-print-table {
     display: table !important;
   }
@@ -11295,4 +11297,36 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+}
+/* FORMULARIO CSS */
+.contact-form{
+  background: #212529;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  width: 70%;
+  border-radius: 1rem;
+}
+
+.contact-form .form{
+  padding: 10%;
+}
+
+.contact-form .btnContact {
+  width: 50%;
+  border: none;
+  border-radius: 1rem;
+  padding: 1.5%;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btnContact-np{
+  border: none;
+  padding: 1rem;
+  width: 90%;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
 }
