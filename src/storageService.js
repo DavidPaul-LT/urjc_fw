@@ -19,11 +19,6 @@ export function removeElement(elementID){
 export function getElement(elementID){
     return storage.get(elementID);
 }
-export function getElementsOfProduct(elementID){
-    for(let i = 0; i < getElement(elementID).length; i++){
-        return alert('hola');
-    }
-}
 /*
     DEFAULT ELEMENT COLLECTION
 */
