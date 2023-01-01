@@ -18,7 +18,21 @@ router.post('/product/new', (req, res) => {
 //---gets from -storage- the Product whose -id- is param id
 router.get('/product/:id', (req, res) => {
     let product = storageService.getElement(req.params.id);
-    res.render('show_product', {product});
+    let subElementos = []; 
+    let i = 0;
+    for(let key in product){
+        // Compruebe si la propiedad realmente existe
+        if(product.hasOwnProperty(key)){
+            subElementos[i] = product[key];
+            // Haz algo con el artículo:
+            // console.log(key,value);
+            i++;
+        }
+    }
+    res.render('show_product', {
+        product,
+        subElementos
+    });
 });
 //---removes from -storage- the Product associated with param id key
 router.get('/product/:id/delete', (req, res) => {
