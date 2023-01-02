@@ -4,6 +4,7 @@
 		{{> navigation}}
 		<!--Section producto: contiene los subelemento de un determinado elemento-->
         <section id="product_section" class="py-5">
+            {{#product}}
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6">
@@ -35,7 +36,7 @@
                             <script>
                                 function confirmar(){
                                     if(window.confirm('Esta seguro de borrar el elemento {{product.name}}?')){
-                                        window.open('/product/{{product.id}}/delete');
+                                        window.location.assign('/product/{{product.id}}/delete');
                                     }
                                 }
                             </script>  
@@ -43,6 +44,10 @@
                     </div>
                 </div>
             </div>
+            {{/product}}
+            {{^product}}
+            {{> product_not_found}}
+            {{/product}}
         </section>
 		{{> footer_bootstrap}}
 	</body>

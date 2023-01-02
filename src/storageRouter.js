@@ -31,7 +31,7 @@ router.get('/product/:id', (req, res) => {
 //---removes from -storage- the Product associated with param id key
 router.get('/product/:id/delete', (req, res) => {
     storageService.removeElement(req.params.id);
-    res.redirect('/');
+    res.render('deleted_product');
 });
 //--- goes to the cart page
 router.get('/cart',(req, res) => {
