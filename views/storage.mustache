@@ -1,0 +1,19 @@
+{{#storage}}
+<!--ELEMENTO-->
+<div id="upper" class="col mb-5">
+    <a id="master" class="card h-100" href="product/{{id}}" style="color: black;">
+        <!-- Product image-->
+        <img class="card-img-top" src="{{image}}" alt="..." />
+        <!-- Product details-->
+        <div id="details" class="card-body p-4">
+            <div id="details_content" class="text-center">
+                <!-- Product name-->
+                <h5 class="fw-bolder">{{name}}</h5>
+                <!-- Product price-->
+                <br>
+                <p class="position-absolute bottom-0 start-50 translate-middle-x">${{price}}.00</p>
+            </div>
+        </div>
+    </a>
+</div>
+{{/storage}}	
