@@ -26,7 +26,8 @@ router.post('/product/new', (req, res) => {
 //---gets from -storage- the Product whose -id- is param id
 router.get('/product/:id', (req, res) => {
     let product = storageService.getElement(req.params.id);
-    res.render('product_page', {product});
+    let subElements = storageService.getSubElements(req.params.id);
+    res.render('product_page', {product, subElements});
 });
 //---removes from -storage- the Product associated with param id key
 router.get('/product/:id/delete', (req, res) => {

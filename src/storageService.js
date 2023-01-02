@@ -19,6 +19,20 @@ export function removeElement(elementID){
 export function getElement(elementID){
     return storage.get(elementID);
 }
+export function getSubElements(elementID){
+    let subelements = [];
+    let subElement = {};
+    Object.entries(storage.get(elementID)).map(entry => {
+        const[key, value] = entry;
+        subElement = {
+            'name': key,
+            'value': value
+        }
+        subelements[subelements.length] = subElement;
+    })
+    console.log(subelements);
+    return subelements;
+}
 /*
     DEFAULT ELEMENT COLLECTION
 */

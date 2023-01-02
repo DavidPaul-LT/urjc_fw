@@ -1,4 +1,4 @@
-const products_to_load = 5;
+const products_to_load = 4;
 
 let starting_product = 0;
 
