@@ -26,9 +26,14 @@ router.post('/product/new', (req, res) => {
 //---gets from -storage- the Product whose -id- is param id
 router.get('/product/:id', (req, res) => {
     let product = storageService.getElement(req.params.id);
-    let subElements = storageService.getSubElements(req.params.id);
-    res.render('product_page', {product, subElements});
+    res.render('product_page', {product});
 });
+
+router.get('/product/:id/formulario', (req, res) => {
+    console.log(req.params.id);
+    let subElements = storageService.getSubElements(req.params.id);
+    res.render('formulario_general', {subElements});
+})
 //---removes from -storage- the Product associated with param id key
 router.get('/product/:id/delete', (req, res) => {
     storageService.removeElement(req.params.id);

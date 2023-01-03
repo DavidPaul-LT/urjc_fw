@@ -25,10 +25,10 @@
                                 <i class="bi-cart-fill me-1"></i>
                                 Añadir al carrito
                             </a>
-                            <button id="form_subelements" class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <a id="form_subelements" href="/product/{{product.id}}/formulario" class="btn btn-outline-dark flex-shrink-0" type="button">
                                 <i class="bi bi-sliders2-vertical"></i>
                                 Modificar
-                            </button>
+                            </a>
                             <button href="/product/{{product.id}}/delete" class="btn btn-outline-dark flex-shrink-0" onclick="confirmar()">
                                 Delete product
                             </button>
@@ -44,7 +44,6 @@
                 </div>
             </div>
         </section>
-        {{> formulario_general}}
 		{{> footer_bootstrap}}
 	</body>
 </html>
