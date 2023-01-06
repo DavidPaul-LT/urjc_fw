@@ -19,9 +19,9 @@ router.get('/loadProducts', (req, res) => {
 });
 //--- POST from Insertion Form
 router.post('/productNew', (req, res) => {
-    let {name, image, price, description} = req.body;
-    storageService.insertElement({name, image, price, description});
-    res.render('index');
+    storageService.insertElement(req.body);
+    console.log(req.body);
+    res.redirect('/');
 });
 //---gets from -storage- the Product whose -id- is param id
 router.get('/product/:id', (req, res) => {
