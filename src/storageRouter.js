@@ -19,7 +19,8 @@ router.get('/loadProducts', (req, res) => {
 });
 //--- POST from Insertion Form
 router.post('/productNew', (req, res) => {
-    storageService.insertElement(req.body);
+    console.log(req.body.id);
+    storageService.insertElement(req.body,req.body.id);
     console.log(req.body);
     res.redirect('/');
 });
