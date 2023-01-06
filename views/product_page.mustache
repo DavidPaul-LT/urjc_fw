@@ -1,0 +1,54 @@
+<html>
+	{{> head}}
+	<body>
+		{{> navigation}}
+		<!--Section producto: contiene los subelemento de un determinado elemento-->
+        <section id="product_section" class="py-5">
+            {{#product}}
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6">
+                        <img id="product_image" class="card-img-top mb-5 mb-md-0" src="{{product.image}}" alt="..." />
+                    </div>
+                    <div class="col-md-6">
+                        <div id="product_id" class="small mb-1">ID: {{product.id}}</div>
+                        <h1 id="product_name" class="display-5 fw-bolder">{{product.name}}</h1>
+                        <div class="fs-5 mb-5">
+                            <span id="product_price">${{product.price}}.00</span>
+                        </div>
+                        <p id="product_description" class="lead">{{product.description}}</p>
+                        <div id="extra_subelements">
+                            <!-- Subelementos aquí: cada uno es un párrafo nuevo -->                            
+                        </div>
+                        <div id="product_buttons" class="d-flex">
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                            <a href="cart/{{product.id}}" class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <i class="bi-cart-fill me-1"></i>
+                                Añadir al carrito
+                            </a>
+                            <a id="form_subelements" href="/product/{{product.id}}/form" class="btn btn-outline-dark flex-shrink-0" type="button">
+                                <i class="bi bi-sliders2-vertical"></i>
+                                Modificar
+                            </a>
+                            <button href="/product/{{product.id}}/delete" class="btn btn-outline-dark flex-shrink-0" onclick="confirmar()">
+                                Delete product
+                            </button>
+                            <script>
+                                function confirmar(){
+                                    if(window.confirm('Esta seguro de borrar el elemento {{product.name}}?')){
+                                        window.location.assign('/product/{{product.id}}/delete');
+                                    }
+                                }
+                            </script>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/product}}
+            {{^product}}
+            {{> product_not_found}}
+            {{/product}}
+        </section>
+		{{> footer_bootstrap}}
+	</body>
+</html>
