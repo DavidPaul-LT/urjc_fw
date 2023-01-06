@@ -14,19 +14,30 @@ router.get('/loadProducts', (req, res) => {
     const begin = parseInt(req.query.begin);
     const to = parseInt(req.query.end);
     res.render('storage', {
-        storage: storageService.getStorage().slice(begin,to)
+    storage: storageService.getStorage().slice(begin,to)
     });
 });
 //--- POST from Insertion Form
-router.post('/product/new', (req, res) => {
+router.post('/productNew', (req, res) => {
     let {name, image, price, description} = req.body;
-    boardService.addPost({name, image, price, description});
-    res.render('saved_product');
+    storageService.insertElement({name, image, price, description});
+    res.render('index');
 });
 //---gets from -storage- the Product whose -id- is param id
 router.get('/product/:id', (req, res) => {
     let product = storageService.getElement(req.params.id);
     res.render('product_page', {product});
+});
+//---load modificaton form
+router.get('/product/:id/form', (req, res) => {
+    console.log(req.params.id);
+    let subElements = storageService.getSubElements(req.params.id);
+    res.render('form', {subElements});
+});
+//---load empty form
+router.get('/form', (req, res) => {
+    let subElements = storageService.getDefaultSubElements();
+    res.render('form', {subElements});
 });
 //---removes from -storage- the Product associated with param id key
 router.get('/product/:id/delete', (req, res) => {

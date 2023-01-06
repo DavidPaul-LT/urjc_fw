@@ -19,6 +19,38 @@ export function removeElement(elementID){
 export function getElement(elementID){
     return storage.get(elementID);
 }
+//---Return subelements
+export function getSubElements(elementID){
+    let subelements = [];
+    let subElement = {};
+    Object.entries(storage.get(elementID)).map(entry => {
+        const[key, value] = entry;
+        subElement = {
+            'name': key,
+            'value': value
+        }
+        subelements[subelements.length] = subElement;
+    })
+    console.log(subelements);
+    return subelements;
+}
+//---Return default subelements
+export function getDefaultSubElements(){
+    let subelements = [];
+    let subElement = {};
+    let defaultSubelements = {name: '', price: '', image: '', description: ''};
+    Object.entries(defaultSubelements).map(entry => {
+        const[key, value] = entry;
+        subElement = {
+            'name': key,
+            'value': value
+        }
+        subelements[subelements.length] = subElement;
+    })
+    console.log(subelements);
+    return subelements;
+}
+
 /*
     DEFAULT ELEMENT COLLECTION
 */
