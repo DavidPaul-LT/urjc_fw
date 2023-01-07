@@ -6,10 +6,14 @@ export function getStorage(){
     return [...storage.values()]
 }
 //--- Adds a new element into -storage- map
-export function insertElement(element){
-    let id = startingID++;
-    element.id = id.toString();
-    storage.set(element.id, element);
+export function insertElement(element,customId=undefined){
+    if(customId != undefined){
+        storage.set(customId, element);
+    }else{
+        let id = startingID++;
+        element.id = id.toString();
+        storage.set(element.id, element);
+    }
 }
 //--- Removes an element by its ID from -storage- map
 export function removeElement(elementID){

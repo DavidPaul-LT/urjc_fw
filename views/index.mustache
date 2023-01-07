@@ -21,6 +21,13 @@
                         </div>
                     </div>
                     <div class="carousel-item">
+                        <img src="assets/carrousel_images/CPIC3.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1><b>SOLACE</b></h1>
+                            <h4 class="text-info">Descuentos de hasta el 50%</h4>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
                         <img src="assets/carrousel_images/CPIC4.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                             <h1><b>SOLACE</b></h1>
@@ -52,47 +59,48 @@
                 </button>
               </div>
         </section>
-		<!--Section principal: contiene los elementos contenidos en el almacén-->
+		<!-- Main section: displays all the products contained in the storage -->
         <section id="main_section" class="py-5">
-            <!--DIV que contiene la lista de elementos-->
+            <!-- Element container div -->
             <div class="container px-4 px-lg-5 mt-5">
                 <div id="product_container" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-5 justify-content-center">
                     {{#storage}}
-					<!--ELEMENTO-->
+					<!-- ELEMENT CARD -->
                     <div id="upper" class="col mb-5">
                         <a id="master" class="card h-100" href="product/{{id}}" style="color: black;">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{{image}}" alt="..." />
-                            <!-- Product details-->
+                            <!-- Product image -->
+                            <img class="card-img-top" src="{{image}}" alt="Product image"/>
+                            <!-- Product details -->
                             <div id="details" class="card-body p-4">
                                 <div id="details_content" class="text-center">
-                                    <!-- Product name-->
+                                    <!-- Product name -->
                                     <h5 class="fw-bolder">{{name}}</h5>
-                                    <!-- Product price-->
+                                    <!-- Product price -->
                                     <br>
                                     <p class="position-absolute bottom-0 start-50 translate-middle-x">${{price}}.00</p>
                                 </div>
                             </div>
                         </a>
                     </div>
-					{{/storage}}	
+					{{/storage}}
                 </div>
             </div>
+            <!-- Empy product page -->
 			{{^storage}}
-				{{> product_not_found}}
+				{{> no_products}}
 			{{/storage}}
             <center>
+                <!-- Dinamic product load using AJAX -->
                 <div class="col-md-6" style="padding-bottom: 1%;">
                     <button class="btnContact-np btn bg-info" onclick='loadMore()'>Cargar más</button>
                 </div>
-            </center>
-            <center>
+                <!-- Insertion product form -->
                 <div class="col-md-6">
-                    <a id="form_button" class="btnContact-np btn bg-info" href="form" >Añadir producto</a>
+                    <a id="form_button" class="btnContact-np btn bg-info" href="form">Añadir producto</a>
                 </div>
             </center>
         </section>
         {{> footer_bootstrap}}
-        <script src="app.js"></script>
+        <script src="js/ajaxUtils.js"></script>
 	</body>
 </html>

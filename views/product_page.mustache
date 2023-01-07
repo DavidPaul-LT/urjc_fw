@@ -2,7 +2,7 @@
 	{{> head}}
 	<body>
 		{{> navigation}}
-		<!--Section producto: contiene los subelemento de un determinado elemento-->
+		<!-- Product section: displays the suelements given an element -->
         <section id="product_section" class="py-5">
             {{#product}}
             <div class="container px-4 px-lg-5 my-5">
@@ -17,21 +17,25 @@
                             <span id="product_price">${{product.price}}.00</span>
                         </div>
                         <p id="product_description" class="lead">{{product.description}}</p>
+                        <!-- Extra subelements div -->
                         <div id="extra_subelements">
-                            <!-- Subelementos aquí: cada uno es un párrafo nuevo -->                            
+                            <!-- extra -->
                         </div>
                         <div id="product_buttons" class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem"/>
+                            <!-- Add to cart link -->
                             <a href="cart/{{product.id}}" class="btn btn-outline-dark flex-shrink-0" type="button">
                                 <i class="bi-cart-fill me-1"></i>
                                 Añadir al carrito
                             </a>
+                            <!-- Modify product link -->
                             <a id="form_subelements" href="/product/{{product.id}}/form" class="btn btn-outline-dark flex-shrink-0" type="button">
                                 <i class="bi bi-sliders2-vertical"></i>
                                 Modificar
                             </a>
-                            <button href="/product/{{product.id}}/delete" class="btn btn-outline-dark flex-shrink-0" onclick="confirmar()">
-                                Delete product
+                            <!-- Delete product link -->
+                            <button class="btn btn-outline-dark flex-shrink-0" onclick="confirmar()">
+                                Eliminar
                             </button>
                             <script>
                                 function confirmar(){
@@ -39,14 +43,15 @@
                                         window.location.assign('/product/{{product.id}}/delete');
                                     }
                                 }
-                            </script>  
+                            </script>
                         </div>
                     </div>
                 </div>
             </div>
             {{/product}}
+            <!-- Product page not found -->
             {{^product}}
-            {{> product_not_found}}
+                {{> product_not_found}}
             {{/product}}
         </section>
 		{{> footer_bootstrap}}

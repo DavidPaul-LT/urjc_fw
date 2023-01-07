@@ -1,32 +1,24 @@
 <html>
+    {{> head}}
     <body>
+        {{> navigation}}
         <center>
             <section id="form_section" class="contact-form" style="display: block;">
-                <form method="post" id="form" class="form"> 
+                <form action="/productNew" method="post" id="form" class="form"> 
                     <div id="form_content" class="col-md-6">
                         {{#subElements}}
                         <div class="form-group py-1">
-                            <input type="text" value="{{value}}" placeholder="{{name}}" class="input_field form-control">
+                            <input name="{{name}}" type="text" value="{{value}}" placeholder="{{name}}" class="input_field form-control">
                         </div>
                         {{/subElements}}
                     </div>
-                    <button class="btnContact-np btn bg-info" onclick="crearNuevoSubElemeneto()" type="button">Añadir subelemento</button>
-                    <button class="btnContact-np btn bg-info" type="button">Cerrar Formulario</button>
-
-                    <script>
-                        function crearNuevoSubElemeneto(){
-                            let atrib, inp;
-                            atrib = document.createElement("div");
-                            atrib.className = "form-group py-1"
-                            inp = document.createElement("input");
-                            inp.type = "text";
-                            inp.className = "input_field form-control";
-                            document.getElementById("form_content").appendChild(atrib);
-                            alert('buenas')
-                        }
-                    </script>
+                    <button class="btnContact-np btn bg-info" onclick="insertNewSubelement()" type="button">Añadir subelemento</button>
+                    <input type="submit" href="/productNew" class="btnContact-np btn bg-info" value="Guardar">
+                    <a href="/" class="btnContact-np btn bg-info" type="button">Cerrar Formulario</a>
                 </form>
             </section>
         </center>
+        {{> footer_bootstrap}}
+        <script src="js/form.js"></script>
     </body>
 </html>
