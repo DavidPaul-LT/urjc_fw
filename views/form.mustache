@@ -1,0 +1,27 @@
+<html>
+    {{> head}}
+    <body>
+        {{> navigation}}
+        <center>
+            <section id="form_section" class="contact-form" style="display: block; padding: 5%;">
+                <form action="/productNew" method="post" id="form" class="form"> 
+                    <div id="form_content" class="col-md-6">
+                        {{#subElements}}
+                        <div class="form-group py-1 d-flex">
+                            <input name="{{name}}" type="text" value="{{value}}" placeholder="{{name}}" class="input_field form-control">
+                            {{#id}}
+                            <a href="/product/{{id}}/{{name}}" style="border: solid; padding: 1%;">X</a>
+                            {{/id}}
+                        </div>
+                        {{/subElements}}
+                    </div>
+                    <button class="btnContact-np btn bg-info" onclick="insertNewSubelement()" type="button">Añadir subelemento</button>
+                    <input type="submit" href="/productNew" class="btnContact-np btn bg-info" value="Guardar">
+                    <a href="/" class="btnContact-np btn bg-info" type="button">Cerrar Formulario</a>
+                </form>
+            </section>
+        </center>
+        {{> footer_bootstrap}}
+        <script src="/js/form.js"></script>
+    </body>
+</html>
