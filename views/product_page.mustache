@@ -20,32 +20,24 @@
                         <!-- Extra subelements div -->
                         <div id="extra_subelements">
                             {{#subElements}}
-                            <p>{{name}}: {{value}}</p>
+                            <p>{{.}}</p>
                             {{/subElements}}
-                            
                         </div>
                         <div id="product_buttons" class="d-flex">
-                            <form action="/cart/{{product.id}}" method="post" class="d-flex">
+                            <form action="/cart/{{product.id}}" method="post" class="d-flex" style="margin-right: 10%;">
                                 <input name="quant" class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem"/>
                                 <!-- Add to cart link -->
                                 <input class="btn btn-outline-dark flex-shrink-0" type="submit" value="Añadir al carrito"/>
+                                <!-- Modify product link -->
+                                <a id="form_subelements" href="/product/{{product.id}}/form" class="btn btn-outline-dark flex-shrink-0" type="button">
+                                    <i class="bi bi-sliders2-vertical"></i>
+                                    Modificar
+                                </a>
+                                <!-- Delete product link -->
+                                <button class="btn btn-outline-dark flex-shrink-0" onclick="confirmar()">
+                                    Eliminar
+                                </button>
                             </form>
-                            <!-- Modify product link -->
-                            <a id="form_subelements" href="/product/{{product.id}}/form" class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi bi-sliders2-vertical"></i>
-                                Modificar
-                            </a>
-                            <!-- Delete product link -->
-                            <button class="btn btn-outline-dark flex-shrink-0" onclick="confirmar()">
-                                Eliminar
-                            </button>
-                            <script>
-                                function confirmar(){
-                                    if(window.confirm('Esta seguro de borrar el elemento {{product.name}}?')){
-                                        window.location.assign('/product/{{product.id}}/delete');
-                                    }
-                                }
-                            </script>
                         </div>
                     </div>
                 </div>
@@ -66,5 +58,12 @@
             </div>
         </section>
 		{{> footer_bootstrap}}
+        <script>
+            function confirmar(){
+                if(window.confirm('Esta seguro de borrar el elemento {{product.name}}?')){
+                    window.location.assign('/product/{{product.id}}/delete');
+                }
+            }
+        </script>
 	</body>
 </html>
