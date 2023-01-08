@@ -31,7 +31,8 @@ export function getSubElements(elementID){
         const[key, value] = entry;
         subElement = {
             'name': key,
-            'value': value
+            'value': value,
+            'id': elementID
         }
         subelements[subelements.length] = subElement;
     })
