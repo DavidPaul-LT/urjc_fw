@@ -8,19 +8,21 @@
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6">
-                        <img id="product_image" class="card-img-top mb-5 mb-md-0" src="{{product.image}}" alt="..." />
+                        <img id="product_image" class="card-img-top mb-5 mb-md-0" src="{{image}}" alt="..." />
                     </div>
                     <div class="col-md-6">
-                        <div id="product_id" class="small mb-1">ID: {{product.id}}</div>
-                        <h1 id="product_name" class="display-5 fw-bolder">{{product.name}}</h1>
+                        <div id="product_id" class="small mb-1">ID: {{id}}</div>
+                        <h1 id="product_name" class="display-5 fw-bolder">{{name}}</h1>
                         <div class="fs-5 mb-5">
-                            <span id="product_price">${{product.price}}.00</span>
+                            <span id="product_price">${{price}}.00</span>
                         </div>
-                        <p id="product_description" class="lead">{{product.description}}</p>
+                        <p id="product_description" class="lead">{{description}}</p>
                         <!-- Extra subelements div -->
                         <div id="extra_subelements">
-                            <!-- extra -->
-                            <p>{{product}}</p>
+                            {{#subElements}}
+                            <p>{{name}}: {{value}}</p>
+                            {{/subElements}}
+                            
                         </div>
                         <div id="product_buttons" class="d-flex">
                             <form action="/cart/{{product.id}}" method="post" class="d-flex">
