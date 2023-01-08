@@ -1,5 +1,5 @@
 //--- storage map contains all the product ocurrences
-let storage = new Map();
+let storage = new Map(); // id: {name: ,price: image: }; id2: {}, 
 let startingID = 1234;
 //--- Returns all the elements contained in -storage- map
 export function getStorage(){
@@ -68,4 +68,5 @@ insertElement({name: 'Chaqueta camisera 100% lana merina', price: 120, image: '/
 insertElement({name: 'Pantalón acampanado Ultra-Stretch', price: 50, image: '/assets/product/1240.jpg', description: 'Si los pantalones de trabajo y los de yoga tuvieran un hijo, sería éste. Este pantalón es de punto doble y muy elástico y además queda fabuloso con zapatos planos o con zapatillas de deporte.'});
 insertElement({name: 'Leggings de alto rendimiento ultra suave', price: 40, image: '/assets/product/1241.jpg', description: 'Nuestros leggings de alto rendimiento tienen todo lo que necesitan para convertirse en tus pantalones de entrenamiento favoritos, sin comprometer la apariencia. Cuentan con un tejido de secado rápido, que absorbe la humedad y que es antimicrobiano, con la elasticidad óptima para que puedas hacer sentadillas sin preocupaciones.'});
 insertElement({name: 'Vestido camisero de seda elástica', price: 70, image: '/assets/product/1242.jpg', description: 'Nuestro vestido camisero de seda es elegante, aerodinámico y se anuda a la cintura sin esfuerzo. Un estilo versátil para el día y la noche, para reuniones y copas. Además, la fibra de seda contiene 18 tipos de aminoácidos que la hacen increíble para nutrir la piel, hipoalergénica y termorreguladora por naturaleza para ayudar a mantener la temperatura corporal.'});
-insertElement({name: 'Chaqueta Chore Organic Comfort', price: 50, image: '/assets/product/1243.jpg', description: 'La sarga elástica orgánica supersuave y los bolsillos laterales ocultos harán que uses esta chaqueta todos los días de la semana. Con un corte estándar, es perfecta para llevar encima de una sudadera con capucha o simplemente con una camiseta.'});
+insertElement(
+    {name: 'Chaqueta Chore Organic Comfort', price: 50, image: '/assets/product/1243.jpg', description: 'La sarga elástica orgánica supersuave y los bolsillos laterales ocultos harán que uses esta chaqueta todos los días de la semana. Con un corte estándar, es perfecta para llevar encima de una sudadera con capucha o simplemente con una camiseta.'});

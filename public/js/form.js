@@ -17,5 +17,6 @@ function insertNewSubelement(){
     inp.placeholder = "name";
     inp2.placeholder = "value";
     inp2.name = inp.value;
+    console.log(inp2.name);
     document.getElementById("form_content").appendChild(subelement);
 }
