@@ -10,7 +10,7 @@
                         <div class="form-group py-1 d-flex">
                             <input name="{{name}}" type="text" value="{{value}}" placeholder="{{name}}" class="input_field form-control">
                             {{#id}}
-                            <a href="/delete/{{id}}/{{name}}" style="border: solid; padding: 1%;">X</a>
+                            <a href="/delete/{{id}}/{{name}}" onclick="alert('Que sepas que tu cambio es permanente')" style="border: solid; padding: 1%;">X</a>
                             {{/id}}
                         </div>
                         {{/subElements}}

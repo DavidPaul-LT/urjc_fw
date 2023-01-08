@@ -38,19 +38,24 @@ router.post('/productNew', (req, res) => {
 router.get('/product/:id', (req, res) => {
     let product = storageService.getElement(req.params.id);
     let storage = storageService.getStorage();
-    let subElements = storageService.getSubElements(req.params.id);
-    console.log(product);
+    let subElements = Object.assign({},product);
     let relatedProducts = []
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 4; i++){
         const randomIndex = Math.floor(Math.random() * storage.length);
         let randomElement = storage.slice(randomIndex, randomIndex + 1)[0];
         relatedProducts.push(randomElement);
-        console.log(Object.values(product));
     }
-  
+    let subi = [];
+    for (let key in subElements) {
+        if (["name","price","image","description","id"].includes(key)){
+            delete subElements[key];
+        }else{
+            subi.push(subElements[key]);
+        }
+    }
     res.render('product_page', {
         product,
-        subElements,
+        subElements: subi,
         storage: relatedProducts
     });
 });
@@ -58,6 +63,7 @@ router.get('/product/:id', (req, res) => {
 router.get('/product/:id/form', (req, res) => {
     console.log(req.params.id);
     let subElements = storageService.getSubElements(req.params.id);
+    console.log("LENGTH:::",subElements);
     res.render('form', {subElements});
 });
 //--- Removes from the storage the Product associated with param id key

@@ -29,14 +29,15 @@ export function getSubElements(elementID){
     let subElement = {};
     Object.entries(storage.get(elementID)).map(entry => {
         const[key, value] = entry;
-        subElement = {
-            'name': key,
-            'value': value,
-            'id': elementID
+        if(true){
+            subElement = {
+                'name': key,
+                'value': value,
+                'id': elementID
+            }
+            subelements[subelements.length] = subElement;
         }
-        subelements[subelements.length] = subElement;
     })
-    console.log(subelements);
     return subelements;
 }
 //---Return default subelements
@@ -52,7 +53,6 @@ export function getDefaultSubElements(){
         }
         subelements[subelements.length] = subElement;
     })
-    console.log(subelements);
     return subelements;
 }
 
