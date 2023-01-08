@@ -38,15 +38,19 @@ router.post('/productNew', (req, res) => {
 router.get('/product/:id', (req, res) => {
     let product = storageService.getElement(req.params.id);
     let storage = storageService.getStorage();
+    let subElements = storageService.getSubElements(req.params.id);
     console.log(product);
     let relatedProducts = []
     for (let i = 0; i < 4; i++) {
         const randomIndex = Math.floor(Math.random() * storage.length);
         let randomElement = storage.slice(randomIndex, randomIndex + 1)[0];
         relatedProducts.push(randomElement);
+        console.log(Object.values(product));
     }
+  
     res.render('product_page', {
-        product: product,
+        product,
+        subElements,
         storage: relatedProducts
     });
 });
@@ -62,7 +66,7 @@ router.get('/product/:id/delete', (req, res) => {
     res.render('deleted_product');
 });
 //--- Deletes a specific subelement from a product
-router.get('/product/:id/:name', (req, res) => {
+router.get('/delete/:id/:name', (req, res) => {
     delete storageService.getElement(req.params.id)[req.params.name];
     res.redirect('back');
 });
