@@ -23,6 +23,7 @@ router.get('/loadProducts', (req, res) => {
 //--- Loads an empty form
 router.get('/form', (req, res) => {
     let subElements = storageService.getDefaultSubElements();
+    subElements = subElements.slice()
     res.render('form', {subElements});
 });
 /*
