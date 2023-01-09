@@ -1,5 +1,5 @@
-//--- storage map contains all the product ocurrences
-let storage = new Map(); // id: {name: ,price: image: }; id2: {}, 
+//--- Storage map contains all the product ocurrences
+let storage = new Map();
 let startingID = 1234;
 //--- Returns all the elements contained in -storage- map
 export function getStorage(){
@@ -23,7 +23,7 @@ export function removeElement(elementID){
 export function getElement(elementID){
     return storage.get(elementID);
 }
-//---Return subelements
+//--- Return subelements
 export function getSubElements(elementID){
     let subelements = [];
     let subElement = {};
@@ -40,7 +40,7 @@ export function getSubElements(elementID){
     })
     return subelements;
 }
-//---Return default subelements
+//--- Returns the default subelements
 export function getDefaultSubElements(){
     let subelements = [];
     let subElement = {};
@@ -55,7 +55,30 @@ export function getDefaultSubElements(){
     })
     return subelements;
 }
-
+//--- Discards a product's default attributes
+export function discartDefaultAtt(productID){
+    let subElements = Object.assign({}, getElement(productID));
+    let subi = [];
+    for (let key in subElements) {
+        if (["name","price","image","description","id"].includes(key)){
+            delete subElements[key];
+        }else{
+            subi.push(subElements[key]);
+        }
+    }
+    return subi;
+}
+//--- Generates an array with n number of random products from storage
+export function relatedProducts(n=4){
+    let auxStorage = getStorage();
+    let relatedProducts = []
+    for (let i = 0; i < n; i++){
+        const randomIndex = Math.floor(Math.random() * auxStorage.length);
+        let randomElement = auxStorage.slice(randomIndex, randomIndex + 1)[0];
+        relatedProducts.push(randomElement);
+    }
+    return relatedProducts;
+}
 /*
     DEFAULT ELEMENT COLLECTION
 */
