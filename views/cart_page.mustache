@@ -1,0 +1,87 @@
+<html lang="en">
+  {{> head}}
+  <body>
+    {{> navigation}}
+    <!-- Cart page section -->
+    <section style="background-color: #d2c9ff;">
+        <div class="container py-5">
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-12">
+              <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                <div class="card-body p-0">
+                  <div class="row g-0">
+                    <div class="col-lg-8">
+                      <div class="p-5">
+                        <div class="d-flex justify-content-between align-items-center mb-5">
+                          <h1 class="fw-bold mb-0 text-black">Tu carrito</h1>
+                          <h6 class="mb-0 text-muted">{{cart.length}} productos</h6>
+                        </div>
+                        <hr class="my-4">
+                        <!-- Product -->
+                        {{#cart}}
+                        <div class="row mb-4 d-flex justify-content-between align-items-center">
+                          <div class="col-md-2 col-lg-2 col-xl-2">
+                            <img src="{{image}}" class="img-fluid rounded-3" alt="{{name}}">
+                          </div>
+                          <div class="col-md-3 col-lg-3 col-xl-3">
+                            <a href="/product/{{id}}"><h6 class="text-black mb-0">{{name}}</h6></a>
+                          </div>
+                          <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                            <a href="/decrease/{{id}}" class="btn btn-link px-2">-</a>
+                            <p class="form-control form-control-sm">{{ocurrences}}</p>
+                            <a href="/increase/{{id}}" class="btn btn-link px-2">+</a>
+                          </div>
+                          <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                            <h6 class="mb-0">${{price}}.00</h6>
+                          </div>
+                          <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                            <a href="/cart/delete/{{id}}" class="text-muted">X<i class="fas fa-times"></i></a>
+                          </div>
+                        </div>
+                        <hr class="my-4">
+                        {{/cart}}
+                        <div class="pt-5">
+                          <h6 class="mb-0"><a href="/" class="text-body">
+                            <i class="fas fa-long-arrow-alt-left me-2"></i>Seguir comprando</a></h6>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 bg-grey">
+                      {{#amount}}
+                      <div class="p-5">
+                        <h3 class="fw-bold mb-5 mt-2 pt-1">Resumen</h3>
+                        <hr class="my-4">
+                        <div class="d-flex justify-content-between mb-4">
+                          <h5 class="text-uppercase">Subtotal</h5>
+                          <h5>${{subtotal}}.00</h5>
+                        </div>
+                        <h5 class="text-uppercase mb-3">Tipo de envío</h5>
+                        <div class="mb-4 pb-2">
+                          <p>Envío universal - $5.00</p>
+                        </div>
+                        <div class="mb-5">
+                          <div class="form-outline">
+                            <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
+                            <label class="form-label" for="form3Examplea2">Introduce aquí tu código de descuento</label>
+                          </div>
+                        </div>
+                        <hr class="my-4">
+                        <div class="d-flex justify-content-between mb-5">
+                          <h5 class="text-uppercase">Precio total</h5>
+                          <h5>${{total}}.00</h5>
+                        </div>
+                        <button type="button" class="btn btn-dark btn-block btn-lg"
+                          data-mdb-ripple-color="dark">¡ME LO LLEVO!</button>
+                      </div>
+                      {{/amount}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    {{> footer_bootstrap}}
+  </body>
+</html>
