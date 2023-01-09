@@ -1,4 +1,4 @@
-//--- storage map contains all the product ocurrences
+//--- Storage map contains all the product ocurrences
 let storage = new Map();
 let startingID = 1234;
 //--- Returns all the elements contained in -storage- map
@@ -23,22 +23,24 @@ export function removeElement(elementID){
 export function getElement(elementID){
     return storage.get(elementID);
 }
-//---Return subelements
+//--- Return subelements
 export function getSubElements(elementID){
     let subelements = [];
     let subElement = {};
     Object.entries(storage.get(elementID)).map(entry => {
         const[key, value] = entry;
-        subElement = {
-            'name': key,
-            'value': value
+        if(true){
+            subElement = {
+                'name': key,
+                'value': value,
+                'id': elementID
+            }
+            subelements[subelements.length] = subElement;
         }
-        subelements[subelements.length] = subElement;
     })
-    console.log(subelements);
     return subelements;
 }
-//---Return default subelements
+//--- Returns the default subelements
 export function getDefaultSubElements(){
     let subelements = [];
     let subElement = {};
@@ -51,14 +53,36 @@ export function getDefaultSubElements(){
         }
         subelements[subelements.length] = subElement;
     })
-    console.log(subelements);
     return subelements;
 }
-
+//--- Discards a product's default attributes
+export function discartDefaultAtt(productID){
+    let subElements = Object.assign({}, getElement(productID));
+    let subi = [];
+    for (let key in subElements) {
+        if (["name","price","image","description","id"].includes(key)){
+            delete subElements[key];
+        }else{
+            subi.push(subElements[key]);
+        }
+    }
+    return subi;
+}
+//--- Generates an array with n number of random products from storage
+export function relatedProducts(n=4){
+    let auxStorage = getStorage();
+    let relatedProducts = []
+    for (let i = 0; i < n; i++){
+        const randomIndex = Math.floor(Math.random() * auxStorage.length);
+        let randomElement = auxStorage.slice(randomIndex, randomIndex + 1)[0];
+        relatedProducts.push(randomElement);
+    }
+    return relatedProducts;
+}
 /*
     DEFAULT ELEMENT COLLECTION
 */
-insertElement({name: 'Camisa de lana elástica', price: 60, image: '/assets/product/1234.jpg', description: 'Esta camisa tiene un aspecto de punto clásico y versátil, perfecta para el otoño. Fabricada con un tejido súper suave y elástico, proporciona un ajuste natural al cuerpo.'}); 
+insertElement({name: 'Camisa de lana elástica', price: 60, image: '/assets/product/1234.jpg', description: 'Esta camisa tiene un aspecto de punto clásico y versátil, perfecta para el otoño. Fabricada con un tejido súper suave y elástico, proporciona un ajuste natural al cuerpo.', tallas: "S/M/L"}); 
 insertElement({name: 'Polo de alto rendimiento', price: 40, image: '/assets/product/1235.jpg', description: 'Este polo supersuave es ideal para el golf, los viajes o las citas nocturnas. Nuestro tejido Flowknit, increíblemente suave, no solo es sostenible, sino que facilita la absorción de la humedad y evita el mal olor, ofreciendo la máxima versatilidad. Nuestro Flowknit está fabricado con hilo de poliéster Global Recycle Standard, que desvía y recicla los plásticos destinados a los vertederos o al océano, para que puedas sentirte y verte bien con lo que llevas puesto.'});
 insertElement({name: 'Pantalón de alto rendimiento', price: 45, image: '/assets/product/1236.jpg', description: 'Nuestros joggers de alto rendimiento favoritos tienen un ajuste fino pero relajado siendo lo suficientemente elásticos para conseguir la máxima comodidad. Los gruesos cordones, los tobillos con puños y el diseño de dos bolsillos ofrecen una sensación de calidad.'});
 insertElement({name: 'Pantalón corto de alto rendimiento', price: 35, image: '/assets/product/1237.jpg', description: 'Puede que sean cortos, pero consiguen evitar la humedad, son antimicrobianos, tienen un bolsillo para el móvil en la parte delantera y un bolsillo trasero con cremallera. Perfecto para entrenar, viajar o descansar.'});

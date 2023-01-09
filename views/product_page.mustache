@@ -8,41 +8,36 @@
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6">
-                        <img id="product_image" class="card-img-top mb-5 mb-md-0" src="{{product.image}}" alt="..." />
+                        <img id="product_image" class="card-img-top mb-5 mb-md-0" src="{{image}}" alt="..." />
                     </div>
                     <div class="col-md-6">
-                        <div id="product_id" class="small mb-1">ID: {{product.id}}</div>
-                        <h1 id="product_name" class="display-5 fw-bolder">{{product.name}}</h1>
+                        <div id="product_id" class="small mb-1">ID: {{id}}</div>
+                        <h1 id="product_name" class="display-5 fw-bolder">{{name}}</h1>
                         <div class="fs-5 mb-5">
-                            <span id="product_price">${{product.price}}.00</span>
+                            <span id="product_price">${{price}}.00</span>
                         </div>
-                        <p id="product_description" class="lead">{{product.description}}</p>
+                        <p id="product_description" class="lead">{{description}}</p>
                         <!-- Extra subelements div -->
                         <div id="extra_subelements">
-                            <!-- extra -->
+                            {{#subElements}}
+                            <p>{{.}}</p>
+                            {{/subElements}}
                         </div>
                         <div id="product_buttons" class="d-flex">
-                            <form action="/cart/{{product.id}}" method="post" class="d-flex">
+                            <form action="/cart/{{product.id}}" method="post" class="d-flex" style="margin-right: 10%;">
                                 <input name="quant" class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem"/>
                                 <!-- Add to cart link -->
                                 <input class="btn btn-outline-dark flex-shrink-0" type="submit" value="Añadir al carrito"/>
+                                <!-- Modify product link -->
+                                <a id="form_subelements" href="/product/{{product.id}}/form" class="btn btn-outline-dark flex-shrink-0" type="button">
+                                    <i class="bi bi-sliders2-vertical"></i>
+                                    Modificar
+                                </a>
+                                <!-- Delete product link -->
+                                <button class="btn btn-outline-dark flex-shrink-0" onclick="confirmar()">
+                                    Eliminar
+                                </button>
                             </form>
-                            <!-- Modify product link -->
-                            <a id="form_subelements" href="/product/{{product.id}}/form" class="btn btn-outline-dark flex-shrink-0" type="button">
-                                <i class="bi bi-sliders2-vertical"></i>
-                                Modificar
-                            </a>
-                            <!-- Delete product link -->
-                            <button class="btn btn-outline-dark flex-shrink-0" onclick="confirmar()">
-                                Eliminar
-                            </button>
-                            <script>
-                                function confirmar(){
-                                    if(window.confirm('Esta seguro de borrar el elemento {{product.name}}?')){
-                                        window.location.assign('/product/{{product.id}}/delete');
-                                    }
-                                }
-                            </script>
                         </div>
                     </div>
                 </div>
@@ -50,7 +45,7 @@
             {{/product}}
             <!-- Product page not found -->
             {{^product}}
-                {{> product_not_found}}
+                {{> deleted_product}}
             {{/product}}
         </section>
         <!-- Related items section -->
@@ -63,5 +58,12 @@
             </div>
         </section>
 		{{> footer_bootstrap}}
+        <script>
+            function confirmar(){
+                if(window.confirm('Esta seguro de borrar el elemento {{product.name}}?')){
+                    window.location.assign('/product/{{product.id}}/delete');
+                }
+            }
+        </script>
 	</body>
 </html>

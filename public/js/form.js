@@ -1,6 +1,6 @@
 /*
     insertNewSubelement():
-        Add subelement button inserts two new inputs into form element each time is pressed.
+        Add subelement button: inserts two new inputs into the form each time is pressed.
 */
 function insertNewSubelement(){
     let subelement, inp, inp2;
@@ -12,10 +12,11 @@ function insertNewSubelement(){
         input.type = "text";
         input.className = "input_field form-control";
         subelement.appendChild(input);
-        console.log(input);
     }
     inp.placeholder = "name";
     inp2.placeholder = "value";
-    inp2.name = inp.value;
+    inp.onchange = function() {
+        inp2.name = inp.value;
+    }
     document.getElementById("form_content").appendChild(subelement);
 }

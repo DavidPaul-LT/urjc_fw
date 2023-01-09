@@ -1,6 +1,6 @@
-//--- cart map contains all the products and its ocurrences which were added to the cart
+//--- Cart map contains all the products and its ocurrences which were added to the cart
 let cart = new Map();
-//--- cart format key: product.id value: {id, ocurrences}
+//--- Cart format key: product.id; value: [id, ocurrences]
 
 //--- Returns all the elements contained in -cart- map
 export function getCart(){

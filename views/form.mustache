@@ -9,7 +9,9 @@
                         {{#subElements}}
                         <div class="form-group py-1 d-flex">
                             <input name="{{name}}" type="text" value="{{value}}" placeholder="{{name}}" class="input_field form-control">
-                            <a href="/product/{{subElements.id}}/{{name}}" style="border: solid; padding: 1%;">X</a>
+                            {{#id}}
+                            <a href="/delete/{{id}}/{{name}}" onclick="alert(`¡ATENCIÓN! Se va a borrar el subelemento: {{name}}`)" style="border: solid; padding: 1%;">X</a>
+                            {{/id}}
                         </div>
                         {{/subElements}}
                     </div>
@@ -20,6 +22,6 @@
             </section>
         </center>
         {{> footer_bootstrap}}
-        <script src="js/form.js"></script>
+        <script src="/js/form.js"></script>
     </body>
 </html>
