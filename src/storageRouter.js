@@ -6,13 +6,13 @@ const router = express.Router();
 /*
     ----- MAIN PAGE -----
 */
-//--- Gets from the storage all the product instances
+//--- Gets from the storage first five product instances
 router.get('/', (req, res) => {
     res.render('index', { 
         storage: storageService.getStorage().slice(0,5)
     });
 });
-//--- Loads more products
+//--- Loads more products (uses AJAX)
 router.get('/loadProducts', (req, res) => {
     const begin = parseInt(req.query.begin);
     const to = parseInt(req.query.end);
@@ -25,6 +25,9 @@ router.get('/form', (req, res) => {
     let subElements = storageService.getDefaultSubElements();
     res.render('form', {subElements});
 });
+/*
+    ----- COMMON FORM UTILS -----
+*/
 //--- Gets the values of insertion form its inputs
 router.post('/productNew', (req, res) => {
     storageService.insertElement(req.body,req.body.id);
@@ -36,34 +39,15 @@ router.post('/productNew', (req, res) => {
 */
 //--- Gets from the storage the product whose id is param id
 router.get('/product/:id', (req, res) => {
-    let product = storageService.getElement(req.params.id);
-    let storage = storageService.getStorage();
-    let subElements = Object.assign({},product);
-    let relatedProducts = []
-    for (let i = 0; i < 4; i++){
-        const randomIndex = Math.floor(Math.random() * storage.length);
-        let randomElement = storage.slice(randomIndex, randomIndex + 1)[0];
-        relatedProducts.push(randomElement);
-    }
-    let subi = [];
-    for (let key in subElements) {
-        if (["name","price","image","description","id"].includes(key)){
-            delete subElements[key];
-        }else{
-            subi.push(subElements[key]);
-        }
-    }
     res.render('product_page', {
-        product,
-        subElements: subi,
-        storage: relatedProducts
+        product: storageService.getElement(req.params.id),
+        subElements: storageService.discartDefaultAtt(req.params.id),
+        storage: storageService.relatedProducts()
     });
 });
 //--- Loads the product's modificaton form
 router.get('/product/:id/form', (req, res) => {
-    console.log(req.params.id);
     let subElements = storageService.getSubElements(req.params.id);
-    console.log("LENGTH:::",subElements);
     res.render('form', {subElements});
 });
 //--- Removes from the storage the Product associated with param id key
@@ -85,8 +69,13 @@ router.get('/cart',(req, res) => {
     let amount = 0;
     for (let product of cartService.getCart()){
         let info = storageService.getElement(product.id);
-        productsInCart.push({id: product.id, name: info.name, image: info.image, price: info.price, ocurrences: product.ocurrences});
-        amount += info.price * product.ocurrences;
+        try {
+            productsInCart.push({id: product.id, name: info.name, image: info.image, price: info.price, ocurrences: product.ocurrences});    
+            amount += info.price * product.ocurrences;
+        } catch (TypeError) {
+            console.log("Product cannot be pushed because its been deleted")
+            cartService.removeElement(product.id);
+        }
     }
     res.render('cart_page',{
         cart: productsInCart,
@@ -95,7 +84,6 @@ router.get('/cart',(req, res) => {
 });
 //--- Inserts into the cart a new product
 router.post('/cart/:id', (req, res) => {
-    console.log(req.params.id);
     let aux = cartService.getElement(req.params.id);
     let quant = parseInt(req.body.quant);
     console.log(aux);
@@ -104,10 +92,28 @@ router.post('/cart/:id', (req, res) => {
         cartService.insertElement(req.params.id, aux);
     }else{
         cartService.insertElement(req.params.id,{id: req.params.id, ocurrences: quant});
-        console.log(cartService.getElement(req.params.id));
     }
-    //alert("El producto ha sido añadido al carrito");
     res.redirect('back');
 });
-
+//--- Deletes a product from cart given its id
+router.get('/cart/delete/:id', (req, res) => {
+    cartService.removeElement(req.params.id);
+    res.redirect('/cart');
+});
+//--- Decreases in 1 a cart product's ocurrence
+router.get('/decrease/:id', (req, res) => {
+    let aux = cartService.getElement(req.params.id);
+    if((aux[1] > 1) && (req.params.id === aux[0])){
+        cartService.insertElement(aux[0],[aux[0],aux[1]-1])
+        res.redirect('/cart');
+    }
+});
+//--- Increases in 1 a cart product's ocurrence
+router.get('/increase/:id', (req, res) => {
+    let aux = cartService.getElement(req.params.id);
+    if(req.params.id === aux[0]){
+        cartService.insertElement(aux[0],[aux[0],aux[1]+1])
+        res.redirect('/cart');
+    }
+});
 export default router;

@@ -10,7 +10,7 @@
                         <div class="form-group py-1 d-flex">
                             <input name="{{name}}" type="text" value="{{value}}" placeholder="{{name}}" class="input_field form-control">
                             {{#id}}
-                            <a href="/delete/{{id}}/{{name}}" onclick="alert('Que sepas que tu cambio es permanente')" style="border: solid; padding: 1%;">X</a>
+                            <a href="/delete/{{id}}/{{name}}" onclick="confirmar()" style="border: solid; padding: 1%;">X</a>
                             {{/id}}
                         </div>
                         {{/subElements}}
@@ -22,6 +22,13 @@
             </section>
         </center>
         {{> footer_bootstrap}}
+        <script>
+            function confirmar(){
+                if(window.confirm('Esta seguro de borrar el subelemento?')){
+                    window.location.assign('/product/{{product.id}}/delete');
+                }
+            }
+        </script>
         <script src="/js/form.js"></script>
     </body>
 </html>
