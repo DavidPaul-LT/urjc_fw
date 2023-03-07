@@ -103,7 +103,7 @@ router.get('/cart/delete/:id', (req, res) => {
 //--- Decreases in 1 a cart product's ocurrence
 router.get('/decrease/:id', (req, res) => {
     let aux = cartService.getElement(req.params.id);
-    if((aux[1] > 1) && (req.params.id === aux[0])){
+    if((aux[1] > 1) && (req.params.id == aux[0])){
         cartService.insertElement(aux[0],[aux[0],aux[1]-1])
         res.redirect('/cart');
     }
@@ -111,9 +111,10 @@ router.get('/decrease/:id', (req, res) => {
 //--- Increases in 1 a cart product's ocurrence
 router.get('/increase/:id', (req, res) => {
     let aux = cartService.getElement(req.params.id);
-    if(req.params.id === aux[0]){
+    if(req.params.id == aux[0]){
         cartService.insertElement(aux[0],[aux[0],aux[1]+1])
         res.redirect('/cart');
     }
 });
+
 export default router;
